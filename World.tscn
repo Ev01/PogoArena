@@ -97,7 +97,7 @@ shape = SubResource( 3 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 position = Vector2( 976, 40 )
-rotation = -1.57079
+rotation = -3.14159
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D4"]
 rotation = 0.785397
@@ -111,7 +111,7 @@ shape = SubResource( 3 )
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
 position = Vector2( 48, 40 )
-rotation = -6.28318
+rotation = -4.71239
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D5"]
 rotation = 0.785397
