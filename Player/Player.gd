@@ -34,7 +34,6 @@ func kill():
 	
 	is_dead = true
 	#Engine.time_scale = 0.2
-	print("dead")
 	respawn_timer.start()
 	yield(respawn_timer, "timeout")
 	respawn()
@@ -51,14 +50,9 @@ func respawn():
 
 func bounce(body):
 	if body != self:
-		print(linear_velocity.length())
-		
 		#apply_central_impulse(Vector2(linear_velocity.length() * mass + bounce_power, 0).rotated(rotation - PI/2))
 		apply_central_impulse(Vector2(bounce_power, 0).rotated(rotation - PI/2))
 
-
-func _on_Player_body_entered(body):
-	pass
 
 
 func _on_FootArea_body_entered(body):
