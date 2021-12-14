@@ -9,6 +9,8 @@ onready var player1_spawns = get_tree().get_nodes_in_group("Player1Spawn")
 onready var player2_spawns = get_tree().get_nodes_in_group("Player2Spawn")
 onready var player3_spawns = get_tree().get_nodes_in_group("Player3Spawn")
 
+onready var spawns = [player1_spawns, player2_spawns, player3_spawns]
+
 onready var main = get_node("/root/Main")
 var player_count = 2
 
@@ -35,13 +37,14 @@ func spawn_players():
 
 
 func choose_spawn(player_num):
-	match(player_num):
-		1:
-			return player1_spawns[randi() % len(player1_spawns)].position
-		2:
-			return player2_spawns[randi() % len(player2_spawns)].position
-		3:
-			return player3_spawns[randi() % len(player3_spawns)].position
+	var final_spawn
+	for spawn in spawns[player_num - 1]:
+		final_spawn = spawn.position
+		if spawn.is_spawnable():
+			break
+	
+	return final_spawn
+	
 
 func _input(event):
 	if Input.is_action_just_pressed("Reset"):

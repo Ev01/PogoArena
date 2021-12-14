@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "RespawnPoint",
+"language": "GDScript",
+"path": "res://RespawnPoint/RespawnPoint.gd"
+} ]
+_global_script_class_icons={
+"RespawnPoint": ""
+}
+
 [application]
 
 config/name="PogoArena"
