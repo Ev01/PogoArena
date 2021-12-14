@@ -4,7 +4,7 @@
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 
 [sub_resource type="PhysicsMaterial" id=3]
-friction = 0.2
+friction = 0.0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 40 )
@@ -13,7 +13,7 @@ extents = Vector2( 12, 40 )
 extents = Vector2( 8, 6 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 12, 12 )
+extents = Vector2( 12, 18 )
 
 [node name="Player" type="RigidBody2D"]
 position = Vector2( -1, 0 )
@@ -47,11 +47,10 @@ shape = SubResource( 2 )
 [node name="HeadArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadArea"]
-position = Vector2( 5, -32 )
+position = Vector2( 5, -26 )
 shape = SubResource( 4 )
 
 [node name="RespawnTimer" type="Timer" parent="."]
-wait_time = 0.3
 
 [connection signal="body_entered" from="FootArea" to="." method="_on_FootArea_body_entered"]
 [connection signal="body_entered" from="HeadArea" to="." method="_on_HeadArea_body_entered"]

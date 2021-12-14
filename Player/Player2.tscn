@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+
+[node name="Player2" instance=ExtResource( 1 )]
+modulate = Color( 0.172549, 1, 0, 1 )
+action_rotate_left = "rotate_left_p2"
+action_rotate_right = "rotate_right_p2"
+player_num = 2

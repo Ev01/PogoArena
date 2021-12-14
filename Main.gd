@@ -19,4 +19,10 @@ func change_scene_to(scene):
 
 
 func load_new_game(player_count):
-	change_scene_to(game_scn)
+	if current_scene:
+		current_scene.queue_free()
+	
+	current_scene = game_scn.instance()
+	current_scene.player_count = player_count
+	add_child(current_scene)
+	

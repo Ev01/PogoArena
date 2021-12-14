@@ -6,12 +6,14 @@ export var rotation_torque = 100
 export (String) var action_rotate_left = "rotate_left"
 export (String) var action_rotate_right = "rotate_right"
 export (NodePath) var respawn_point_path
+export (int) var player_num = 1
 
 var is_dead = false
 
 onready var foot_area = $FootArea
 onready var respawn_timer = $RespawnTimer
-onready var respawn_point = get_node(respawn_point_path)
+onready var world = get_parent()
+#onready var respawn_point = get_node(respawn_point_path)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,7 +44,7 @@ func kill():
 
 func respawn():
 	#Engine.time_scale = 1
-	position = respawn_point.position
+	position = world.choose_spawn(player_num)
 	linear_velocity = Vector2.ZERO
 	rotation = 0
 	is_dead = false
