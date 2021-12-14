@@ -10,7 +10,11 @@ export (String) var action_rotate_right = "rotate_right"
 # If you are player 1 this is 1, if player 2 this is 2 etc.
 export (int) var player_num = 1
 
+signal got_frag(current_score)
+
 var is_dead = false
+var current_score = 0
+var last_touched_by
 
 onready var foot_area = $FootArea
 onready var respawn_timer = $RespawnTimer
@@ -19,7 +23,7 @@ onready var world = get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	connect("body_entered", self, "_on_Player_body_entered")
 
 
 func _physics_process(delta):
@@ -35,13 +39,15 @@ func _physics_process(delta):
 
 
 func kill():
-	
-	is_dead = true
-	#Engine.time_scale = 0.2
-	respawn_timer.start()
-	yield(respawn_timer, "timeout") # Wait for the respawn timer to finish
-	respawn()
-	
+	if not is_dead:
+		if last_touched_by:
+			last_touched_by.give_frag()
+		
+		is_dead = true
+		#Engine.time_scale = 0.2
+		respawn_timer.start()
+		yield(respawn_timer, "timeout") # Wait for the respawn timer to finish
+		respawn()
 
 
 func respawn():
@@ -58,6 +64,10 @@ func bounce(body):
 		apply_central_impulse(Vector2(bounce_power, 0).rotated(rotation - PI/2))
 
 
+func give_frag():
+	current_score += 1
+	emit_signal("got_frag", current_score)
+
 
 func _on_FootArea_body_entered(body):
 	pass
@@ -66,3 +76,7 @@ func _on_FootArea_body_entered(body):
 func _on_HeadArea_body_entered(body):
 	if body != self:
 		kill()
+
+func _on_Player_body_entered(body):
+	if body.is_in_group("Player"):
+		last_touched_by = body
