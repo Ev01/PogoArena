@@ -38,7 +38,7 @@ position = Vector2( 5, -4 )
 scale = Vector2( 0.375, 1.25 )
 texture = ExtResource( 1 )
 
-[node name="FootArea" type="Area2D" parent="."]
+[node name="FootArea" type="Area2D" parent="." groups=["Player", "PlayerFoot"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FootArea"]
 position = Vector2( 5, 42 )
@@ -54,4 +54,3 @@ shape = SubResource( 4 )
 wait_time = 1.5
 
 [connection signal="body_entered" from="FootArea" to="." method="_on_FootArea_body_entered"]
-[connection signal="body_entered" from="HeadArea" to="." method="_on_HeadArea_body_entered"]
