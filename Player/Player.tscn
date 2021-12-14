@@ -51,6 +51,7 @@ position = Vector2( 5, -26 )
 shape = SubResource( 4 )
 
 [node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 1.5
 
 [connection signal="body_entered" from="FootArea" to="." method="_on_FootArea_body_entered"]
 [connection signal="body_entered" from="HeadArea" to="." method="_on_HeadArea_body_entered"]

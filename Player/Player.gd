@@ -10,7 +10,13 @@ export (String) var action_rotate_right = "rotate_right"
 # If you are player 1 this is 1, if player 2 this is 2 etc.
 export (int) var player_num = 1
 
+
 signal got_frag(current_score)
+
+var col_pos
+
+onready var sprite = get_node("Sprite")
+
 
 var is_dead = false
 var current_score = 0
@@ -42,12 +48,13 @@ func kill():
 	if not is_dead:
 		if last_touched_by:
 			last_touched_by.give_frag()
-		
 		is_dead = true
 		#Engine.time_scale = 0.2
+		sprite.modulate = Color(0.2,0.2,0.2)
 		respawn_timer.start()
 		yield(respawn_timer, "timeout") # Wait for the respawn timer to finish
 		respawn()
+
 
 
 func respawn():
@@ -55,6 +62,7 @@ func respawn():
 	position = world.choose_spawn(player_num)
 	linear_velocity = Vector2.ZERO
 	rotation = 0
+	sprite.modulate = Color(1,1,1)
 	is_dead = false
 
 
@@ -75,8 +83,17 @@ func _on_FootArea_body_entered(body):
 
 func _on_HeadArea_body_entered(body):
 	if body != self:
+		#apply force at point of collision
+		if body.is_in_group("Player"):
+			apply_central_impulse((col_pos-position) * -200)
 		kill()
+
 
 func _on_Player_body_entered(body):
 	if body.is_in_group("Player"):
 		last_touched_by = body
+
+func _integrate_forces( state ):
+	if(state.get_contact_count() >= 1):
+		col_pos = state.get_contact_local_position(0)
+
