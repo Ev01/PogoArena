@@ -30,6 +30,8 @@ onready var world = get_parent()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect("body_entered", self, "_on_Player_body_entered")
+	$HeadArea.connect("area_entered", self, "_on_HeadArea_area_entered")
+	$HeadArea.connect("body_entered", self, "_on_HeadArea_body_entered")
 
 
 func _physics_process(delta):
@@ -44,10 +46,13 @@ func _physics_process(delta):
 			bounce(body)
 
 
-func kill():
+func kill(body):
 	if not is_dead:
 		if last_touched_by:
 			last_touched_by.give_frag()
+		
+		
+		
 		is_dead = true
 		#Engine.time_scale = 0.2
 		sprite.modulate = Color(0.2,0.2,0.2)
@@ -86,7 +91,12 @@ func _on_HeadArea_body_entered(body):
 		#apply force at point of collision
 		if body.is_in_group("Player"):
 			apply_central_impulse((col_pos-position) * -200)
-		kill()
+		kill(body)
+
+
+func _on_HeadArea_area_entered(area):
+	if area.is_in_group("PlayerFoot"):
+		kill(area)
 
 
 func _on_Player_body_entered(body):
