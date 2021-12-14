@@ -1,11 +1,13 @@
 extends RigidBody2D
 
-
+# How fast your pogo bounces
 export var bounce_power = 500
+# How fast your pogo rotates
 export var rotation_torque = 100
+# These are the actions in Input Map
 export (String) var action_rotate_left = "rotate_left"
 export (String) var action_rotate_right = "rotate_right"
-export (NodePath) var respawn_point_path
+# If you are player 1 this is 1, if player 2 this is 2 etc.
 export (int) var player_num = 1
 
 var is_dead = false
@@ -37,7 +39,7 @@ func kill():
 	is_dead = true
 	#Engine.time_scale = 0.2
 	respawn_timer.start()
-	yield(respawn_timer, "timeout")
+	yield(respawn_timer, "timeout") # Wait for the respawn timer to finish
 	respawn()
 	
 
