@@ -3,6 +3,8 @@ extends RigidBody2D
 
 export var bounce_power = 500
 export var rotation_torque = 100
+export (String) var action_rotate_left = "rotate_left"
+export (String) var action_rotate_right = "rotate_right"
 export (NodePath) var respawn_point_path
 
 var is_dead = false
@@ -18,9 +20,10 @@ func _ready():
 
 func _physics_process(delta):
 	if not is_dead:
-		if Input.is_action_pressed("rotate_left"):
+		
+		if Input.is_action_pressed(action_rotate_left):
 			apply_torque_impulse(-rotation_torque)
-		if Input.is_action_pressed("rotate_right"):
+		if Input.is_action_pressed(action_rotate_right):
 			apply_torque_impulse(rotation_torque)
 		
 		for body in foot_area.get_overlapping_bodies():
@@ -30,7 +33,7 @@ func _physics_process(delta):
 func kill():
 	
 	is_dead = true
-	Engine.time_scale = 0.2
+	#Engine.time_scale = 0.2
 	print("dead")
 	respawn_timer.start()
 	yield(respawn_timer, "timeout")
@@ -39,8 +42,9 @@ func kill():
 
 
 func respawn():
-	Engine.time_scale = 1
+	#Engine.time_scale = 1
 	position = respawn_point.position
+	linear_velocity = Vector2.ZERO
 	rotation = 0
 	is_dead = false
 

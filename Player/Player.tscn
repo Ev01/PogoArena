@@ -10,7 +10,7 @@ friction = 0.2
 extents = Vector2( 12, 40 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4, 6 )
+extents = Vector2( 8, 6 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 12, 12 )
@@ -19,11 +19,12 @@ extents = Vector2( 12, 12 )
 position = Vector2( -1, 0 )
 mass = 10.0
 physics_material_override = SubResource( 3 )
-gravity_scale = 4.0
+gravity_scale = 5.0
 continuous_cd = 1
 contacts_reported = 3
 contact_monitor = true
-angular_damp = 5.0
+linear_damp = 0.5
+angular_damp = 12.0
 script = ExtResource( 2 )
 bounce_power = 1500
 rotation_torque = 10000
@@ -51,6 +52,8 @@ shape = SubResource( 4 )
 
 [node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="body_entered" from="FootArea" to="." method="_on_FootArea_body_entered"]
