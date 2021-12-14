@@ -66,6 +66,7 @@ func respawn():
 	#Engine.time_scale = 1
 	position = world.choose_spawn(player_num)
 	linear_velocity = Vector2.ZERO
+	angular_velocity = 0
 	rotation = 0
 	sprite.modulate = Color(1,1,1)
 	is_dead = false
