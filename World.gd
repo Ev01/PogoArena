@@ -45,4 +45,4 @@ func choose_spawn(player_num):
 
 func _input(event):
 	if Input.is_action_just_pressed("Reset"):
-		main.load_new_game()
+				main.load_new_game()

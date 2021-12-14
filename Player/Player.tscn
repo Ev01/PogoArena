@@ -15,7 +15,7 @@ extents = Vector2( 8, 6 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 12, 18 )
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" groups=["Player"]]
 position = Vector2( -1, 0 )
 mass = 10.0
 physics_material_override = SubResource( 3 )
@@ -51,6 +51,7 @@ position = Vector2( 5, -26 )
 shape = SubResource( 4 )
 
 [node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 1.5
 
 [connection signal="body_entered" from="FootArea" to="." method="_on_FootArea_body_entered"]
 [connection signal="body_entered" from="HeadArea" to="." method="_on_HeadArea_body_entered"]

@@ -10,6 +10,10 @@ export (String) var action_rotate_right = "rotate_right"
 # If you are player 1 this is 1, if player 2 this is 2 etc.
 export (int) var player_num = 1
 
+var col_pos
+
+onready var sprite = get_node("Sprite")
+
 var is_dead = false
 
 onready var foot_area = $FootArea
@@ -19,7 +23,7 @@ onready var world = get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 func _physics_process(delta):
@@ -35,9 +39,9 @@ func _physics_process(delta):
 
 
 func kill():
-	
 	is_dead = true
 	#Engine.time_scale = 0.2
+	sprite.modulate = Color(0.2,0.2,0.2)
 	respawn_timer.start()
 	yield(respawn_timer, "timeout") # Wait for the respawn timer to finish
 	respawn()
@@ -49,6 +53,7 @@ func respawn():
 	position = world.choose_spawn(player_num)
 	linear_velocity = Vector2.ZERO
 	rotation = 0
+	sprite.modulate = Color(1,1,1)
 	is_dead = false
 
 
@@ -65,4 +70,11 @@ func _on_FootArea_body_entered(body):
 
 func _on_HeadArea_body_entered(body):
 	if body != self:
+		#apply force at point of collision
+		if body.is_in_group("Player"):
+			apply_central_impulse((col_pos-position) * -200)
 		kill()
+
+func _integrate_forces( state ):
+	if(state.get_contact_count() >= 1):
+		col_pos = state.get_contact_local_position(0)
