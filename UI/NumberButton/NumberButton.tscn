@@ -1,20 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://UI/NumberButton/NumberButton.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://UI/NumberButton/ValueLabel.gd" type="Script" id=3]
 
 [node name="NumberButton" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 88.0
+margin_bottom = 64.0
 script = ExtResource( 1 )
-min_value = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+min_value = 1
+max_value = 100
 value = 2
 
 [node name="Up" type="TextureButton" parent="."]
-margin_left = 600.0
-margin_top = 168.0
-margin_right = 632.0
-margin_bottom = 200.0
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 32.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 2 )
@@ -24,10 +28,10 @@ __meta__ = {
 }
 
 [node name="Down" type="TextureButton" parent="."]
-margin_left = 600.0
-margin_top = 200.0
-margin_right = 632.0
-margin_bottom = 232.0
+margin_left = 64.0
+margin_top = 32.0
+margin_right = 96.0
+margin_bottom = 64.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 2 )
@@ -36,14 +40,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="Label" parent="."]
-margin_left = 544.0
-margin_top = 176.0
-margin_right = 584.0
-margin_bottom = 216.0
-text = "2"
+[node name="Value" type="LineEdit" parent="."]
+margin_top = 24.0
+margin_right = 58.0
+margin_bottom = 48.0
+text = "10"
 align = 1
-valign = 1
+max_length = 4
+context_menu_enabled = false
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="Up" to="." method="_on_Up_pressed"]
 [connection signal="pressed" from="Down" to="." method="_on_Down_pressed"]
+[connection signal="focus_exited" from="Value" to="." method="_on_Value_focus_exited"]
+[connection signal="text_changed" from="Value" to="." method="_on_Value_text_changed"]
+[connection signal="text_entered" from="Value" to="." method="_on_Value_text_entered"]
