@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://UI/ScoreLabel/ScoreLabel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Concrete.png" type="Texture" id=8]
 [ext_resource path="res://PolyOutline.gd" type="Script" id=9]
+[ext_resource path="res://UI/WinDialog.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 24 )
@@ -163,6 +164,37 @@ margin_left = 128.0
 margin_top = 40.0
 margin_right = 896.0
 margin_bottom = 136.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WinDialog" type="WindowDialog" parent="UI"]
+pause_mode = 2
+margin_left = 336.0
+margin_top = 200.0
+margin_right = 632.0
+margin_bottom = 352.0
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayAgain" type="Button" parent="UI/WinDialog"]
+margin_left = 32.0
+margin_top = 88.0
+margin_right = 120.0
+margin_bottom = 128.0
+text = "Play again"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackToMenu" type="Button" parent="UI/WinDialog"]
+margin_left = 168.0
+margin_top = 88.0
+margin_right = 256.0
+margin_bottom = 128.0
+text = "Back to menu"
 __meta__ = {
 "_edit_use_anchors_": false
 }

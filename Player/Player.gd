@@ -11,7 +11,7 @@ export (String) var action_rotate_right = "rotate_right"
 export (int) var player_num = 1
 
 
-signal got_frag(current_score)
+signal score_changed(current_score)
 
 var col_pos
 
@@ -80,7 +80,7 @@ func bounce(body):
 
 func give_frag():
 	current_score += 1
-	emit_signal("got_frag", current_score)
+	emit_signal("score_changed", current_score)
 
 
 func _on_FootArea_body_entered(body):

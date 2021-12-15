@@ -11,6 +11,7 @@ func _ready():
 
 
 func change_scene_to(scene):
+	get_tree().paused = false
 	if current_scene:
 		current_scene.queue_free()
 	
@@ -18,11 +19,14 @@ func change_scene_to(scene):
 	add_child(current_scene)
 
 
-func load_new_game(player_count):
+func load_new_game(player_count, max_score):
+	get_tree().paused = false
 	if current_scene:
-		current_scene.queue_free()
+		# queue_free will make get_nodes_in_group get deleted spawns
+		current_scene.call_deferred("free") 
 	
 	current_scene = game_scn.instance()
 	current_scene.player_count = player_count
-	add_child(current_scene)
+	current_scene.max_score = max_score
+	call_deferred("add_child", current_scene)
 	

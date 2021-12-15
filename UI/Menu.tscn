@@ -59,7 +59,7 @@ buttons = {
 "3": 3
 }
 
-[node name="NumberButton" parent="." instance=ExtResource( 3 )]
+[node name="MaxScore" parent="." instance=ExtResource( 3 )]
 margin_left = 480.0
 margin_top = 240.0
 margin_right = 568.0
@@ -67,7 +67,7 @@ margin_bottom = 312.0
 max_value = 9999
 value = 10
 
-[node name="Label" type="Label" parent="."]
+[node name="MaxScoreLbl" type="Label" parent="."]
 margin_left = 328.0
 margin_top = 264.0
 margin_right = 368.0
