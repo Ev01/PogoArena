@@ -1,11 +1,20 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://UI/ScoreLabel/ScoreLabel.gd" type="Script" id=1]
+[ext_resource path="res://UI/Stacked pixel.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 98
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
 
 [node name="ScoreLabel" type="Label"]
 margin_right = 40.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
 script = ExtResource( 1 )
