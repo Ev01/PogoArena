@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/TrickLabel.gd" type="Script" id=1]
+[ext_resource path="res://UI/Stacked pixel.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[node name="TrickLabel" type="Label"]
+margin_right = 64.0
+margin_bottom = 14.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 96, 15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "HELLO!"
+align = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
