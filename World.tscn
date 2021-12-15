@@ -20,7 +20,7 @@ extents = Vector2( 24, 256 )
 extents = Vector2( 56.5685, 56.5686 )
 
 [sub_resource type="Gradient" id=4]
-colors = PoolColorArray( 0.515625, 0.792816, 1, 1, 0.205223, 0.434918, 0.709961, 1 )
+colors = PoolColorArray( 0.0196078, 0.0196078, 0.196078, 0.278431, 0.617188, 0.800369, 1, 0.329412 )
 
 [sub_resource type="GradientTexture" id=5]
 gradient = SubResource( 4 )
@@ -39,7 +39,7 @@ position = Vector2( 512, 576 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 512, 16 )
+position = Vector2( 488, 16 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
@@ -168,19 +168,19 @@ __meta__ = {
 }
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color( 0.705882, 0.705882, 0.705882, 1 )
+color = Color( 0.827451, 0.768627, 0.768627, 1 )
 texture = ExtResource( 8 )
 invert_enable = true
 polygon = PoolVector2Array( 976, 472, 896, 552, 128, 552, 48, 472, 48, 120, 128, 40, 896, 40, 976, 120 )
 script = ExtResource( 9 )
-OutLine = Color( 0.27451, 0.270588, 0.301961, 1 )
-Width = 6.0
+OutLine = Color( 0.866667, 0.866667, 0.866667, 1 )
+Width = 5.0
 
 [node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( 514.671, 294.274 )
+position = Vector2( 515, 312.613 )
 rotation = -1.57079
-scale = Vector2( 0.25, 931.25 )
-z_index = -10
+scale = Vector2( 0.36393, 931.25 )
+z_index = -5
 texture = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -188,5 +188,12 @@ visible = false
 modulate = Color( 0.0823529, 0.0862745, 0.0980392, 1 )
 position = Vector2( 512, 296 )
 scale = Vector2( 1.8125, 1 )
+z_index = -10
+texture = ExtResource( 8 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+modulate = Color( 0.168627, 0.180392, 0.270588, 1 )
+position = Vector2( 516, 296 )
+scale = Vector2( 1.82813, 1 )
 z_index = -10
 texture = ExtResource( 8 )
