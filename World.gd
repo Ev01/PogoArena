@@ -12,6 +12,8 @@ var player3_spawns# = get_tree().get_nodes_in_group("Player3Spawn")
 
 var spawns# = [player1_spawns, player2_spawns, player3_spawns]
 
+var is_game_finished = false
+
 onready var main = get_node("/root/Main")
 onready var score_container = $UI/HBoxContainer
 onready var win_popup = $UI/WinDialog
@@ -32,6 +34,7 @@ func _ready():
 
 
 func add_player(player_scene):
+	
 	var new_player = player_scene.instance()
 	add_child(new_player)
 	new_player.connect("score_changed", self, "_on_player_score_changed", [new_player])
@@ -45,10 +48,8 @@ func add_player(player_scene):
 func spawn_players():
 	if player_count >= 1:
 		add_player(player1_scn)
-	
 	if player_count >= 2:
 		add_player(player2_scn)
-	
 	if player_count >= 3:
 		add_player(player3_scn)
 
@@ -65,7 +66,9 @@ func choose_spawn(player_num):
 
 func win_game(player):
 	win_popup.popup()
-	get_tree().paused = true
+	#get_tree().paused = true
+	Engine.time_scale = 0.1
+	is_game_finished = true
 	win_popup.window_title = "Player " + str(player.player_num) + " Wins!"
 
 

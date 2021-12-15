@@ -12,8 +12,10 @@ func _ready():
 
 
 func _on_play_again_pressed():
+	Engine.time_scale = 1
 	main.load_new_game(world.player_count, world.max_score)
 
 
 func _on_menu_pressed():
+	Engine.time_scale = 1
 	main.change_scene_to(main.menu_scn)

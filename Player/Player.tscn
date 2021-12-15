@@ -55,20 +55,3 @@ shape = SubResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadArea"]
 position = Vector2( 5, -26.5 )
 shape = SubResource( 4 )
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2( 5, 0 )
-emitting = false
-lifetime = 0.3
-preprocess = 0.3
-lifetime_randomness = 0.51
-emission_shape = 2
-emission_rect_extents = Vector2( 1, 30 )
-direction = Vector2( 1, 1 )
-spread = 180.0
-initial_velocity = 300.0
-initial_velocity_random = 1.0
-radial_accel = 100.0
-radial_accel_random = 1.0
-scale_amount = 5.0
-scale_amount_random = 1.0
