@@ -15,7 +15,7 @@ var highspeed_bounce = true
 export (PackedScene) var trick_text
 
 
-signal got_frag(current_score)
+signal score_changed(current_score)
 
 var col_pos
 
@@ -94,7 +94,7 @@ func bounce(body):
 
 func give_frag():
 	current_score += 1
-	emit_signal("got_frag", current_score)
+	emit_signal("score_changed", current_score)
 
 func done_trick(text):
 	var text_inst = trick_text.instance()
