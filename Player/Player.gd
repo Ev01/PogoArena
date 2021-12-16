@@ -71,7 +71,6 @@ func _physics_process(delta):
 func kill(body):
 	
 	if not is_dead and not is_invincible:
-		print("Player ", player_num, " Killed by ", body, " Time: ", OS.get_ticks_msec())
 		if last_touched_by:
 			last_touched_by.give_frag()
 		
@@ -85,7 +84,7 @@ func kill(body):
 		sprite.modulate = Color(0.2,0.2,0.2)
 		respawn_timer.start()
 		yield(respawn_timer, "timeout") # Wait for the respawn timer to finish
-		call_deferred("respawn")#respawn()
+		respawn()
 
 func respawn():
 	#Engine.time_scale = 1
@@ -96,12 +95,14 @@ func respawn():
 		rotation = 0
 		sprite.modulate = Color(1,1,1)
 		is_dead = false
-		# Wait one frame to prevent dying on the first frame
-		print("respawned ", OS.get_ticks_msec())
+		# Wait 0.05 seconds frame to prevent dying on spawn.
+		# This happens because on_HeadArea_body entered fires around 20 milliseconds late.
+		# This means you could hit something 10 milliseconds before respawning and you would
+		# die 10 milliseconds after respawn
+		# NOTE: Make sure invincibilty timer is at least 0.02 or this will happen
 		invincibility_timer.start()
 		is_invincible = true
 		yield(invincibility_timer, "timeout")
-		print("not invincible now ", OS.get_ticks_msec())
 		is_invincible = false
 		
 
@@ -129,7 +130,6 @@ func _on_FootArea_body_entered(body):
 
 func _on_HeadArea_body_entered(body):
 	if body != self:
-		print("Head collide! Time: ", OS.get_ticks_msec())
 		kill(body)
 
 
