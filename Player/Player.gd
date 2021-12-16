@@ -9,6 +9,9 @@ export (String) var action_rotate_left = "rotate_left"
 export (String) var action_rotate_right = "rotate_right"
 # If you are player 1 this is 1, if player 2 this is 2 etc.
 export (int) var player_num = 1
+# When a player hits your head, exert a force of this much away from them.
+export (float) var blast_power = 20000
+
 var rot_since_bounce = 0.0
 var highspeed_bounce = true
 
@@ -58,8 +61,6 @@ func _physics_process(delta):
 		done_trick("FLIP!")
 		rot_since_bounce = 0
 	
-	print(linear_velocity.length())
-	
 	if linear_velocity.length() >= 1450 and highspeed_bounce == true:
 		done_trick("HIGH SPEED!")
 		highspeed_bounce = false
@@ -69,7 +70,11 @@ func kill(body):
 		if last_touched_by:
 			last_touched_by.give_frag()
 		
-		
+		if body.is_in_group("Player"):
+			# Apply force away from the killer
+			var blast_force = (position - body.position).normalized() * blast_power
+			print("Blasted ", col_pos)
+			apply_central_impulse(blast_force)
 		
 		is_dead = true
 		#Engine.time_scale = 0.2
@@ -113,9 +118,9 @@ func _on_FootArea_body_entered(body):
 
 func _on_HeadArea_body_entered(body):
 	if body != self:
-		#apply force at point of collision
-		if body.is_in_group("Player"):
-			apply_central_impulse((col_pos-position) * -200)
+		
+		#if body.is_in_group("Player"):
+		#	apply_central_impulse((col_pos-position) * -200)
 		kill(body)
 
 
