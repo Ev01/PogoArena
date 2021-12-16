@@ -36,6 +36,10 @@ trick_text = ExtResource( 3 )
 wait_time = 1.5
 one_shot = true
 
+[node name="InvincibilityTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 5, -4 )
 scale = Vector2( 0.15, 0.27 )

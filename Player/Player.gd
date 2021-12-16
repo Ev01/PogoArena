@@ -27,11 +27,13 @@ onready var sprite = get_node("Sprite")
 
 
 var is_dead = false
+var is_invincible = false
 var current_score = 0 setget _set_current_score
 var last_touched_by
 
 onready var foot_area = $FootArea
 onready var respawn_timer = $RespawnTimer
+onready var invincibility_timer = $InvincibilityTimer
 onready var game = get_node("/root/Main/Game")
 #onready var respawn_point = get_node(respawn_point_path)
 
@@ -68,8 +70,8 @@ func _physics_process(delta):
 
 func kill(body):
 	
-	if not is_dead:
-		print("Player ", player_num, " Killed by ", body)
+	if not is_dead and not is_invincible:
+		print("Player ", player_num, " Killed by ", body, " Time: ", OS.get_ticks_msec())
 		if last_touched_by:
 			last_touched_by.give_frag()
 		
@@ -83,7 +85,7 @@ func kill(body):
 		sprite.modulate = Color(0.2,0.2,0.2)
 		respawn_timer.start()
 		yield(respawn_timer, "timeout") # Wait for the respawn timer to finish
-		respawn()
+		call_deferred("respawn")#respawn()
 
 func respawn():
 	#Engine.time_scale = 1
@@ -93,10 +95,15 @@ func respawn():
 		angular_velocity = 0
 		rotation = 0
 		sprite.modulate = Color(1,1,1)
-		
-		# Wait one frame to prevent dying on the first frame
-		yield(get_tree(), "idle_frame")
 		is_dead = false
+		# Wait one frame to prevent dying on the first frame
+		print("respawned ", OS.get_ticks_msec())
+		invincibility_timer.start()
+		is_invincible = true
+		yield(invincibility_timer, "timeout")
+		print("not invincible now ", OS.get_ticks_msec())
+		is_invincible = false
+		
 
 
 func do_bounce(body):
@@ -122,6 +129,7 @@ func _on_FootArea_body_entered(body):
 
 func _on_HeadArea_body_entered(body):
 	if body != self:
+		print("Head collide! Time: ", OS.get_ticks_msec())
 		kill(body)
 
 
