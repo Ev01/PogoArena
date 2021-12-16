@@ -3,7 +3,7 @@ extends WindowDialog
 
 onready var play_again_btn = $PlayAgain
 onready var menu_btn = $BackToMenu
-onready var game = get_parent()
+onready var game = get_node("/root/Main/Game")
 onready var main = get_node("/root/Main")
 
 func _ready():
