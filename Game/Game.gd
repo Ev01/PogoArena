@@ -87,4 +87,5 @@ func _on_player_score_changed(current_score, player):
 		win_game(player)
 
 func _on_player_got_kill(player):
-	player.current_score += 1
+	if not is_game_finished:
+		player.current_score += 1
