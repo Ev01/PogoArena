@@ -9,7 +9,8 @@ export (String) var action_rotate_left = "rotate_left"
 export (String) var action_rotate_right = "rotate_right"
 # If you are player 1 this is 1, if player 2 this is 2 etc.
 export (int) var player_num = 1
-var rot_since_bounce = 0.0
+#used to be rot_since_last_bounce but now its not since last bounce
+var rot_flip = 0.0
 var highspeed_bounce = true
 
 export (PackedScene) var trick_text
@@ -18,6 +19,10 @@ export (PackedScene) var trick_text
 signal score_changed(current_score)
 
 var col_pos
+var col_normal
+#used for wall jumps
+var wall_jumped=false
+var can_kick=false
 
 onready var sprite = get_node("Sprite")
 
@@ -48,13 +53,16 @@ func _physics_process(delta):
 		
 		for body in foot_area.get_overlapping_bodies():
 			bounce(body)
-	rot_since_bounce += angular_velocity*delta
+	rot_flip += angular_velocity*delta
 	
-	if abs(rot_since_bounce) >= deg2rad(360):
+	if abs(rot_flip) >= deg2rad(360) && wall_jumped:
+		done_trick("WALL FLIP!")
+		rot_flip = 0
+		wall_jumped = false
+	
+	if abs(rot_flip) >= deg2rad(360):
 		done_trick("FLIP!")
-		rot_since_bounce = 0
-	
-	print(linear_velocity.length())
+		rot_flip = 0
 	
 	if linear_velocity.length() >= 1450 and highspeed_bounce == true:
 		done_trick("HIGH SPEED!")
@@ -81,6 +89,7 @@ func respawn():
 		linear_velocity = Vector2.ZERO
 		angular_velocity = 0
 		rotation = 0
+		rot_flip = 0
 		sprite.modulate = Color(1,1,1)
 		is_dead = false
 
@@ -89,11 +98,14 @@ func bounce(body):
 	if body != self:
 		#apply_central_impulse(Vector2(linear_velocity.length() * mass + bounce_power, 0).rotated(rotation - PI/2))
 		apply_central_impulse(Vector2(bounce_power, 0).rotated(rotation - PI/2))
-		rot_since_bounce = 0
+		#rot_flip = 0
 		highspeed_bounce = true
 
 
 func give_frag():
+	if can_kick:
+		#if frag is off a wall then it is a kick
+		done_trick("KICK!")
 	current_score += 1
 	emit_signal("score_changed", current_score)
 
@@ -127,4 +139,12 @@ func _on_Player_body_entered(body):
 func _integrate_forces( state ):
 	if(state.get_contact_count() >= 1):
 		col_pos = state.get_contact_local_position(0)
+		col_normal = state.get_contact_local_normal(0).angle()
+		#this code a bit yuky
+		if rad2deg(col_normal) >= 165 && rad2deg(col_normal) <= 195 or rad2deg(col_normal) >= -15 && rad2deg(col_normal) <= 15:
+			wall_jumped=true
+			can_kick=true
+		else:
+			wall_jumped=false
+			can_kick=false
 
