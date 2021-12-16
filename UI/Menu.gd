@@ -1,8 +1,9 @@
 extends Control
 
 
-onready var player_num_button = $PlayersOption/PlayerNumButton
+#onready var player_num_button = $PlayersOption/PlayerNumButton
 onready var max_score_control = $MaxScore
+onready var player_join = $PlayerJoin
 onready var main = get_node("/root/Main")
 
 
@@ -10,7 +11,8 @@ onready var main = get_node("/root/Main")
 
 
 func _on_PlayButton_pressed():
-	main.load_new_game(player_num_button.current_value, max_score_control.value)
+	var player_data = player_join.get_player_data()
+	main.load_new_game(player_data.player_count, max_score_control.value)
 
 
 func _on_Control_gui_input(event):
