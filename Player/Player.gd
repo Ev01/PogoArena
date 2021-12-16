@@ -52,7 +52,7 @@ func _physics_process(delta):
 		
 		for body in foot_area.get_overlapping_bodies():
 			if body != self:
-				bounce(body)
+				do_bounce(body)
 				break
 	
 	rot_since_bounce += angular_velocity*delta
@@ -94,7 +94,7 @@ func respawn():
 		is_dead = false
 
 
-func bounce(body):
+func do_bounce(body):
 	if body != self:
 		#apply_central_impulse(Vector2(linear_velocity.length() * mass + bounce_power, 0).rotated(rotation - PI/2))
 		apply_central_impulse(Vector2(bounce_power, 0).rotated(rotation - PI/2))
