@@ -13,7 +13,7 @@ __meta__ = {
 }
 min_value = 1
 max_value = 100
-value = 2
+value = 5
 
 [node name="Up" type="TextureButton" parent="."]
 margin_left = 64.0
@@ -44,7 +44,7 @@ __meta__ = {
 margin_top = 24.0
 margin_right = 58.0
 margin_bottom = 48.0
-text = "10"
+text = "5"
 align = 1
 max_length = 4
 context_menu_enabled = false

@@ -23,6 +23,7 @@ export (PackedScene) var jump_particle
 
 signal score_changed(current_score)
 signal got_kill()
+signal killed_self()
 
 var col_pos
 var col_normal
@@ -87,8 +88,16 @@ func _physics_process(delta):
 func kill(body):
 	
 	if not is_dead and not is_invincible:
+		if body.is_in_group("PlayerFoot"):
+			last_touched_by = body.get_parent()
+		elif body.is_in_group("Player"):
+			last_touched_by = body
+		
 		if last_touched_by:
 			last_touched_by.give_frag()
+		else:
+			emit_signal("killed_self")
+			
 		
 		if body.is_in_group("Player"):
 			# Apply force away from the killer
@@ -110,6 +119,7 @@ func respawn():
 		angular_velocity = 0
 		rotation = 0
 		rot_flip = 0
+		last_touched_by = null
 		sprite.modulate = Color(1,1,1)
 		is_dead = false
 		# Wait 0.05 seconds frame to prevent dying on spawn.

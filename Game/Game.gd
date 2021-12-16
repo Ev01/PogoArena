@@ -40,6 +40,7 @@ func add_player(player_scene):
 	world.add_child(new_player)
 	new_player.connect("score_changed", self, "_on_player_score_changed", [new_player])
 	new_player.connect("got_kill", self, "_on_player_got_kill", [new_player])
+	new_player.connect("killed_self", self, "_on_player_killed_self", [new_player])
 	
 	new_player.respawn()
 	
@@ -89,3 +90,7 @@ func _on_player_score_changed(current_score, player):
 func _on_player_got_kill(player):
 	if not is_game_finished:
 		player.current_score += 1
+
+
+func _on_player_killed_self(player):
+	player.current_score = max(player.current_score - 1 , 0)

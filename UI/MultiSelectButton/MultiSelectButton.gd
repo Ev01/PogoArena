@@ -4,6 +4,7 @@ extends HBoxContainer
 export (Dictionary) var buttons
 
 var current_value
+var button_nodes = {}
 
 onready var button_group = ButtonGroup.new()
 
@@ -19,6 +20,12 @@ func _ready():
 		add_child(new_button)
 		new_button.connect("pressed", self, "_on_button_pressed", [name])
 		new_button.size_flags_horizontal = SIZE_EXPAND_FILL
+		
+		button_nodes[name] = new_button
+	
+	button_nodes["2"].pressed = true
+	_on_button_pressed("2")
+	
 
 
 func _on_button_pressed(name):

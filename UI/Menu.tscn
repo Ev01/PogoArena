@@ -65,7 +65,6 @@ margin_top = 240.0
 margin_right = 568.0
 margin_bottom = 312.0
 max_value = 9999
-value = 10
 
 [node name="MaxScoreLbl" type="Label" parent="."]
 margin_left = 328.0
