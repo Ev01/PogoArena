@@ -15,6 +15,7 @@ var spawns# = [player1_spawns, player2_spawns, player3_spawns]
 var is_game_finished = false
 
 onready var main = get_node("/root/Main")
+onready var world = $World
 onready var score_container = $UI/HBoxContainer
 onready var win_popup = $UI/WinDialog
 
@@ -36,7 +37,7 @@ func _ready():
 func add_player(player_scene):
 	
 	var new_player = player_scene.instance()
-	add_child(new_player)
+	world.add_child(new_player)
 	new_player.connect("score_changed", self, "_on_player_score_changed", [new_player])
 	new_player.respawn()
 	
@@ -74,7 +75,7 @@ func win_game(player):
 
 func _input(event):
 	if Input.is_action_just_pressed("Reset"):
-				main.load_new_game()
+		main.load_new_game()
 
 
 func _on_player_score_changed(current_score, player):

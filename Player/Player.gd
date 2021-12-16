@@ -31,7 +31,7 @@ var last_touched_by
 
 onready var foot_area = $FootArea
 onready var respawn_timer = $RespawnTimer
-onready var world = get_parent()
+onready var game = get_node("/root/Main/Game")
 #onready var respawn_point = get_node(respawn_point_path)
 
 # Called when the node enters the scene tree for the first time.
@@ -42,7 +42,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	if not is_dead and !world.is_game_finished:
+	if not is_dead and !game.is_game_finished:
 		
 		if Input.is_action_pressed(action_rotate_left):
 			apply_torque_impulse(-rotation_torque)
@@ -86,8 +86,8 @@ func kill(body):
 
 func respawn():
 	#Engine.time_scale = 1
-	if world.is_game_finished == false:
-		position = world.choose_spawn(player_num)
+	if game.is_game_finished == false:
+		position = game.choose_spawn(player_num)
 		linear_velocity = Vector2.ZERO
 		angular_velocity = 0
 		rotation = 0
@@ -112,7 +112,7 @@ func give_frag():
 
 func done_trick(text):
 	var text_inst = trick_text.instance()
-	world.add_child(text_inst)
+	game.add_child(text_inst)
 	text_inst.rect_position = position
 	text_inst.text = text
 
