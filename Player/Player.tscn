@@ -44,7 +44,7 @@ texture = ExtResource( 1 )
 position = Vector2( 5, 0 )
 shape = SubResource( 5 )
 
-[node name="FootArea" type="Area2D" parent="." groups=["Player"]]
+[node name="FootArea" type="Area2D" parent="." groups=["Player", "PlayerFoot"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FootArea"]
 position = Vector2( 5, 34.5 )
