@@ -49,12 +49,14 @@ func add_player(player_scene):
 
 
 func spawn_players():
-	if player_count >= 1:
-		add_player(player1_scn)
 	if player_count >= 2:
 		add_player(player2_scn)
 	if player_count >= 3:
 		add_player(player3_scn)
+	if player_count >= 1:
+		add_player(player1_scn)
+
+	
 
 
 func choose_spawn(player_num):
