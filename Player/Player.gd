@@ -22,6 +22,7 @@ export (PackedScene) var trick_text
 
 
 signal score_changed(current_score)
+signal got_kill()
 
 var col_pos
 var col_normal
@@ -33,12 +34,14 @@ onready var sprite = get_node("Sprite")
 
 
 var is_dead = false
-var current_score = 0
+var is_invincible = false
+var current_score = 0 setget _set_current_score
 var last_touched_by
 
 onready var foot_area = $FootArea
 onready var respawn_timer = $RespawnTimer
-onready var world = get_parent()
+onready var invincibility_timer = $InvincibilityTimer
+onready var game = get_node("/root/Main/Game")
 #onready var respawn_point = get_node(respawn_point_path)
 
 # Called when the node enters the scene tree for the first time.
@@ -49,7 +52,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	if not is_dead and !world.is_game_finished:
+	if not is_dead and !game.is_game_finished:
 		
 		if Input.is_action_pressed(action_rotate_left):
 			apply_torque_impulse(-rotation_torque)
@@ -81,8 +84,7 @@ func _physics_process(delta):
 
 func kill(body):
 	
-	if not is_dead:
-		print("Player ", player_num, " Killed by ", body)
+	if not is_dead and not is_invincible:
 		if last_touched_by:
 			last_touched_by.give_frag()
 		
@@ -100,17 +102,24 @@ func kill(body):
 
 func respawn():
 	#Engine.time_scale = 1
-	if world.is_game_finished == false:
-		position = world.choose_spawn(player_num)
+	if game.is_game_finished == false:
+		position = game.choose_spawn(player_num)
 		linear_velocity = Vector2.ZERO
 		angular_velocity = 0
 		rotation = 0
 		rot_flip = 0
 		sprite.modulate = Color(1,1,1)
-		
-		# Wait one frame to prevent dying on the first frame
-		yield(get_tree(), "idle_frame")
 		is_dead = false
+		# Wait 0.05 seconds frame to prevent dying on spawn.
+		# This happens because on_HeadArea_body entered fires around 20 milliseconds late.
+		# This means you could hit something 10 milliseconds before respawning and you would
+		# die 10 milliseconds after respawn
+		# NOTE: Make sure invincibilty timer is at least 0.02 or this will happen
+		invincibility_timer.start()
+		is_invincible = true
+		yield(invincibility_timer, "timeout")
+		is_invincible = false
+		
 
 
 func do_bounce(body):
@@ -122,15 +131,11 @@ func do_bounce(body):
 
 
 func give_frag():
-	if can_kick:
-		#if frag is off a wall then it is a kick
-		done_trick("KICK!")
-	current_score += 1
-	emit_signal("score_changed", current_score)
+	emit_signal("got_kill")
 
 func done_trick(text):
 	var text_inst = trick_text.instance()
-	world.add_child(text_inst)
+	game.add_child(text_inst)
 	text_inst.rect_position = position
 	text_inst.text = text
 
@@ -164,3 +169,7 @@ func _integrate_forces( state ):
 			wall_jumped=false
 			can_kick=false
 
+
+func _set_current_score(value):
+	current_score = value
+	emit_signal("score_changed", current_score)
