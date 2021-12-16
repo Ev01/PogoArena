@@ -19,7 +19,7 @@ var rot_flip = 0.0
 var highspeed_bounce = true
 
 export (PackedScene) var trick_text
-
+export (PackedScene) var jump_particle
 
 signal score_changed(current_score)
 signal got_kill()
@@ -41,7 +41,9 @@ var last_touched_by
 onready var foot_area = $FootArea
 onready var respawn_timer = $RespawnTimer
 onready var invincibility_timer = $InvincibilityTimer
+onready var jump_particle_timer = $JumpParticleTimer
 onready var game = get_node("/root/Main/Game")
+onready var world = get_parent()
 #onready var respawn_point = get_node(respawn_point_path)
 
 # Called when the node enters the scene tree for the first time.
@@ -128,6 +130,14 @@ func do_bounce(body):
 		apply_central_impulse(Vector2(bounce_power, 0).rotated(rotation - PI/2))
 		#rot_flip = 0
 		highspeed_bounce = true
+		
+		if jump_particle_timer.is_stopped():
+			var new_particle = jump_particle.instance()
+			new_particle.position = $ParticleSpawn.global_position
+			new_particle.rotation = rotation
+			new_particle.emitting = true
+			world.add_child(new_particle)
+			jump_particle_timer.start()
 
 
 func give_frag():
