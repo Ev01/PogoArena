@@ -19,6 +19,7 @@ export (PackedScene) var trick_text
 
 
 signal score_changed(current_score)
+signal got_kill()
 
 var col_pos
 
@@ -26,7 +27,7 @@ onready var sprite = get_node("Sprite")
 
 
 var is_dead = false
-var current_score = 0
+var current_score = 0 setget _set_current_score
 var last_touched_by
 
 onready var foot_area = $FootArea
@@ -107,8 +108,7 @@ func do_bounce(body):
 
 
 func give_frag():
-	current_score += 1
-	emit_signal("score_changed", current_score)
+	emit_signal("got_kill")
 
 func done_trick(text):
 	var text_inst = trick_text.instance()
@@ -138,3 +138,7 @@ func _integrate_forces( state ):
 	if(state.get_contact_count() >= 1):
 		col_pos = state.get_contact_local_position(0)
 
+
+func _set_current_score(value):
+	current_score = value
+	emit_signal("score_changed", current_score)

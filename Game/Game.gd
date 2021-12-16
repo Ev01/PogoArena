@@ -39,6 +39,8 @@ func add_player(player_scene):
 	var new_player = player_scene.instance()
 	world.add_child(new_player)
 	new_player.connect("score_changed", self, "_on_player_score_changed", [new_player])
+	new_player.connect("got_kill", self, "_on_player_got_kill", [new_player])
+	
 	new_player.respawn()
 	
 	var new_score_label = score_label_scn.instance()
@@ -81,3 +83,6 @@ func _input(event):
 func _on_player_score_changed(current_score, player):
 	if current_score >= max_score:
 		win_game(player)
+
+func _on_player_got_kill(player):
+	player.current_score += 1
