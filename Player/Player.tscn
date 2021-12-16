@@ -34,6 +34,7 @@ trick_text = ExtResource( 3 )
 
 [node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 1.5
+one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 5, -4 )

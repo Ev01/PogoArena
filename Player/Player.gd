@@ -66,14 +66,15 @@ func _physics_process(delta):
 		highspeed_bounce = false
 
 func kill(body):
+	
 	if not is_dead:
+		print("Player ", player_num, " Killed by ", body)
 		if last_touched_by:
 			last_touched_by.give_frag()
 		
 		if body.is_in_group("Player"):
 			# Apply force away from the killer
 			var blast_force = (position - body.position).normalized() * blast_power
-			print("Blasted ", col_pos)
 			apply_central_impulse(blast_force)
 		
 		is_dead = true
@@ -91,6 +92,9 @@ func respawn():
 		angular_velocity = 0
 		rotation = 0
 		sprite.modulate = Color(1,1,1)
+		
+		# Wait one frame to prevent dying on the first frame
+		yield(get_tree(), "idle_frame")
 		is_dead = false
 
 
@@ -118,9 +122,6 @@ func _on_FootArea_body_entered(body):
 
 func _on_HeadArea_body_entered(body):
 	if body != self:
-		
-		#if body.is_in_group("Player"):
-		#	apply_central_impulse((col_pos-position) * -200)
 		kill(body)
 
 
