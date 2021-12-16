@@ -46,8 +46,12 @@ func _physics_process(delta):
 		if Input.is_action_pressed(action_rotate_right):
 			apply_torque_impulse(rotation_torque)
 		
+		
 		for body in foot_area.get_overlapping_bodies():
-			bounce(body)
+			if body != self:
+				bounce(body)
+				break
+	
 	rot_since_bounce += angular_velocity*delta
 	
 	if abs(rot_since_bounce) >= deg2rad(360):
