@@ -135,8 +135,8 @@ func do_bounce(body):
 			var new_particle = jump_particle.instance()
 			new_particle.position = $ParticleSpawn.global_position
 			new_particle.rotation = rotation
-			new_particle.emitting = true
 			world.add_child(new_particle)
+			new_particle.emitting = true
 			jump_particle_timer.start()
 
 
