@@ -1,9 +1,7 @@
 extends Node2D
 
 
-export (PackedScene) var player1_scn
-export (PackedScene) var player2_scn
-export (PackedScene) var player3_scn
+export (PackedScene) var player_scn
 export (PackedScene) var score_label_scn
 
 var player1_spawns# = get_tree().get_nodes_in_group("Player1Spawn")
@@ -36,7 +34,7 @@ func _ready():
 
 func add_player(data, player_num):
 	
-	var new_player = player1_scn.instance()
+	var new_player = player_scn.instance()
 	world.add_child(new_player)
 	new_player.connect("score_changed", self, "_on_player_score_changed", [new_player])
 	new_player.connect("got_kill", self, "_on_player_got_kill", [new_player])
