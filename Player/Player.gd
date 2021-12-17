@@ -44,6 +44,7 @@ var last_touched_by
 onready var foot_area = $FootArea
 onready var respawn_timer = $RespawnTimer
 onready var invincibility_timer = $InvincibilityTimer
+onready var last_touched_timer = $LastTouchedTimer
 onready var jump_particle_timer = $JumpParticleTimer
 onready var game = get_node("/root/Main/Game")
 onready var world = get_parent()
@@ -70,7 +71,10 @@ func _physics_process(delta):
 			if body != self:
 				do_bounce(body)
 				break
-
+	
+	if last_touched_timer.is_stopped():
+		last_touched_by = null
+	
 	rot_flip += angular_velocity*delta
 	
 	
@@ -169,7 +173,12 @@ func done_trick(text):
 	text_inst.text = text
 
 func _on_FootArea_body_entered(body):
-	pass
+	if body.is_in_group("Player"):
+		last_touched_by = body
+		last_touched_timer.start()
+	if body.is_in_group("PlayerFoot"):
+		last_touched_by = body
+		last_touched_timer.start()
 
 
 func _on_HeadArea_body_entered(body):
@@ -185,6 +194,7 @@ func _on_HeadArea_area_entered(area):
 func _on_Player_body_entered(body):
 	if body.is_in_group("Player"):
 		last_touched_by = body
+		last_touched_timer.start()
 
 func _integrate_forces( state ):
 	if(state.get_contact_count() >= 1):
