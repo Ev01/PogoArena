@@ -20,6 +20,7 @@ var highspeed_bounce = true
 
 export (PackedScene) var trick_text
 export (PackedScene) var jump_particle
+export (PackedScene) var explosion_particle
 
 signal score_changed(current_score)
 signal got_kill()
@@ -107,6 +108,13 @@ func kill(body):
 		is_dead = true
 		#Engine.time_scale = 0.2
 		sprite.modulate = Color(0.2,0.2,0.2)
+		
+		var new_particle = explosion_particle.instance()
+		new_particle.position = position
+		world.add_child(new_particle)
+		new_particle.emitting = true
+		#new_particle.vel = linear_velocity
+		
 		respawn_timer.start()
 		yield(respawn_timer, "timeout") # Wait for the respawn timer to finish
 		respawn()

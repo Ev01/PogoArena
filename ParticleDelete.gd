@@ -2,6 +2,7 @@ extends Node2D
 
 var emitting = false setget _set_emitting
 var children = []
+var vel = Vector2.ZERO
 
 func _ready():
 	children = get_children()
@@ -16,6 +17,9 @@ func _process(delta):
 	
 	if should_kill:
 		queue_free()
+	
+	vel -= (vel * 5) * delta
+	position+=vel*delta
 
 
 func _set_emitting(value):
