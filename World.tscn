@@ -124,23 +124,35 @@ position = Vector2( -9.53674e-07, 0 )
 rotation = 0.785397
 shape = SubResource( 3 )
 
-[node name="Respawn1" parent="." groups=["Player1Spawn"] instance=ExtResource( 6 )]
+[node name="Respawn1" parent="." groups=[
+"Player1Spawn",
+] instance=ExtResource( 6 )]
 position = Vector2( 136.513, 432 )
 
-[node name="Respawn3" parent="." groups=["Player3Spawn"] instance=ExtResource( 6 )]
+[node name="Respawn3" parent="." groups=[
+"Player3Spawn",
+] instance=ExtResource( 6 )]
 position = Vector2( 859.058, 424 )
 
-[node name="Respawn2" parent="." groups=["Player2Spawn"] instance=ExtResource( 6 )]
+[node name="Respawn2" parent="." groups=[
+"Player2Spawn",
+] instance=ExtResource( 6 )]
 position = Vector2( 509.755, 425.326 )
 
-[node name="Respawn12" parent="." groups=["Player1Spawn"] instance=ExtResource( 6 )]
-position = Vector2( 510.268, 217.326 )
+[node name="Respawn12" parent="." groups=[
+"Player1Spawn",
+] instance=ExtResource( 6 )]
+position = Vector2( 134, 225 )
 
-[node name="Respawn32" parent="." groups=["Player3Spawn"] instance=ExtResource( 6 )]
+[node name="Respawn32" parent="." groups=[
+"Player3Spawn",
+] instance=ExtResource( 6 )]
 position = Vector2( 859.058, 216 )
 
-[node name="Respawn22" parent="." groups=["Player2Spawn"] instance=ExtResource( 6 )]
-position = Vector2( 136, 224 )
+[node name="Respawn22" parent="." groups=[
+"Player2Spawn",
+] instance=ExtResource( 6 )]
+position = Vector2( 510, 224 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color( 0.827451, 0.768627, 0.768627, 1 )
