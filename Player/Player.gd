@@ -30,6 +30,7 @@ var col_normal
 #used for wall jumps
 var wall_jumped=false
 var can_kick=false
+var player_name = "Player"
 
 onready var sprite = get_node("Sprite")
 

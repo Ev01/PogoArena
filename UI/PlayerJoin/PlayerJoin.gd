@@ -9,6 +9,10 @@ var taken_controls = []
 
 # The colour corresponding to each control scheme
 var colours = [Color.yellow, Color.green, Color.red]
+# Player number corresponding to each control scheme
+var player_nums = [3, 1, 2]
+# Player name corresponding to each control scheme
+var player_names = ["Yellow", "Green", "Red"]
 onready var control_schemes = [control_scheme1,  control_scheme2, control_scheme3]
 # This list will rearange as the join panels rearrange themselves when unjoining
 onready var join_panels = get_children()
@@ -22,14 +26,22 @@ func _ready():
 
 func get_player_data():
 	var player_count = 0
+	var players = []
 	for panel in join_panels:
+		
 		if panel.joined:
 			player_count += 1
+			var panel_data = {
+				colour = panel.colour,
+				controls = panel.control,
+				player_num = panel.player_num,
+				player_name = panel.player_name,
+			}
+			players.append(panel_data)
 		
-		
-	
 	return {
-		player_count = player_count
+		player_count = player_count,
+		players = players
 	}
 
 
@@ -41,7 +53,7 @@ func _input(event):
 			
 			if Input.is_action_just_pressed(control):
 				if active_panel_num < len(join_panels):
-					join_panels[active_panel_num].join(control_schemes[s], colours[s])
+					join_panels[active_panel_num].join(control_schemes[s], colours[s], player_nums[s], player_names[s])
 					taken_controls.append(control_schemes[s])
 					active_panel_num += 1
 					print(active_panel_num)

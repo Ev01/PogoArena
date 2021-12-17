@@ -6,7 +6,9 @@ extends Panel
 
 var joined = false
 var control = []
+var player_num = 1
 var colour = Color.white setget _set_colour
+var player_name = "Player"
 
 #onready var control_schemes = [control_scheme1,  control_scheme2, control_scheme3]
 onready var player_preview = $PlayerPreview
@@ -19,10 +21,13 @@ func _ready():
 	remove_btn.hide()
 
 
-func join(control_scheme, p_colour):
+func join(control_scheme, p_colour, p_player_num, p_name):
 	if not joined:
 		_set_colour(p_colour)
 		control = control_scheme
+		player_num = p_player_num
+		player_name = p_name
+		
 		player_preview.show()
 		press_key.hide()
 		remove_btn.show()
