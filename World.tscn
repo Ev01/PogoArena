@@ -127,12 +127,12 @@ shape = SubResource( 3 )
 [node name="Respawn1" parent="." groups=[
 "Player1Spawn",
 ] instance=ExtResource( 6 )]
-position = Vector2( 136.513, 432 )
+position = Vector2( 169, 424 )
 
 [node name="Respawn3" parent="." groups=[
 "Player3Spawn",
 ] instance=ExtResource( 6 )]
-position = Vector2( 859.058, 424 )
+position = Vector2( 859, 424 )
 
 [node name="Respawn2" parent="." groups=[
 "Player2Spawn",
@@ -142,12 +142,12 @@ position = Vector2( 509.755, 425.326 )
 [node name="Respawn12" parent="." groups=[
 "Player1Spawn",
 ] instance=ExtResource( 6 )]
-position = Vector2( 134, 225 )
+position = Vector2( 169.487, 224 )
 
 [node name="Respawn32" parent="." groups=[
 "Player3Spawn",
 ] instance=ExtResource( 6 )]
-position = Vector2( 859.058, 216 )
+position = Vector2( 859, 224 )
 
 [node name="Respawn22" parent="." groups=[
 "Player2Spawn",
@@ -180,7 +180,7 @@ texture = ExtResource( 8 )
 
 [node name="Sprite3" type="Sprite" parent="."]
 modulate = Color( 0.168627, 0.180392, 0.270588, 1 )
-position = Vector2( 516, 296 )
+position = Vector2( 524, 296 )
 scale = Vector2( 1.82813, 1 )
 z_index = -10
 texture = ExtResource( 8 )
