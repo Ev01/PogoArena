@@ -9,15 +9,8 @@ export (String) var action_rotate_left = "rotate_left"
 export (String) var action_rotate_right = "rotate_right"
 # If you are player 1 this is 1, if player 2 this is 2 etc.
 export (int) var player_num = 1
-
 # When a player hits your head, exert a force of this much away from them.
 export (float) var blast_power = 20000
-
-#used to be rot_since_last_bounce but now its not since last bounce
-var rot_flip = 0.0
-
-var highspeed_bounce = true
-
 export (PackedScene) var trick_text
 export (PackedScene) var jump_particle
 export (PackedScene) var explosion_particle
@@ -26,28 +19,33 @@ signal score_changed(current_score)
 signal got_kill()
 signal killed_self()
 
+#used to be rot_since_last_bounce but now its not since last bounce
+var rot_flip = 0.0
+var highspeed_bounce = true
 var col_pos
 var col_normal
 #used for wall jumps
-var wall_jumped=false
-var can_kick=false
+var wall_jumped = false
+var can_kick = false
 var player_name = "Player"
-
-onready var sprite = get_node("Sprite")
-
-
 var is_dead = false
 var is_invincible = false
 var current_score = 0 setget _set_current_score
 var last_touched_by
+var gravity_multiplier = 1 setget _set_gravity_multiplier
 
+
+onready var org_gravity_scale = gravity_scale
+onready var sprite = get_node("Sprite")
 onready var foot_area = $FootArea
 onready var respawn_timer = $RespawnTimer
+onready var respawn_time = respawn_timer.wait_time setget _set_respawn_time
 onready var invincibility_timer = $InvincibilityTimer
 onready var last_touched_timer = $LastTouchedTimer
 onready var jump_particle_timer = $JumpParticleTimer
 onready var game = get_node("/root/Main/Game")
 onready var world = get_parent()
+
 #onready var respawn_point = get_node(respawn_point_path)
 
 # Called when the node enters the scene tree for the first time.
@@ -212,3 +210,13 @@ func _integrate_forces( state ):
 func _set_current_score(value):
 	current_score = value
 	emit_signal("score_changed", current_score)
+
+
+func _set_gravity_multiplier(value):
+	gravity_multiplier = value
+	gravity_scale = org_gravity_scale * gravity_multiplier
+
+
+func _set_respawn_time(value):
+	respawn_time = value
+	respawn_timer.wait_time = value

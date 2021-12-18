@@ -16,14 +16,19 @@ onready var main = get_node("/root/Main")
 onready var world = $World
 onready var score_container = $UI/HBoxContainer
 onready var win_popup = $UI/WinDialog
+#onready var pause_menu = $UI/PauseMenu
+#onready var back_button = $UI/PauseMenu/VBoxContainer/Control/BackButton
+#onready var match_settings_node = $UI/PauseMenu/VBoxContainer/MatchSettings
 
 var player_data
 var match_settings = {}
 #var player_count = 2
 var max_score = 50
+var players = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#back_button.connect("pressed", self, "")
 	
 	player1_spawns = get_tree().get_nodes_in_group("Player1Spawn")
 	player2_spawns = get_tree().get_nodes_in_group("Player2Spawn")
@@ -31,11 +36,13 @@ func _ready():
 	spawns = [player1_spawns, player2_spawns, player3_spawns]
 	
 	spawn_players()
+	update_match_settings()
 
 
 func add_player(data, player_num):
 	
 	var new_player = player_scn.instance()
+	players.append(new_player)
 	world.add_child(new_player)
 	new_player.connect("score_changed", self, "_on_player_score_changed", [new_player])
 	new_player.connect("got_kill", self, "_on_player_got_kill", [new_player])
@@ -47,10 +54,6 @@ func add_player(data, player_num):
 	new_player.action_rotate_left = data.controls[0]
 	new_player.action_rotate_right = data.controls[1]
 	
-	new_player.get_node("RespawnTimer").wait_time = match_settings.respawn_time
-	new_player.gravity_scale *= match_settings.gravity_multiplier
-	new_player.bounce_power = match_settings.bounce_power
-	
 	new_player.respawn()
 	
 	var new_score_label = score_label_scn.instance()
@@ -61,14 +64,13 @@ func add_player(data, player_num):
 func spawn_players():
 	for p in range(len(player_data.players)):
 		add_player(player_data.players[p], p+1)
-	#if player_data.player_count >= 2:
-	#	add_player(player2_scn)
-	#if player_data.player_count >= 3:
-	#	add_player(player3_scn)
-	#if player_data.player_count >= 1:
-	#	add_player(player1_scn)
 
-	
+
+func update_match_settings():
+	for p in players:
+		p.respawn_time = match_settings.respawn_time
+		p.gravity_multiplier = match_settings.gravity_multiplier
+		p.bounce_power = match_settings.bounce_power
 
 
 func choose_spawn(player_num):
@@ -87,6 +89,24 @@ func win_game(player):
 	Engine.time_scale = 0.1
 	is_game_finished = true
 	win_popup.window_title = player.player_name + " Wins!"
+
+
+func abort_game():
+	win_popup.popup()
+	#get_tree().paused = true
+	Engine.time_scale = 0.1
+	is_game_finished = true
+	
+	# Check which player finished with the highest score
+	var highest_scoring
+	for p in players:
+		if not highest_scoring:
+			highest_scoring = p
+		else:
+			if p.current_score > highest_scoring.current_score:
+				highest_scoring = p
+	
+	win_popup.window_title = "Match Aborted, " + highest_scoring.player_name + " Wins!"
 
 
 func _input(event):
