@@ -23,7 +23,7 @@ onready var win_popup = $UI/WinDialog
 var player_data
 var match_settings = {}
 #var player_count = 2
-var max_score = 50
+#var max_score = 50
 var players = []
 
 # Called when the node enters the scene tree for the first time.
