@@ -18,6 +18,7 @@ onready var score_container = $UI/HBoxContainer
 onready var win_popup = $UI/WinDialog
 
 var player_data
+var match_settings = {}
 #var player_count = 2
 var max_score = 50
 
@@ -90,7 +91,7 @@ func _input(event):
 
 
 func _on_player_score_changed(current_score, player):
-	if current_score >= max_score:
+	if current_score >= match_settings.max_score:
 		win_game(player)
 
 func _on_player_got_kill(player):

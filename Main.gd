@@ -19,7 +19,7 @@ func change_scene_to(scene):
 	add_child(current_scene)
 
 
-func load_new_game(player_data, max_score):
+func load_new_game(player_data, match_settings):
 	get_tree().paused = false
 	if current_scene:
 		# queue_free will make get_nodes_in_group get deleted spawns
@@ -27,6 +27,7 @@ func load_new_game(player_data, max_score):
 	
 	current_scene = game_scn.instance()
 	current_scene.player_data = player_data
-	current_scene.max_score = max_score
+	#current_scene.max_score = match_settings.max_score
+	current_scene.match_settings = match_settings
 	call_deferred("add_child", current_scene)
 	
