@@ -2,7 +2,7 @@ extends Control
 
 
 #onready var player_num_button = $PlayersOption/PlayerNumButton
-onready var max_score_control = $MaxScore
+onready var max_score_control = $MatchSettings/ScrollContainer/MarginContainer/VBoxContainer/MaxScore/ValueChange
 onready var player_join = $PlayerJoin
 onready var main = get_node("/root/Main")
 

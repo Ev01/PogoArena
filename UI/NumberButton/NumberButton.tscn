@@ -5,8 +5,8 @@
 [ext_resource path="res://UI/NumberButton/ValueLabel.gd" type="Script" id=3]
 
 [node name="NumberButton" type="Control"]
-margin_right = 88.0
-margin_bottom = 64.0
+margin_right = 120.0
+margin_bottom = 24.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -16,34 +16,35 @@ max_value = 100
 value = 5
 
 [node name="Up" type="TextureButton" parent="."]
-margin_left = 64.0
-margin_right = 96.0
-margin_bottom = 32.0
+anchor_bottom = 1.0
+margin_left = 88.0
+margin_right = 112.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 2 )
 expand = true
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Down" type="TextureButton" parent="."]
+anchor_bottom = 1.0
 margin_left = 64.0
-margin_top = 32.0
-margin_right = 96.0
-margin_bottom = 64.0
+margin_right = 88.0
+grow_horizontal = 0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 2 )
 expand = true
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Value" type="LineEdit" parent="."]
-margin_top = 24.0
+anchor_bottom = 1.0
 margin_right = 58.0
-margin_bottom = 48.0
 text = "5"
 align = 1
 max_length = 4

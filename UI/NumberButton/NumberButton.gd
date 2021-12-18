@@ -7,6 +7,11 @@ export var value = 0 setget _set_value
 
 onready var value_label = $Value
 
+
+func _ready():
+	value_label.text = str(value)
+
+
 func _on_Up_pressed():
 	if not Engine.is_editor_hint():
 		self.value = clamp(value + 1, min_value, max_value)
