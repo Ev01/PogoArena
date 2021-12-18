@@ -15,12 +15,9 @@ var setting_nodes = {}
 
 func _ready():
 	for setting_node in vbox.get_children():
-		print(setting_node.get_class())
 		if setting_node.get_class() != "Control":
 			continue
 		setting_nodes[setting_node.setting_name] = setting_node
-	
-	print(setting_nodes)
 
 
 func update_settings():
@@ -34,15 +31,8 @@ func update_settings():
 func _set_settings(value):
 	settings = value
 	var setting_names = setting_nodes.keys()
-	print(setting_names)
 	# Loop through all setting nodes
 	for i in range(len(setting_names)):
-		#print(i)
-		#print(setting_names[i])
-		#print(setting_nodes[setting_names[i]])
-		#print(setting_nodes[setting_names[i]].get_node("ValueChange"))
-		#print(setting_nodes[setting_names[i]].get_node("ValueChange").value)
-		# Set the setting node's value to the correct setting
 		setting_nodes[setting_names[i]].get_node("ValueChange").value = settings[setting_names[i]]
 
 func _get_settings():

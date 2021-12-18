@@ -28,7 +28,6 @@ func _set_value(val):
 	emit_signal("value_changed", value)
 	if value_label:
 		value_label.text = str(value)
-		print(str(value))
 
 
 func _on_Value_text_changed(new_text):

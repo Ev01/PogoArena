@@ -25,6 +25,5 @@ func _process(delta):
 
 func _set_emitting(value):
 	for child in children:
-		print(child.get_class())
 		if child.get_class() == "CPUParticles2D":
 			child.emitting = value
