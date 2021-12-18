@@ -81,7 +81,6 @@ func _physics_process(delta):
 			
 			slide_audio.pitch_scale = linear_velocity.length() / 1000 + 0.5
 			slide_audio.volume_db = min(linear_velocity.length() / 50 - 24, 0)
-			print(slide_audio.volume_db)
 			if !slide_audio.playing:
 				slide_audio.play()
 		else:
