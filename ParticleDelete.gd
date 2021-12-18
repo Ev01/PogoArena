@@ -11,9 +11,10 @@ func _ready():
 func _process(delta):
 	var should_kill = true
 	for child in children:
-		if child.emitting == true:
-			should_kill = false
-			break
+		if child.get_class() == "CPUParticles2D":
+			if child.emitting == true:
+				should_kill = false
+				break
 	
 	if should_kill:
 		queue_free()
@@ -24,4 +25,6 @@ func _process(delta):
 
 func _set_emitting(value):
 	for child in children:
-		child.emitting = value
+		print(child.get_class())
+		if child.get_class() == "CPUParticles2D":
+			child.emitting = value

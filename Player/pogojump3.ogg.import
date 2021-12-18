@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pogojump3.ogg-9bf5c480c2cab4519ba127035dc9f9fe.oggstr"
+
+[deps]
+
+source_file="res://Player/pogojump3.ogg"
+dest_files=[ "res://.import/pogojump3.ogg-9bf5c480c2cab4519ba127035dc9f9fe.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -43,6 +43,10 @@ onready var respawn_time = respawn_timer.wait_time setget _set_respawn_time
 onready var invincibility_timer = $InvincibilityTimer
 onready var last_touched_timer = $LastTouchedTimer
 onready var jump_particle_timer = $JumpParticleTimer
+
+onready var bounce_audio = $BounceSound
+onready var slide_audio = $SlidingSound
+
 onready var game = get_node("/root/Main/Game")
 onready var world = get_parent()
 
@@ -53,6 +57,7 @@ func _ready():
 	connect("body_entered", self, "_on_Player_body_entered")
 	$HeadArea.connect("area_entered", self, "_on_HeadArea_area_entered")
 	$HeadArea.connect("body_entered", self, "_on_HeadArea_body_entered")
+	$FootArea.connect("body_entered", self, "_on_FootArea_body_entered")
 
 
 func _physics_process(delta):
@@ -69,6 +74,17 @@ func _physics_process(delta):
 			if body != self:
 				do_bounce(body)
 				break
+	if is_dead:
+		if get_colliding_bodies():
+			
+			slide_audio.pitch_scale = linear_velocity.length() / 1000 + 0.5
+			slide_audio.volume_db = min(linear_velocity.length() / 50 - 24, 0)
+			if !slide_audio.playing:
+				slide_audio.play()
+		else:
+			slide_audio.stop()
+	else:
+		slide_audio.stop()
 	
 	if last_touched_timer.is_stopped():
 		last_touched_by = null
@@ -142,7 +158,6 @@ func respawn():
 		is_invincible = true
 		yield(invincibility_timer, "timeout")
 		is_invincible = false
-		
 
 
 func do_bounce(body):
@@ -164,19 +179,24 @@ func do_bounce(body):
 func give_frag():
 	emit_signal("got_kill")
 
+
 func done_trick(text):
 	var text_inst = trick_text.instance()
 	game.add_child(text_inst)
 	text_inst.rect_position = position
 	text_inst.text = text
 
+
 func _on_FootArea_body_entered(body):
-	if body.is_in_group("Player"):
-		last_touched_by = body
-		last_touched_timer.start()
-	if body.is_in_group("PlayerFoot"):
-		last_touched_by = body
-		last_touched_timer.start()
+	if body != self: 
+		if not is_dead:
+			bounce_audio.play_random(0.9, 1.2, -6, 0)
+		if body.is_in_group("Player"):
+			last_touched_by = body
+			last_touched_timer.start()
+		if body.is_in_group("PlayerFoot"):
+			last_touched_by = body
+			last_touched_timer.start()
 
 
 func _on_HeadArea_body_entered(body):
@@ -193,6 +213,7 @@ func _on_Player_body_entered(body):
 	if body.is_in_group("Player"):
 		last_touched_by = body
 		last_touched_timer.start()
+
 
 func _integrate_forces( state ):
 	if(state.get_contact_count() >= 1):
