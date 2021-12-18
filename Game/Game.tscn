@@ -13,20 +13,22 @@ script = ExtResource( 1 )
 player_scn = ExtResource( 6 )
 score_label_scn = ExtResource( 7 )
 
+[node name="TimeLeft" type="Timer" parent="."]
+
 [node name="World" parent="." instance=ExtResource( 2 )]
 
 [node name="UI" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 1024.0
+margin_bottom = 600.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
-margin_left = 128.0
+[node name="Scores" type="HBoxContainer" parent="UI"]
+anchor_right = 1.0
 margin_top = 40.0
-margin_right = 896.0
-margin_bottom = 136.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -99,6 +101,29 @@ anchor_bottom = 1.0
 margin_right = 334.0
 margin_bottom = 174.0
 
+[node name="VBoxContainer" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings" index="0"]
+margin_right = 324.0
+margin_bottom = 164.0
+
+[node name="Title" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="0"]
+margin_right = 314.0
+
+[node name="MaxScore" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="1"]
+margin_right = 314.0
+
+[node name="GravityMultiplier" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="2"]
+margin_right = 314.0
+
+[node name="BouncePower" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="3"]
+margin_right = 314.0
+
+[node name="RespawnTime" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="4"]
+margin_right = 314.0
+
+[node name="Time" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="5"]
+visible = false
+margin_right = 314.0
+
 [node name="Control" type="Control" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen"]
 margin_top = 178.0
 margin_right = 334.0
@@ -116,6 +141,7 @@ __meta__ = {
 }
 
 [node name="MainScreen" type="VBoxContainer" parent="UI/PauseMenu/MarginContainer/Control"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 20
@@ -147,3 +173,5 @@ text = "End Game"
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MainScreen/ResumeBtn" to="UI/PauseMenu" method="_on_ResumeBtn_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MainScreen/MatchSettingsBtn" to="UI/PauseMenu" method="_on_MatchSettingsBtn_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MainScreen/EndGameBtn" to="UI/PauseMenu" method="_on_EndGameBtn_pressed"]
+
+[editable path="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings"]
