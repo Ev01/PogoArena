@@ -139,6 +139,8 @@ margin_right = 242.0
 margin_bottom = 119.0
 rect_min_size = Vector2( 0, 25 )
 script = ExtResource( 4 )
+setting_name = "bounce_power"
+match_settings_path = NodePath("../../../..")
 
 [node name="Label" type="Label" parent="MatchSettings/ScrollContainer/MarginContainer/VBoxContainer/BouncePower"]
 anchor_bottom = 1.0
@@ -156,8 +158,8 @@ anchor_bottom = 1.0
 margin_left = -121.0
 margin_right = 0.0
 margin_bottom = 0.0
-max_value = 10000
-value = 2000
+max_value = 100000
+value = 9000
 
 [node name="RespawnTime" type="Control" parent="MatchSettings/ScrollContainer/MarginContainer/VBoxContainer"]
 margin_top = 129.0
@@ -165,6 +167,8 @@ margin_right = 242.0
 margin_bottom = 154.0
 rect_min_size = Vector2( 0, 25 )
 script = ExtResource( 4 )
+setting_name = "respawn_time"
+match_settings_path = NodePath("../../../..")
 
 [node name="Label" type="Label" parent="MatchSettings/ScrollContainer/MarginContainer/VBoxContainer/RespawnTime"]
 anchor_bottom = 1.0

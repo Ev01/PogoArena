@@ -40,7 +40,7 @@ func _on_Value_text_entered(new_text):
 
 
 func _on_Value_focus_exited():
-	if not Engine.is_editor_hint:
+	if not Engine.is_editor_hint():
 		var caret_position = value_label.caret_position
 		self.value = int(value_label.text)
 		value_label.caret_position = caret_position

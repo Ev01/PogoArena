@@ -47,6 +47,10 @@ func add_player(data, player_num):
 	new_player.action_rotate_left = data.controls[0]
 	new_player.action_rotate_right = data.controls[1]
 	
+	new_player.get_node("RespawnTimer").wait_time = match_settings.respawn_time
+	new_player.gravity_scale *= match_settings.gravity_multiplier
+	new_player.bounce_power = match_settings.bounce_power
+	
 	new_player.respawn()
 	
 	var new_score_label = score_label_scn.instance()
