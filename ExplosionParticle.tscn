@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ParticleDelete.gd" type="Script" id=1]
 [ext_resource path="res://circle.png" type="Texture" id=2]
+[ext_resource path="res://Player/plosion.wav" type="AudioStream" id=3]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, -15.0577, 0, 0, Vector2( 0.136513, 0.365031 ), 0.0, 0.0, 0, 0, Vector2( 0.28125, 0.659509 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -33,3 +34,8 @@ scale_amount = 0.3
 scale_amount_random = 0.11
 scale_amount_curve = SubResource( 1 )
 color_ramp = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+autoplay = true
