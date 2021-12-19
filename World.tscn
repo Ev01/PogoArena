@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://UI/Fonts/Stacked pixel.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=4]
 [ext_resource path="res://RespawnPoint/RespawnPoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Concrete.png" type="Texture" id=8]
@@ -13,6 +14,13 @@ extents = Vector2( 24, 256 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 56.5685, 56.5686 )
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
+
+[sub_resource type="DynamicFont" id=7]
+size = 164
+font_data = ExtResource( 1 )
 
 [sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 0.0196078, 0.0196078, 0.196078, 0.278431, 0.617188, 0.800369, 1, 0.329412 )
@@ -124,34 +132,22 @@ position = Vector2( -9.53674e-07, 0 )
 rotation = 0.785397
 shape = SubResource( 3 )
 
-[node name="Respawn1" parent="." groups=[
-"Player1Spawn",
-] instance=ExtResource( 6 )]
+[node name="Respawn1" parent="." groups=["Player1Spawn"] instance=ExtResource( 6 )]
 position = Vector2( 169, 424 )
 
-[node name="Respawn3" parent="." groups=[
-"Player3Spawn",
-] instance=ExtResource( 6 )]
+[node name="Respawn3" parent="." groups=["Player3Spawn"] instance=ExtResource( 6 )]
 position = Vector2( 859, 424 )
 
-[node name="Respawn2" parent="." groups=[
-"Player2Spawn",
-] instance=ExtResource( 6 )]
+[node name="Respawn2" parent="." groups=["Player2Spawn"] instance=ExtResource( 6 )]
 position = Vector2( 509.755, 425.326 )
 
-[node name="Respawn12" parent="." groups=[
-"Player1Spawn",
-] instance=ExtResource( 6 )]
+[node name="Respawn12" parent="." groups=["Player1Spawn"] instance=ExtResource( 6 )]
 position = Vector2( 169.487, 224 )
 
-[node name="Respawn32" parent="." groups=[
-"Player3Spawn",
-] instance=ExtResource( 6 )]
+[node name="Respawn32" parent="." groups=["Player3Spawn"] instance=ExtResource( 6 )]
 position = Vector2( 859, 224 )
 
-[node name="Respawn22" parent="." groups=[
-"Player2Spawn",
-] instance=ExtResource( 6 )]
+[node name="Respawn22" parent="." groups=["Player2Spawn"] instance=ExtResource( 6 )]
 position = Vector2( 510, 224 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
@@ -163,13 +159,6 @@ script = ExtResource( 9 )
 OutLine = Color( 0.866667, 0.866667, 0.866667, 1 )
 Width = 5.0
 
-[node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( 515, 312.613 )
-rotation = -1.57079
-scale = Vector2( 0.36393, 931.25 )
-z_index = -5
-texture = SubResource( 5 )
-
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
 modulate = Color( 0.0823529, 0.0862745, 0.0980392, 1 )
@@ -178,7 +167,33 @@ scale = Vector2( 1.8125, 1 )
 z_index = -10
 texture = ExtResource( 8 )
 
-[node name="Sprite3" type="Sprite" parent="."]
+[node name="BG" type="Node2D" parent="."]
+z_index = -5
+
+[node name="TimeLbl" type="Label" parent="BG"]
+modulate = Color( 1, 1, 1, 0.0784314 )
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "15"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGGradient" type="Sprite" parent="BG"]
+position = Vector2( 515, 312.613 )
+rotation = -1.57079
+scale = Vector2( 0.36393, 931.25 )
+z_index = -5
+texture = SubResource( 5 )
+
+[node name="BGTexture" type="Sprite" parent="BG"]
 modulate = Color( 0.168627, 0.180392, 0.270588, 1 )
 position = Vector2( 524, 296 )
 scale = Vector2( 1.82813, 1 )

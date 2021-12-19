@@ -21,7 +21,7 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 278.0
-margin_bottom = 182.0
+margin_bottom = 199.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
@@ -140,3 +140,31 @@ margin_left = -118.0
 margin_right = 0.0
 margin_bottom = 0.0
 value = 2
+
+[node name="Time" type="Control" parent="VBoxContainer"]
+margin_top = 164.0
+margin_right = 268.0
+margin_bottom = 189.0
+rect_min_size = Vector2( 0, 25 )
+script = ExtResource( 1 )
+setting_name = "time"
+match_settings_path = NodePath("../..")
+
+[node name="Label" type="Label" parent="VBoxContainer/Time"]
+anchor_bottom = 1.0
+margin_right = 111.0
+text = "Time"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValueChange" parent="VBoxContainer/Time" instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -118.0
+margin_right = 0.0
+margin_bottom = 0.0
+max_value = 999999
+value = 120

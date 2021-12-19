@@ -7,15 +7,21 @@ export (PackedScene) var score_label_scn
 var player1_spawns# = get_tree().get_nodes_in_group("Player1Spawn")
 var player2_spawns# = get_tree().get_nodes_in_group("Player2Spawn")
 var player3_spawns# = get_tree().get_nodes_in_group("Player3Spawn")
-
 var spawns# = [player1_spawns, player2_spawns, player3_spawns]
 
 var is_game_finished = false
+var player_data
+var match_settings = {}
+#var player_count = 2
+var players = []
+#var time_left setget _set_time_left
 
 onready var main = get_node("/root/Main")
 onready var world = $World
-onready var score_container = $UI/HBoxContainer
+onready var score_container = $UI/Scores
 onready var win_popup = $UI/WinDialog
+onready var time_label = world.get_node("BG/TimeLbl")
+onready var game_timer = $TimeLeft
 #onready var pause_menu = $UI/PauseMenu
 #onready var back_button = $UI/PauseMenu/VBoxContainer/Control/BackButton
 #onready var match_settings_node = $UI/PauseMenu/VBoxContainer/MatchSettings
@@ -37,6 +43,15 @@ func _ready():
 	
 	spawn_players()
 	update_match_settings()
+	#_set_time_left(match_settings.time)
+	game_timer.connect("timeout", self, "_on_game_timer_timeout")
+	game_timer.start(match_settings.time)
+	
+
+
+func _process(delta):
+	if time_label:
+		time_label.text = str(int(game_timer.time_left))
 
 
 func add_player(data, player_num):
@@ -83,20 +98,7 @@ func choose_spawn(player_num):
 	return final_spawn
 
 
-func win_game(player):
-	win_popup.popup()
-	#get_tree().paused = true
-	Engine.time_scale = 0.1
-	is_game_finished = true
-	win_popup.window_title = player.player_name + " Wins!"
-
-
-func abort_game():
-	win_popup.popup()
-	#get_tree().paused = true
-	Engine.time_scale = 0.1
-	is_game_finished = true
-	
+func get_highest_scoring():
 	# Check which player finished with the highest score
 	var highest_scoring
 	for p in players:
@@ -106,7 +108,20 @@ func abort_game():
 			if p.current_score > highest_scoring.current_score:
 				highest_scoring = p
 	
-	win_popup.window_title = "Match Aborted, " + highest_scoring.player_name + " Wins!"
+	return highest_scoring
+
+
+func win_game(player, message = "%s Wins!"):
+	win_popup.popup()
+	#get_tree().paused = true
+	Engine.time_scale = 0.1
+	is_game_finished = true
+	win_popup.window_title = message % player.player_name
+
+
+func abort_game():
+	# TODO: This can be replaced with win_game
+	win_game(get_highest_scoring(), "Match Aborted. %s Wins!")
 
 
 func _input(event):
@@ -118,6 +133,7 @@ func _on_player_score_changed(current_score, player):
 	if current_score >= match_settings.max_score:
 		win_game(player)
 
+
 func _on_player_got_kill(player):
 	if not is_game_finished:
 		player.current_score += 1
@@ -125,3 +141,7 @@ func _on_player_got_kill(player):
 
 func _on_player_killed_self(player):
 	player.current_score = max(player.current_score - 1 , 0)
+
+
+func _on_game_timer_timeout():
+	win_game(get_highest_scoring(), "Time out! %s wins")
