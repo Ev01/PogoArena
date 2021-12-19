@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game/Game.gd" type="Script" id=1]
 [ext_resource path="res://World.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/WinDialog.gd" type="Script" id=3]
+[ext_resource path="res://UI/MatchSettings/MatchSettings.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/PauseMenu.gd" type="Script" id=5]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/ScoreLabel/ScoreLabel.tscn" type="PackedScene" id=7]
 
@@ -11,20 +13,22 @@ script = ExtResource( 1 )
 player_scn = ExtResource( 6 )
 score_label_scn = ExtResource( 7 )
 
+[node name="TimeLeft" type="Timer" parent="."]
+
 [node name="World" parent="." instance=ExtResource( 2 )]
 
 [node name="UI" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 1024.0
+margin_bottom = 600.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
-margin_left = 128.0
+[node name="Scores" type="HBoxContainer" parent="UI"]
+anchor_right = 1.0
 margin_top = 40.0
-margin_right = 896.0
-margin_bottom = 136.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -59,3 +63,115 @@ text = "Back to menu"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PauseMenu" type="PanelContainer" parent="UI"]
+pause_mode = 2
+visible = false
+margin_left = 320.0
+margin_top = 68.0
+margin_right = 688.0
+margin_bottom = 488.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PauseMenu"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 361.0
+margin_bottom = 413.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="Control" type="Control" parent="UI/PauseMenu/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 344.0
+margin_bottom = 396.0
+
+[node name="MatchSettingsScreen" type="VBoxContainer" parent="UI/PauseMenu/MarginContainer/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MatchSettings" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen" instance=ExtResource( 4 )]
+margin_right = 334.0
+margin_bottom = 174.0
+
+[node name="VBoxContainer" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings" index="0"]
+margin_right = 324.0
+margin_bottom = 164.0
+
+[node name="Title" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="0"]
+margin_right = 314.0
+
+[node name="MaxScore" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="1"]
+margin_right = 314.0
+
+[node name="GravityMultiplier" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="2"]
+margin_right = 314.0
+
+[node name="BouncePower" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="3"]
+margin_right = 314.0
+
+[node name="RespawnTime" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="4"]
+margin_right = 314.0
+
+[node name="Time" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="5"]
+visible = false
+margin_right = 314.0
+
+[node name="Control" type="Control" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen"]
+margin_top = 178.0
+margin_right = 334.0
+margin_bottom = 386.0
+size_flags_vertical = 3
+
+[node name="BackButton" type="Button" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainScreen" type="VBoxContainer" parent="UI/PauseMenu/MarginContainer/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResumeBtn" type="Button" parent="UI/PauseMenu/MarginContainer/Control/MainScreen"]
+margin_right = 334.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+text = "Resume"
+
+[node name="MatchSettingsBtn" type="Button" parent="UI/PauseMenu/MarginContainer/Control/MainScreen"]
+margin_top = 70.0
+margin_right = 334.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 50 )
+text = "Match Settings"
+
+[node name="EndGameBtn" type="Button" parent="UI/PauseMenu/MarginContainer/Control/MainScreen"]
+margin_top = 140.0
+margin_right = 334.0
+margin_bottom = 190.0
+rect_min_size = Vector2( 0, 50 )
+text = "End Game"
+
+[connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/Control/BackButton" to="UI/PauseMenu" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MainScreen/ResumeBtn" to="UI/PauseMenu" method="_on_ResumeBtn_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MainScreen/MatchSettingsBtn" to="UI/PauseMenu" method="_on_MatchSettingsBtn_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MainScreen/EndGameBtn" to="UI/PauseMenu" method="_on_EndGameBtn_pressed"]
+
+[editable path="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings"]

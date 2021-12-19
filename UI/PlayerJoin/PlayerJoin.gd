@@ -56,9 +56,6 @@ func _input(event):
 					join_panels[active_panel_num].join(control_schemes[s], colours[s], player_nums[s], player_names[s])
 					taken_controls.append(control_schemes[s])
 					active_panel_num += 1
-					print(active_panel_num)
-				#if active_panel_num >= len(join_panels):
-				#	active_panel_num = null
 
 
 func _on_panel_remove_pressed(panel_num):

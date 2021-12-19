@@ -9,43 +9,47 @@ export (String) var action_rotate_left = "rotate_left"
 export (String) var action_rotate_right = "rotate_right"
 # If you are player 1 this is 1, if player 2 this is 2 etc.
 export (int) var player_num = 1
-
 # When a player hits your head, exert a force of this much away from them.
 export (float) var blast_power = 20000
-
-#used to be rot_since_last_bounce but now its not since last bounce
-var rot_flip = 0.0
-
-var highspeed_bounce = true
-
 export (PackedScene) var trick_text
 export (PackedScene) var jump_particle
+export (PackedScene) var explosion_particle
 
 signal score_changed(current_score)
 signal got_kill()
 signal killed_self()
 
+#used to be rot_since_last_bounce but now its not since last bounce
+var rot_flip = 0.0
+var highspeed_bounce = true
 var col_pos
 var col_normal
 #used for wall jumps
-var wall_jumped=false
-var can_kick=false
+var wall_jumped = false
+var can_kick = false
 var player_name = "Player"
-
-onready var sprite = get_node("Sprite")
-
-
 var is_dead = false
 var is_invincible = false
 var current_score = 0 setget _set_current_score
 var last_touched_by
+var gravity_multiplier = 1 setget _set_gravity_multiplier
 
+
+onready var org_gravity_scale = gravity_scale
+onready var sprite = get_node("Sprite")
 onready var foot_area = $FootArea
 onready var respawn_timer = $RespawnTimer
+onready var respawn_time = respawn_timer.wait_time setget _set_respawn_time
 onready var invincibility_timer = $InvincibilityTimer
+onready var last_touched_timer = $LastTouchedTimer
 onready var jump_particle_timer = $JumpParticleTimer
+
+onready var bounce_audio = $BounceSound
+onready var slide_audio = $SlidingSound
+
 onready var game = get_node("/root/Main/Game")
 onready var world = get_parent()
+
 #onready var respawn_point = get_node(respawn_point_path)
 
 # Called when the node enters the scene tree for the first time.
@@ -53,6 +57,7 @@ func _ready():
 	connect("body_entered", self, "_on_Player_body_entered")
 	$HeadArea.connect("area_entered", self, "_on_HeadArea_area_entered")
 	$HeadArea.connect("body_entered", self, "_on_HeadArea_body_entered")
+	$FootArea.connect("body_entered", self, "_on_FootArea_body_entered")
 
 
 func _physics_process(delta):
@@ -69,7 +74,21 @@ func _physics_process(delta):
 			if body != self:
 				do_bounce(body)
 				break
-
+	if is_dead:
+		if get_colliding_bodies():
+			
+			slide_audio.pitch_scale = linear_velocity.length() / 1000 + 0.5
+			slide_audio.volume_db = min(linear_velocity.length() / 50 - 24, 0)
+			if !slide_audio.playing:
+				slide_audio.play()
+		else:
+			slide_audio.stop()
+	else:
+		slide_audio.stop()
+	
+	if last_touched_timer.is_stopped():
+		last_touched_by = null
+	
 	rot_flip += angular_velocity*delta
 	
 	
@@ -108,6 +127,13 @@ func kill(body):
 		is_dead = true
 		#Engine.time_scale = 0.2
 		sprite.modulate = Color(0.2,0.2,0.2)
+		
+		var new_particle = explosion_particle.instance()
+		new_particle.position = position
+		world.add_child(new_particle)
+		new_particle.emitting = true
+		#new_particle.vel = linear_velocity
+		
 		respawn_timer.start()
 		yield(respawn_timer, "timeout") # Wait for the respawn timer to finish
 		respawn()
@@ -132,7 +158,6 @@ func respawn():
 		is_invincible = true
 		yield(invincibility_timer, "timeout")
 		is_invincible = false
-		
 
 
 func do_bounce(body):
@@ -154,14 +179,24 @@ func do_bounce(body):
 func give_frag():
 	emit_signal("got_kill")
 
+
 func done_trick(text):
 	var text_inst = trick_text.instance()
 	game.add_child(text_inst)
 	text_inst.rect_position = position
 	text_inst.text = text
 
+
 func _on_FootArea_body_entered(body):
-	pass
+	if body != self: 
+		if not is_dead:
+			bounce_audio.play_random(0.9, 1.2, -6, 0)
+		if body.is_in_group("Player"):
+			last_touched_by = body
+			last_touched_timer.start()
+		if body.is_in_group("PlayerFoot"):
+			last_touched_by = body
+			last_touched_timer.start()
 
 
 func _on_HeadArea_body_entered(body):
@@ -177,6 +212,8 @@ func _on_HeadArea_area_entered(area):
 func _on_Player_body_entered(body):
 	if body.is_in_group("Player"):
 		last_touched_by = body
+		last_touched_timer.start()
+
 
 func _integrate_forces( state ):
 	if(state.get_contact_count() >= 1):
@@ -194,3 +231,13 @@ func _integrate_forces( state ):
 func _set_current_score(value):
 	current_score = value
 	emit_signal("score_changed", current_score)
+
+
+func _set_gravity_multiplier(value):
+	gravity_multiplier = value
+	gravity_scale = org_gravity_scale * gravity_multiplier
+
+
+func _set_respawn_time(value):
+	respawn_time = value
+	respawn_timer.wait_time = value

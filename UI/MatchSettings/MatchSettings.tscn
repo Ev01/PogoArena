@@ -1,0 +1,170 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/MatchSettings/MatchSetting.gd" type="Script" id=1]
+[ext_resource path="res://UI/MatchSettings/MatchSettings.gd" type="Script" id=3]
+[ext_resource path="res://UI/NumberButton/NumberButton.tscn" type="PackedScene" id=4]
+
+[node name="MatchSettings" type="MarginContainer"]
+margin_right = 288.0
+margin_bottom = 192.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 278.0
+margin_bottom = 199.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+margin_right = 268.0
+margin_bottom = 14.0
+text = "Match Settings"
+align = 1
+
+[node name="MaxScore" type="Control" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 268.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 0, 25 )
+script = ExtResource( 1 )
+setting_name = "max_score"
+match_settings_path = NodePath("../..")
+
+[node name="MaxScoreLbl" type="Label" parent="VBoxContainer/MaxScore"]
+anchor_bottom = 1.0
+margin_right = 65.0
+text = "Max Score"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValueChange" parent="VBoxContainer/MaxScore" instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -118.0
+margin_right = 0.0
+margin_bottom = 0.0
+max_value = 9999
+
+[node name="GravityMultiplier" type="Control" parent="VBoxContainer"]
+margin_top = 59.0
+margin_right = 268.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 25 )
+script = ExtResource( 1 )
+setting_name = "gravity_multiplier"
+match_settings_path = NodePath("../..")
+
+[node name="Label" type="Label" parent="VBoxContainer/GravityMultiplier"]
+anchor_bottom = 1.0
+margin_right = 111.0
+text = "Gravity Multiplier"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValueChange" parent="VBoxContainer/GravityMultiplier" instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -118.0
+margin_right = 0.0
+margin_bottom = 0.0
+value = 1
+
+[node name="BouncePower" type="Control" parent="VBoxContainer"]
+margin_top = 94.0
+margin_right = 268.0
+margin_bottom = 119.0
+rect_min_size = Vector2( 0, 25 )
+script = ExtResource( 1 )
+setting_name = "bounce_power"
+match_settings_path = NodePath("../..")
+
+[node name="Label" type="Label" parent="VBoxContainer/BouncePower"]
+anchor_bottom = 1.0
+margin_right = 111.0
+text = "Bounce Power"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValueChange" parent="VBoxContainer/BouncePower" instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -118.0
+margin_right = 0.0
+margin_bottom = 0.0
+max_value = 100000
+value = 9000
+
+[node name="RespawnTime" type="Control" parent="VBoxContainer"]
+margin_top = 129.0
+margin_right = 268.0
+margin_bottom = 154.0
+rect_min_size = Vector2( 0, 25 )
+script = ExtResource( 1 )
+setting_name = "respawn_time"
+match_settings_path = NodePath("../..")
+
+[node name="Label" type="Label" parent="VBoxContainer/RespawnTime"]
+anchor_bottom = 1.0
+margin_right = 111.0
+text = "Respawn Time"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValueChange" parent="VBoxContainer/RespawnTime" instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -118.0
+margin_right = 0.0
+margin_bottom = 0.0
+value = 2
+
+[node name="Time" type="Control" parent="VBoxContainer"]
+margin_top = 164.0
+margin_right = 268.0
+margin_bottom = 189.0
+rect_min_size = Vector2( 0, 25 )
+script = ExtResource( 1 )
+setting_name = "time"
+match_settings_path = NodePath("../..")
+
+[node name="Label" type="Label" parent="VBoxContainer/Time"]
+anchor_bottom = 1.0
+margin_right = 111.0
+text = "Time"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValueChange" parent="VBoxContainer/Time" instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -118.0
+margin_right = 0.0
+margin_bottom = 0.0
+max_value = 999999
+value = 120
