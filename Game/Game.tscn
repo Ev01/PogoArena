@@ -108,7 +108,7 @@ margin_bottom = 179.0
 
 [node name="VBoxContainer" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings" index="0"]
 margin_right = 332.0
-margin_bottom = 169.0
+margin_bottom = 204.0
 
 [node name="Title" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="0"]
 margin_right = 322.0

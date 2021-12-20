@@ -25,7 +25,7 @@ func update_settings():
 	# Loop through all setting nodes
 	for i in range(len(setting_names)):
 		# The setting value is assigned to the setting node's value
-		settings[setting_names[i]] = setting_nodes[setting_names[i]].get_node("ValueChange").value
+		settings[setting_names[i]] = setting_nodes[setting_names[i]].value_node.value
 
 
 func _set_settings(value):
@@ -33,7 +33,7 @@ func _set_settings(value):
 	var setting_names = setting_nodes.keys()
 	# Loop through all setting nodes
 	for i in range(len(setting_names)):
-		setting_nodes[setting_names[i]].get_node("ValueChange").value = settings[setting_names[i]]
+		setting_nodes[setting_names[i]].value_node.value = settings[setting_names[i]]
 
 func _get_settings():
 	update_settings()

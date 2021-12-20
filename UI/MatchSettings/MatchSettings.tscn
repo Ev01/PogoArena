@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/MatchSettings/MatchSetting.gd" type="Script" id=1]
 [ext_resource path="res://UI/Theme/ui_theme.tres" type="Theme" id=2]
 [ext_resource path="res://UI/MatchSettings/MatchSettings.gd" type="Script" id=3]
-[ext_resource path="res://UI/NumberButton/NumberButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/Components/NumberButton/NumberButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/Components/OptionSetting.gd" type="Script" id=5]
 
 [node name="MatchSettings" type="MarginContainer"]
 margin_right = 288.0
@@ -23,7 +24,7 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 278.0
-margin_bottom = 204.0
+margin_bottom = 239.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
@@ -172,3 +173,35 @@ margin_right = 0.0
 margin_bottom = 0.0
 max_value = 999999
 value = 120
+
+[node name="Map" type="Control" parent="VBoxContainer"]
+margin_top = 204.0
+margin_right = 268.0
+margin_bottom = 229.0
+rect_min_size = Vector2( 0, 25 )
+script = ExtResource( 1 )
+setting_name = "map"
+match_settings_path = NodePath("../..")
+value_node_path = NodePath("OptionButton")
+
+[node name="Label" type="Label" parent="VBoxContainer/Map"]
+anchor_bottom = 1.0
+margin_right = 111.0
+text = "Map"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Map"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -118.0
+text = "Map01"
+items = [ "Map01", null, false, 0, null, "Map02", null, false, 1, null ]
+selected = 0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

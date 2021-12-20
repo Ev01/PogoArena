@@ -25,7 +25,7 @@ onready var game_timer = $TimeLeft
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	world.load_level("Map01")
+	world.load_level(match_settings.map)
 	# The countdown timer is part of the map so it can be moved around based on the map layout
 	time_label = world.current_map.get_node("TimeLbl")
 	

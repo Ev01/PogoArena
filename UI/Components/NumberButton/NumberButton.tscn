@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://UI/NumberButton/NumberButton.gd" type="Script" id=1]
+[ext_resource path="res://UI/Components/NumberButton/NumberButton.gd" type="Script" id=1]
 [ext_resource path="res://UI/Theme/small_button_stylebox_hover.tres" type="StyleBox" id=2]
-[ext_resource path="res://UI/NumberButton/ValueLabel.gd" type="Script" id=3]
+[ext_resource path="res://UI/Components/NumberButton/ValueLabel.gd" type="Script" id=3]
 [ext_resource path="res://UI/Theme/ui_theme.tres" type="Theme" id=4]
 [ext_resource path="res://UI/Theme/small_button_stylebox_normal.tres" type="StyleBox" id=5]
 [ext_resource path="res://UI/Theme/small_button_stylebox_pressed.tres" type="StyleBox" id=6]

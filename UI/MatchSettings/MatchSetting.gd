@@ -12,7 +12,10 @@ onready var value_node = get_node(value_node_path)
 
 func _ready():
 	#value_node.connect("value_changed", self, "_on_value_changed")
-	match_settings.settings[setting_name] = value_node.value
+	if value_node:
+		match_settings.settings[setting_name] = value_node.value
+	else:
+		printerr("Value node does not exist in match setting " + name)
 
 
 #func _on_value_changed(value):
