@@ -22,15 +22,7 @@ onready var score_container = $UI/Scores
 onready var win_popup = $UI/WinDialog
 onready var time_label = world.get_node("BG/TimeLbl")
 onready var game_timer = $TimeLeft
-#onready var pause_menu = $UI/PauseMenu
-#onready var back_button = $UI/PauseMenu/VBoxContainer/Control/BackButton
-#onready var match_settings_node = $UI/PauseMenu/VBoxContainer/MatchSettings
 
-var player_data
-var match_settings = {}
-#var player_count = 2
-#var max_score = 50
-var players = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
