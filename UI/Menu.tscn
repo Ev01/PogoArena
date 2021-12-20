@@ -1,14 +1,27 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/PlayerJoin/PlayerJoin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/Menu.gd" type="Script" id=2]
 [ext_resource path="res://UI/MatchSettings/MatchSettings.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/Theme/ui_theme.tres" type="Theme" id=4]
+[ext_resource path="res://UI/Fonts/big_font.tres" type="DynamicFont" id=5]
 
 [node name="Menu" type="Control"]
+margin_right = 1024.0
+margin_bottom = 600.0
+focus_mode = 2
+theme = ExtResource( 4 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+player_join_path = NodePath("RightSide/VBoxContainer/PlayerJoin")
+match_settings_path = NodePath("PanelContainer/ScrollContainer/MatchSettings")
+
+[node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-focus_mode = 2
-script = ExtResource( 2 )
+color = Color( 0.0666667, 0.0784314, 0.0901961, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -21,40 +34,108 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayButton" type="Button" parent="."]
-margin_left = 320.0
-margin_top = 448.0
-margin_right = 704.0
-margin_bottom = 512.0
-text = "Play"
+[node name="RightSide" type="Control" parent="."]
+anchor_left = 0.437
+anchor_top = 0.013
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.511993
+margin_top = 16.2
+margin_right = -32.0
+margin_bottom = -40.0
+size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerJoin" parent="." instance=ExtResource( 1 )]
-margin_left = 296.0
-margin_top = 128.0
-margin_right = -264.0
-margin_bottom = -312.0
+[node name="Title" type="Label" parent="RightSide"]
+anchor_right = 1.0
+margin_top = 56.0
+margin_bottom = 137.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 5 )
+text = "Pogo Arena"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightSide"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -304.0
+margin_bottom = -56.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerJoin" parent="RightSide/VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 544.0
+margin_bottom = 152.0
+size_flags_vertical = 2
+
+[node name="Buttons" type="HBoxContainer" parent="RightSide/VBoxContainer"]
+margin_top = 198.0
+margin_right = 544.0
+margin_bottom = 248.0
+size_flags_vertical = 10
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="RightSide/VBoxContainer/Buttons"]
+margin_right = 168.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+text = "Start Match"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="Button" parent="RightSide/VBoxContainer/Buttons"]
+margin_left = 188.0
+margin_right = 356.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="RightSide/VBoxContainer/Buttons"]
+margin_left = 376.0
+margin_right = 544.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+text = "Quit Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-margin_left = 8.0
-margin_top = 96.0
-margin_right = 296.0
-margin_bottom = 432.0
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 392.0
+margin_bottom = 512.0
+size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 281.0
-margin_bottom = 329.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 325.0
+margin_bottom = 445.0
 
 [node name="MatchSettings" parent="PanelContainer/ScrollContainer" instance=ExtResource( 3 )]
-margin_right = 274.0
-margin_bottom = 174.0
+margin_right = 322.0
+margin_bottom = 214.0
 
 [connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]
-[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="RightSide/VBoxContainer/Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
