@@ -14,23 +14,28 @@ var player_data
 var match_settings = {}
 #var player_count = 2
 var players = []
-#var time_left setget _set_time_left
+var time_label
 
 onready var main = get_node("/root/Main")
 onready var world = $World
 onready var score_container = $UI/Scores
 onready var win_popup = $UI/WinDialog
-onready var time_label = world.get_node("BG/TimeLbl")
 onready var game_timer = $TimeLeft
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#back_button.connect("pressed", self, "")
+	world.load_level("Map01")
+	# The countdown timer is part of the map so it can be moved around based on the map layout
+	time_label = world.current_map.get_node("TimeLbl")
 	
 	player1_spawns = get_tree().get_nodes_in_group("Player1Spawn")
+	assert(player1_spawns, "No player 1 spawns in level, make sure to add the Player1Spawn group")
 	player2_spawns = get_tree().get_nodes_in_group("Player2Spawn")
+	assert(player2_spawns, "No player 2 spawns in level, make sure to add the Player2Spawn group")
 	player3_spawns = get_tree().get_nodes_in_group("Player3Spawn")
+	assert(player3_spawns, "No player 3 spawns in level, make sure to add the Player3Spawn group")
+	
 	spawns = [player1_spawns, player2_spawns, player3_spawns]
 	
 	spawn_players()
