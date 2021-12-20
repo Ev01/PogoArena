@@ -16,6 +16,7 @@ player_scn = ExtResource( 6 )
 score_label_scn = ExtResource( 7 )
 
 [node name="TimeLeft" type="Timer" parent="."]
+one_shot = true
 
 [node name="World" parent="." instance=ExtResource( 2 )]
 
