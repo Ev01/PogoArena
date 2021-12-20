@@ -86,6 +86,7 @@ anchor_bottom = 1.0
 margin_left = -118.0
 margin_right = 0.0
 margin_bottom = 0.0
+min_value = 0
 value = 1
 
 [node name="BouncePower" type="Control" parent="VBoxContainer"]
@@ -113,6 +114,7 @@ anchor_bottom = 1.0
 margin_left = -118.0
 margin_right = 0.0
 margin_bottom = 0.0
+min_value = 100
 max_value = 100000
 value = 9000
 

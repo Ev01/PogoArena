@@ -44,9 +44,12 @@ onready var invincibility_timer = $InvincibilityTimer
 onready var last_touched_timer = $LastTouchedTimer
 onready var jump_particle_timer = $JumpParticleTimer
 
+
+
 onready var bounce_audio = $BounceSound
 onready var slide_audio = $SlidingSound
 
+onready var cam = get_node("/root/Main/MainCamera")
 onready var game = get_node("/root/Main/Game")
 onready var world = get_parent()
 
@@ -129,6 +132,7 @@ func kill(body):
 		sprite.modulate = Color(0.2,0.2,0.2)
 		
 		var new_particle = explosion_particle.instance()
+		cam.camera_shake(10,0.4)
 		new_particle.position = position
 		world.add_child(new_particle)
 		new_particle.emitting = true
