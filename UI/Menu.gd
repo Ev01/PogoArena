@@ -1,13 +1,11 @@
 extends Control
 
+export (NodePath) var player_join_path
+export (NodePath) var match_settings_path
 
-#onready var player_num_button = $PlayersOption/PlayerNumButton
-onready var player_join = $PlayerJoin
+onready var player_join = get_node(player_join_path)
 onready var main = get_node("/root/Main")
-onready var match_settings = $PanelContainer/ScrollContainer/MatchSettings
-
-
-
+onready var match_settings = get_node(match_settings_path)
 
 
 func _on_PlayButton_pressed():
