@@ -13,7 +13,7 @@ func _ready():
 
 func _on_play_again_pressed():
 	Engine.time_scale = 1
-	main.load_new_game(game.player_data, game.match_settings)
+	main.load_new_game(main.player_data)
 
 
 func _on_menu_pressed():
