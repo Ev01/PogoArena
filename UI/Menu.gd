@@ -17,3 +17,4 @@ func _on_Control_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed == true:
 			grab_focus()
+			print("grabed")

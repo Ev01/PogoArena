@@ -108,7 +108,7 @@ margin_bottom = 179.0
 
 [node name="VBoxContainer" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings" index="0"]
 margin_right = 332.0
-margin_bottom = 204.0
+margin_bottom = 219.0
 
 [node name="Title" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="0"]
 margin_right = 322.0
@@ -128,9 +128,6 @@ margin_right = 322.0
 [node name="Time" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="5"]
 visible = false
 margin_right = 314.0
-
-[node name="OptionButton" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer/Map" index="1"]
-items = [ "Map01", null, false, 0, null, "Map02", null, false, 1, null ]
 
 [node name="Control" type="Control" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen"]
 margin_top = 183.0

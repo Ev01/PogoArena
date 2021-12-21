@@ -18,18 +18,19 @@ __meta__ = {
 player_join_path = NodePath("RightSide/VBoxContainer/PlayerJoin")
 match_settings_path = NodePath("PanelContainer/ScrollContainer/MatchSettings")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.0666667, 0.0784314, 0.0901961, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Control" type="Control" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
 focus_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0666667, 0.0784314, 0.0901961, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -135,7 +136,7 @@ margin_bottom = 445.0
 
 [node name="MatchSettings" parent="PanelContainer/ScrollContainer" instance=ExtResource( 3 )]
 margin_right = 322.0
-margin_bottom = 249.0
+margin_bottom = 264.0
 
 [connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]
 [connection signal="pressed" from="RightSide/VBoxContainer/Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
