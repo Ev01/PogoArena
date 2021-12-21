@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pogoready.wav-c7e1fe5d3d4a3470b36da98b0d67641e.sample"
+
+[deps]
+
+source_file="res://Player/pogoready.wav"
+dest_files=[ "res://.import/pogoready.wav-c7e1fe5d3d4a3470b36da98b0d67641e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
