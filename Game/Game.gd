@@ -10,8 +10,8 @@ var player3_spawns# = get_tree().get_nodes_in_group("Player3Spawn")
 var spawns# = [player1_spawns, player2_spawns, player3_spawns]
 
 var is_game_finished = false
-var player_data
-var match_settings = {}
+#var player_data
+#var match_settings = {}
 #var player_count = 2
 var players = []
 var time_label
@@ -25,7 +25,9 @@ onready var game_timer = $TimeLeft
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	world.load_level(match_settings.map)
+	#match_settings = main.match_settings
+	#player_data = main.player_data
+	world.load_level(main.match_settings.settings.map)
 	# The countdown timer is part of the map so it can be moved around based on the map layout
 	time_label = world.current_map.get_node("TimeLbl")
 	
@@ -42,8 +44,7 @@ func _ready():
 	update_match_settings()
 	#_set_time_left(match_settings.time)
 	game_timer.connect("timeout", self, "_on_game_timer_timeout")
-	game_timer.start(match_settings.time)
-	
+	game_timer.start(main.match_settings.settings.time)
 
 
 func _process(delta):
@@ -74,15 +75,15 @@ func add_player(data, player_num):
 
 
 func spawn_players():
-	for p in range(len(player_data.players)):
-		add_player(player_data.players[p], p+1)
+	for p in range(len(main.player_data.players)):
+		add_player(main.player_data.players[p], p+1)
 
 
 func update_match_settings():
 	for p in players:
-		p.respawn_time = match_settings.respawn_time
-		p.gravity_multiplier = match_settings.gravity_multiplier
-		p.bounce_power = match_settings.bounce_power
+		p.respawn_time = main.match_settings.settings.respawn_time
+		p.gravity_multiplier = main.match_settings.settings.gravity_multiplier
+		p.bounce_power = main.match_settings.settings.bounce_power
 
 
 func choose_spawn(player_num):
@@ -127,7 +128,7 @@ func _input(event):
 
 
 func _on_player_score_changed(current_score, player):
-	if current_score >= match_settings.max_score:
+	if current_score >= main.match_settings.settings.max_score:
 		win_game(player)
 
 

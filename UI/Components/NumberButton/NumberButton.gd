@@ -28,6 +28,10 @@ func _set_value(val):
 	emit_signal("value_changed", value)
 	if value_label:
 		value_label.text = str(value)
+	if not Engine.is_editor_hint():
+		if get_parent():
+			print("set_value: ", get_parent().name, " = ", value)
+			print()
 
 
 func _on_Value_text_changed(new_text):

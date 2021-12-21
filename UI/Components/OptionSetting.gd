@@ -1,6 +1,8 @@
 extends OptionButton
 ## Simple button sets value to the text of the selected item
 
+signal value_changed(value)
+
 var value setget _set_value
 # Key = item_text, Value = item_id
 var value_names = {}
@@ -14,9 +16,10 @@ func _ready():
 
 
 func _on_item_selected(item_id):
-	value = get_item_text(item_id)
+	_set_value(get_item_text(item_id))
 
 
 func _set_value(val):
 	value = val
 	select(value_names[val])
+	emit_signal("value_changed", value)

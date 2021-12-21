@@ -6,6 +6,7 @@ onready var main_scr = $MarginContainer/Control/MainScreen
 onready var current_screen = main_scr
 onready var win_dialog = get_node("../WinDialog")
 onready var game = get_node("/root/Main/Game")
+onready var main = get_node("/root/Main")
 
 var is_showing = false
 
@@ -43,8 +44,8 @@ func change_screen(screen):
 
 
 func apply_match_settings():
-	# Update the games settings to be the ones you just changed
-	game.match_settings = match_settings_node.settings
+	# Update Main's match settings to be the ones you just changed
+	#main.match_settings = match_settings_node.settings
 	# Apply these settings
 	game.update_match_settings()
 
@@ -52,7 +53,7 @@ func apply_match_settings():
 func _on_MatchSettingsBtn_pressed():
 	change_screen(match_settings_scr)
 	# Update the match settings you see to be the settings the game has
-	match_settings_node.settings = game.match_settings
+	#match_settings_node.settings = main.match_settings
 
 
 func _on_BackButton_pressed():
