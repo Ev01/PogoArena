@@ -7,13 +7,13 @@
 [ext_resource path="res://UI/Theme/default_button_stylebox_pressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://UI/Theme/default_button_stylebox_hover.tres" type="StyleBox" id=6]
 
-[sub_resource type="StyleBoxEmpty" id=25]
+[sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=2]
 size = 18
 font_data = ExtResource( 1 )
 
-[sub_resource type="Image" id=28]
+[sub_resource type="Image" id=7]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 88, 220, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 220, 22, 223, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 88, 224, 254, 224, 211, 220, 22, 0, 0, 0, 0, 0, 0, 0, 0, 220, 22, 224, 211, 224, 254, 223, 88, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 224, 25, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 223, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 224, 25, 219, 21, 223, 210, 224, 255, 224, 215, 223, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 225, 218, 224, 214, 224, 255, 224, 215, 223, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 214, 224, 255, 224, 255, 224, 219, 223, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 214, 224, 255, 224, 255, 224, 219, 224, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 223, 218, 224, 214, 224, 255, 224, 215, 224, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 223, 24, 219, 21, 223, 210, 224, 255, 224, 215, 224, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 223, 24, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 224, 25, 0, 0, 0, 0, 0, 0, 0, 0, 223, 88, 224, 254, 224, 211, 220, 22, 0, 0, 0, 0, 0, 0, 0, 0, 220, 22, 224, 211, 224, 254, 223, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 88, 220, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 220, 22, 223, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
 "format": "LumAlpha8",
@@ -22,13 +22,13 @@ data = {
 "width": 16
 }
 
-[sub_resource type="ImageTexture" id=5]
+[sub_resource type="ImageTexture" id=4]
 flags = 4
 flags = 4
-image = SubResource( 28 )
+image = SubResource( 7 )
 size = Vector2( 16, 16 )
 
-[sub_resource type="StyleBoxFlat" id=27]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 2
 border_width_top = 2
@@ -36,13 +36,13 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.521569, 0.94902, 0.0941176, 1 )
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.541176, 0.623529, 0.709804, 1 )
 border_color = Color( 0.0666667, 0.0784314, 0.0901961, 0 )
 
 [resource]
 default_font = ExtResource( 3 )
-Button/styles/focus = SubResource( 25 )
+Button/styles/focus = SubResource( 1 )
 Button/styles/hover = ExtResource( 6 )
 Button/styles/normal = ExtResource( 4 )
 Button/styles/pressed = ExtResource( 5 )
@@ -55,9 +55,9 @@ LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 0.5 )
 LineEdit/colors/selection_color = Color( 0.49, 0.49, 0.49, 1 )
 LineEdit/constants/minimum_spaces = 12
-LineEdit/fonts/font = SubResource( 14 )
-LineEdit/icons/clear = SubResource( 5 )
-LineEdit/styles/focus = SubResource( 27 )
-LineEdit/styles/normal = SubResource( 9 )
+LineEdit/fonts/font = SubResource( 2 )
+LineEdit/icons/clear = SubResource( 4 )
+LineEdit/styles/focus = SubResource( 5 )
+LineEdit/styles/normal = SubResource( 6 )
 Panel/styles/panel = ExtResource( 2 )
 PanelContainer/styles/panel = ExtResource( 2 )

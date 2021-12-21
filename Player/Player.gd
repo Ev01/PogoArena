@@ -51,6 +51,7 @@ onready var slide_audio = $SlidingSound
 
 onready var cam = get_node("/root/Main/MainCamera")
 onready var game = get_node("/root/Main/Game")
+onready var audio_manager = get_node("/root/Main/AudioManager")
 onready var world = get_parent()
 
 #onready var respawn_point = get_node(respawn_point_path)
@@ -133,6 +134,7 @@ func kill(body):
 		
 		var new_particle = explosion_particle.instance()
 		cam.camera_shake(10,0.4)
+		audio_manager.play_sound("res://Player/plosion.wav",rand_range(0.9,1.1),rand_range(-15,-5))
 		new_particle.position = position
 		world.add_child(new_particle)
 		new_particle.emitting = true
@@ -194,7 +196,7 @@ func done_trick(text):
 func _on_FootArea_body_entered(body):
 	if body != self: 
 		if not is_dead:
-			bounce_audio.play_random(0.9, 1.2, -6, 0)
+			audio_manager.play_sound(["res://Player/pogojump.ogg", "res://Player/pogojump2.ogg", "res://Player/pogojump3.ogg"], rand_range(0.9, 1.2), rand_range(-6, 0))
 		if body.is_in_group("Player"):
 			last_touched_by = body
 			last_touched_timer.start()
