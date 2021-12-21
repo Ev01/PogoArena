@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/MatchSettings/MatchSetting.gd" type="Script" id=1]
 [ext_resource path="res://UI/Theme/ui_theme.tres" type="Theme" id=2]
-[ext_resource path="res://UI/MatchSettings/MatchSettings.gd" type="Script" id=3]
 [ext_resource path="res://UI/Components/NumberButton/NumberButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/Components/OptionSetting.gd" type="Script" id=5]
 
@@ -15,7 +14,6 @@ custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
-script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
