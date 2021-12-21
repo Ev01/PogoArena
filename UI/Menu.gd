@@ -10,7 +10,7 @@ onready var match_settings = get_node(match_settings_path)
 
 func _on_PlayButton_pressed():
 	var player_data = player_join.get_player_data()
-	main.load_new_game(player_data, match_settings.settings)
+	main.load_new_game(player_data)
 
 
 func _on_Control_gui_input(event):

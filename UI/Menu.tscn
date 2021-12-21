@@ -135,7 +135,7 @@ margin_bottom = 445.0
 
 [node name="MatchSettings" parent="PanelContainer/ScrollContainer" instance=ExtResource( 3 )]
 margin_right = 322.0
-margin_bottom = 214.0
+margin_bottom = 249.0
 
 [connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]
 [connection signal="pressed" from="RightSide/VBoxContainer/Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
