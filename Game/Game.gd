@@ -76,7 +76,7 @@ func add_player(data, player_num):
 
 func spawn_players():
 	for p in range(len(main.player_data.players)):
-		add_player(main.player_data.players[p], p+1)
+		add_player(main.player_data.players[p], p + 1)
 
 
 func update_match_settings():

@@ -5,6 +5,7 @@ extends Panel
 #export (Array, String) var control_scheme3
 
 var joined = false
+# Will be a list of Input Actions defined in the InputMap that this player uses as controls.
 var control = []
 var player_num = 1
 var colour = Color.white setget _set_colour
