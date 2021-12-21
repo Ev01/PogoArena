@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+signal active_panel_changed
+
 export (Array, String) var control_scheme1
 export (Array, String) var control_scheme2
 export (Array, String) var control_scheme3
@@ -29,6 +31,8 @@ func _ready():
 	# If Main's player data isnt empty, use it. This is what remembers what players were joined.
 	if main.player_data:
 		set_player_data(main.player_data)
+	
+	emit_signal("active_panel_changed")
 
 
 func get_player_data():
@@ -61,7 +65,7 @@ func set_player_data(data : Dictionary):
 		join_panels[active_panel_num].join(player.controls, player.colour, player.player_num, player.player_name)
 		taken_controls.append(player.controls)
 		active_panel_num += 1
-	
+	emit_signal("active_panel_changed")
 
 func _input(event):
 	# Loop through all control schemes
@@ -76,6 +80,7 @@ func _input(event):
 					join_panels[active_panel_num].join(control_schemes[s], colours[s], player_nums[s], player_names[s])
 					taken_controls.append(control_schemes[s])
 					active_panel_num += 1
+					emit_signal("active_panel_changed")
 					audio_manager.play_sound("res://Player/pogoready.wav", 1+(float(active_panel_num-1)/2), -5)
 
 
@@ -83,10 +88,8 @@ func _on_panel_remove_pressed(panel_num):
 	var to_remove = join_panels_org[panel_num]
 	taken_controls.erase(to_remove.control)
 	to_remove.unjoin()
-	print("yello")
 	active_panel_num -= 1
-	print(active_panel_num)
-	
+	emit_signal("active_panel_changed")
 	move_child(to_remove, len(join_panels)-1)
 	join_panels = get_children()
 	#join_panels.remove(panel_num)
