@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=2]
+[gd_resource type="Theme" load_steps=14 format=2]
 
 [ext_resource path="res://UI/Fonts/BRLNSR.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/Theme/panel_stylebox.tres" type="StyleBox" id=2]
@@ -9,11 +9,28 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.0431373, 0.27451, 0.521569, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color( 0.541176, 0.623529, 0.709804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.0666667, 0.0784314, 0.0901961, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.541176, 0.623529, 0.709804, 1 )
+
 [sub_resource type="DynamicFont" id=2]
 size = 18
 font_data = ExtResource( 1 )
 
-[sub_resource type="Image" id=7]
+[sub_resource type="Image" id=9]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 88, 220, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 220, 22, 223, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 88, 224, 254, 224, 211, 220, 22, 0, 0, 0, 0, 0, 0, 0, 0, 220, 22, 224, 211, 224, 254, 223, 88, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 224, 25, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 223, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 224, 25, 219, 21, 223, 210, 224, 255, 224, 215, 223, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 225, 218, 224, 214, 224, 255, 224, 215, 223, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 214, 224, 255, 224, 255, 224, 219, 223, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 214, 224, 255, 224, 255, 224, 219, 224, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 223, 218, 224, 214, 224, 255, 224, 215, 224, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 223, 24, 219, 21, 223, 210, 224, 255, 224, 215, 224, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 223, 24, 0, 0, 0, 0, 219, 21, 223, 210, 224, 255, 224, 215, 224, 25, 0, 0, 0, 0, 0, 0, 0, 0, 223, 88, 224, 254, 224, 211, 220, 22, 0, 0, 0, 0, 0, 0, 0, 0, 220, 22, 224, 211, 224, 254, 223, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 88, 220, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 220, 22, 223, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
 "format": "LumAlpha8",
@@ -25,7 +42,7 @@ data = {
 [sub_resource type="ImageTexture" id=4]
 flags = 4
 flags = 4
-image = SubResource( 7 )
+image = SubResource( 9 )
 size = Vector2( 16, 16 )
 
 [sub_resource type="StyleBoxFlat" id=6]
@@ -38,6 +55,9 @@ Button/styles/focus = SubResource( 1 )
 Button/styles/hover = ExtResource( 6 )
 Button/styles/normal = ExtResource( 4 )
 Button/styles/pressed = ExtResource( 5 )
+HSlider/styles/grabber_area = SubResource( 7 )
+HSlider/styles/grabber_area_highlight = SubResource( 7 )
+HSlider/styles/slider = SubResource( 8 )
 Label/fonts/font = ExtResource( 3 )
 LineEdit/colors/clear_button_color = Color( 0.88, 0.88, 0.88, 1 )
 LineEdit/colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
