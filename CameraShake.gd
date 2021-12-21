@@ -11,7 +11,6 @@ onready var shake_timer = $ShakeTimer
 func _process(delta):
 	if is_shaking:
 		shake = max(shake-(delta*fade_out)/shake_timer.wait_time,0)
-		print(shake)
 		set_offset(Vector2(rand_range(-shake, shake), rand_range(-shake, shake)))
 	else:
 		set_offset(Vector2(0, 0))

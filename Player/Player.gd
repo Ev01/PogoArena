@@ -26,7 +26,9 @@ var col_pos
 var col_normal
 #used for wall jumps
 var wall_jumped = false
-var can_kick = false
+#used for roof jumps
+var roof_jumped = false
+
 var player_name = "Player"
 var is_dead = false
 var is_invincible = false
@@ -152,6 +154,8 @@ func respawn():
 		angular_velocity = 0
 		rotation = 0
 		rot_flip = 0
+		wall_jumped = false
+		roof_jumped = false
 		last_touched_by = null
 		sprite.modulate = Color(1,1,1)
 		is_dead = false
@@ -189,8 +193,8 @@ func give_frag():
 func done_trick(text):
 	var text_inst = trick_text.instance()
 	game.add_child(text_inst)
-	text_inst.rect_position = position
 	text_inst.text = text
+	text_inst.rect_position = position
 
 
 func _on_FootArea_body_entered(body):
@@ -206,6 +210,11 @@ func _on_FootArea_body_entered(body):
 
 
 func _on_HeadArea_body_entered(body):
+	if body.is_in_group("Player"):
+		if wall_jumped:
+			done_trick("KAMIKAZE!")
+		if roof_jumped:
+			done_trick("KAMIKAZE!")
 	if body != self:
 		kill(body)
 
@@ -222,16 +231,19 @@ func _on_Player_body_entered(body):
 
 
 func _integrate_forces( state ):
-	if(state.get_contact_count() >= 1):
+	if state.get_contact_count() >= 1 && state.get_contact_collider_object(0).is_in_group("Player") == false:
+		#print(wall_jumped, " ", roof_jumped)
 		col_pos = state.get_contact_local_position(0)
 		col_normal = state.get_contact_local_normal(0).angle()
-		#this code a bit yuky
+		
 		if rad2deg(col_normal) >= 165 && rad2deg(col_normal) <= 195 or rad2deg(col_normal) >= -15 && rad2deg(col_normal) <= 15:
 			wall_jumped=true
-			can_kick=true
 		else:
 			wall_jumped=false
-			can_kick=false
+		if rad2deg(col_normal) >= 90-15 && rad2deg(col_normal) <= 90+15:
+			roof_jumped=true
+		else:
+			roof_jumped=false
 
 
 func _set_current_score(value):
