@@ -19,6 +19,8 @@ onready var join_panels = get_children()
 # This list stays the same
 onready var join_panels_org = get_children()
 
+onready var audio_manager = get_node("/root/Main/AudioManager")
+
 func _ready():
 	for p in range(len(join_panels)):
 		join_panels[p].remove_btn.connect("pressed", self, "_on_panel_remove_pressed", [p])
@@ -56,6 +58,7 @@ func _input(event):
 					join_panels[active_panel_num].join(control_schemes[s], colours[s], player_nums[s], player_names[s])
 					taken_controls.append(control_schemes[s])
 					active_panel_num += 1
+					audio_manager.play_sound("res://Player/pogoready.wav", 1+(float(active_panel_num-1)/2), -5)
 
 
 func _on_panel_remove_pressed(panel_num):
