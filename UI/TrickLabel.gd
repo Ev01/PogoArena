@@ -5,6 +5,7 @@ extends Label
 # var a = 2
 onready var timer = $Timer
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	print(timer.wait_time)
