@@ -14,13 +14,17 @@ onready var main = get_node("/root/Main")
 func _ready():
 	value_node.connect("value_changed", self, "_on_value_changed")
 	if value_node:
+		
 		if main.match_settings.get_setting(setting_name):
+			# If our setting already exists, set our value to the existant setting
 			value_node.value = main.match_settings.get_setting(setting_name)
 		else:
+			# If our value doesnt already exist, make a new setting
 			main.match_settings.set_setting(setting_name, value_node.value)
 	else:
 		printerr("Value node does not exist in match setting " + name)
 
 
 func _on_value_changed(value):
+	# When our value changes, set the setting to our new value
 	main.match_settings.set_setting(setting_name, value_node.value)
