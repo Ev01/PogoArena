@@ -98,28 +98,50 @@ func choose_spawn(player_num):
 
 func get_highest_scoring():
 	# Check which player finished with the highest score
-	var highest_scoring
+	# Returns a list with the winner, or multiple players if there is a tie.
+	var highest_scoring = []
 	for p in players:
 		if not highest_scoring:
-			highest_scoring = p
-		else:
-			if p.current_score > highest_scoring.current_score:
-				highest_scoring = p
+			highest_scoring = [p]
+		elif p.current_score == highest_scoring[0].current_score:
+			# There will be multiple winners if there is a tie
+			highest_scoring.append(p)
+		elif p.current_score > highest_scoring[0].current_score:
+			highest_scoring = [p]
 	
 	return highest_scoring
 
 
-func win_game(player, message = "%s Wins!"):
+func win_game(winning_players : Array, reason = ""):
+	# Reason is something like "Match aborted." or "Time out!"
+	# Win message says who wins, e.g. "Green wins" or "Tie between Green and Red"
+	var win_message = ""
+	
 	win_popup.popup()
 	#get_tree().paused = true
 	Engine.time_scale = 0.1
 	is_game_finished = true
-	win_popup.window_title = message % player.player_name
+	
+	if len(winning_players) == 1:
+		win_message = "%s Wins!" % winning_players[0].player_name
+	elif len(winning_players) > 1:
+		win_message = "Tie between "
+		for p in range(len(winning_players)):
+			# If this is the last listed player
+			if p == len(winning_players) - 1:
+				win_message += " and %s" % winning_players[p].player_name
+			# If this is the first listed player
+			elif p == 0:
+				win_message += "%s" % winning_players[p].player_name
+			else:
+				win_message += ", %s" % winning_players[p].player_name
+		
+	win_popup.window_title = reason + " " + win_message
 
 
 func abort_game():
 	# TODO: This can be replaced with win_game
-	win_game(get_highest_scoring(), "Match Aborted. %s Wins!")
+	win_game(get_highest_scoring(), "Match Aborted.")
 
 
 func _input(event):
@@ -129,7 +151,11 @@ func _input(event):
 
 func _on_player_score_changed(current_score, player):
 	if current_score >= main.match_settings.settings.max_score:
-		win_game(player)
+		# Wait a very small amount of time before winning the game in case two players died 
+		# at the same time (technically just a very small amount of time apart)
+		yield(get_tree().create_timer(0.04), "timeout")
+		# Need to call get_highest_scoring here in case there is a tie
+		win_game(get_highest_scoring())
 
 
 func _on_player_got_kill(player):
@@ -142,4 +168,4 @@ func _on_player_killed_self(player):
 
 
 func _on_game_timer_timeout():
-	win_game(get_highest_scoring(), "Time out! %s wins")
+	win_game(get_highest_scoring(), "Time out!")
