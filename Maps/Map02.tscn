@@ -41,6 +41,8 @@ position = Vector2( 508, 136 )
 
 [node name="Walls" type="StaticBody2D" parent="." index="7"]
 z_index = 1
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" index="0"]
 position = Vector2( 512, 576 )
@@ -84,6 +86,8 @@ texture = ExtResource( 4 )
 
 [node name="CornerBL" type="StaticBody2D" parent="." index="8"]
 position = Vector2( 48, 552 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="CornerBL" index="0"]
 visible = false
@@ -99,6 +103,8 @@ shape = SubResource( 7 )
 [node name="CornerBR" type="StaticBody2D" parent="." index="9"]
 position = Vector2( 976, 552 )
 rotation = -1.57079
+collision_layer = 3
+collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="CornerBR" index="0"]
 visible = false
@@ -114,6 +120,8 @@ shape = SubResource( 7 )
 [node name="CornerTR" type="StaticBody2D" parent="." index="10"]
 position = Vector2( 976, 40 )
 rotation = -3.14159
+collision_layer = 3
+collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="CornerTR" index="0"]
 visible = false
@@ -129,6 +137,8 @@ shape = SubResource( 7 )
 [node name="CornerTL" type="StaticBody2D" parent="." index="11"]
 position = Vector2( 48, 40 )
 rotation = -4.71239
+collision_layer = 3
+collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="CornerTL" index="0"]
 visible = false
@@ -169,6 +179,8 @@ texture = ExtResource( 3 )
 
 [node name="MiddleBlock" type="StaticBody2D" parent="." index="14"]
 position = Vector2( 508, 284 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="Polygon2D" type="Polygon2D" parent="MiddleBlock" index="0"]
 color = Color( 0.827451, 0.768627, 0.768627, 1 )

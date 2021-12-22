@@ -8,7 +8,6 @@ onready var timer = $Timer
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(timer.wait_time)
 	modulate.a-=delta/timer.wait_time
 
 

@@ -8,7 +8,7 @@ func _ready():
 	children = get_children()
 
 
-func _process(delta):
+func _pocess(delta):
 	var should_kill = true
 	for child in children:
 		if child.get_class() == "CPUParticles2D":

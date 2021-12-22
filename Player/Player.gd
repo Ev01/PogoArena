@@ -28,6 +28,9 @@ var col_normal
 var wall_jumped = false
 #used for roof jumps
 var roof_jumped = false
+# The angle in radians of the normal of the last touched wall.
+# Floor = -PI/2    Right wall = PI    Ceiling = PI/2    Left wall = 0 OR PI
+var last_normal_rads
 
 var player_name = "Player"
 var is_dead = false
@@ -45,8 +48,10 @@ onready var respawn_time = respawn_timer.wait_time setget _set_respawn_time
 onready var invincibility_timer = $InvincibilityTimer
 onready var last_touched_timer = $LastTouchedTimer
 onready var jump_particle_timer = $JumpParticleTimer
-
-
+# The foot_kinematic is a kinematic body with the same collision as footarea. It only detects the
+# normal of the Walls/floor/ceiling it touches.
+# The foot_kinematic only detects collisions on layer 2, which has all the walls on it.
+onready var foot_kinematic = $FootKinematic
 
 onready var bounce_audio = $BounceSound
 onready var slide_audio = $SlidingSound
@@ -68,18 +73,19 @@ func _ready():
 
 func _physics_process(delta):
 	if not is_dead and !game.is_game_finished:
-		
+		# PROCESS INPUTS
 		if Input.is_action_pressed(action_rotate_left):
 			apply_torque_impulse(-rotation_torque)
 		if Input.is_action_pressed(action_rotate_right):
 			apply_torque_impulse(rotation_torque)
 		
-		
+		# CHECK TO BOUNCE
 		for body in foot_area.get_overlapping_bodies():
-
 			if body != self:
 				do_bounce(body)
 				break
+	
+	# PLAY SLIDE SOUND
 	if is_dead:
 		if get_colliding_bodies():
 			
@@ -92,12 +98,22 @@ func _physics_process(delta):
 	else:
 		slide_audio.stop()
 	
+	# reset last touched player after a certain amount of time
 	if last_touched_timer.is_stopped():
 		last_touched_by = null
 	
-	rot_flip += angular_velocity*delta
+	# DETECT WALL/ROOF JUMP
+	
+	# Get wall normals on foot
+	# NOTE: wall normals are also gotten on the body in _integrate_forces
+	var foot_col = foot_kinematic.move_and_collide(Vector2.ZERO, true, true, true)
+	if foot_col:
+		last_normal_rads = foot_col.normal.angle()
+		detect_wall_jump()
 	
 	
+	# DETECT TRICKS
+	rot_flip += angular_velocity * delta
 	if abs(rot_flip) >= deg2rad(360) && wall_jumped:
 		done_trick("WALL FLIP!")
 		rot_flip = 0
@@ -191,10 +207,23 @@ func give_frag():
 
 
 func done_trick(text):
+	# Creates the trick label
 	var text_inst = trick_text.instance()
 	game.add_child(text_inst)
 	text_inst.text = text
 	text_inst.rect_position = position
+
+
+func detect_wall_jump():
+	if (rad2deg(last_normal_rads) >= 165 && rad2deg(last_normal_rads) <= 195 or 
+			rad2deg(last_normal_rads) >= -15 && rad2deg(last_normal_rads) <= 15):
+		wall_jumped = true
+	else:
+		wall_jumped = false
+	if rad2deg(last_normal_rads) >= 90 - 15 && rad2deg(last_normal_rads) <= 90 + 15:
+		roof_jumped = true
+	else:
+		roof_jumped = false
 
 
 func _on_FootArea_body_entered(body):
@@ -234,16 +263,8 @@ func _integrate_forces( state ):
 	if state.get_contact_count() >= 1 && state.get_contact_collider_object(0).is_in_group("Player") == false:
 		#print(wall_jumped, " ", roof_jumped)
 		col_pos = state.get_contact_local_position(0)
-		col_normal = state.get_contact_local_normal(0).angle()
-		
-		if rad2deg(col_normal) >= 165 && rad2deg(col_normal) <= 195 or rad2deg(col_normal) >= -15 && rad2deg(col_normal) <= 15:
-			wall_jumped=true
-		else:
-			wall_jumped=false
-		if rad2deg(col_normal) >= 90-15 && rad2deg(col_normal) <= 90+15:
-			roof_jumped=true
-		else:
-			roof_jumped=false
+		last_normal_rads = state.get_contact_local_normal(0).angle()
+		detect_wall_jump()
 
 
 func _set_current_score(value):
