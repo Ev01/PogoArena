@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game/Game.gd" type="Script" id=1]
 [ext_resource path="res://World.tscn" type="PackedScene" id=2]
@@ -9,6 +9,11 @@
 [ext_resource path="res://UI/ScoreLabel/ScoreLabel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/Fonts/big_font.tres" type="DynamicFont" id=8]
 [ext_resource path="res://UI/Theme/ui_theme.tres" type="Theme" id=9]
+[ext_resource path="res://UI/Fonts/Stacked pixel.ttf" type="DynamicFontData" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 10 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -37,32 +42,76 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WinDialog" type="WindowDialog" parent="UI"]
+[node name="WinDialog" type="Panel" parent="UI"]
 pause_mode = 2
-margin_left = 336.0
-margin_top = 200.0
-margin_right = 632.0
-margin_bottom = 352.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -108.0
+margin_right = 224.0
+margin_bottom = 84.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayAgain" type="Button" parent="UI/WinDialog"]
-margin_left = 32.0
-margin_top = 88.0
-margin_right = 120.0
-margin_bottom = 128.0
+[node name="MarginContainer" type="MarginContainer" parent="UI/WinDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="UI/WinDialog/MarginContainer"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 423.0
+margin_bottom = 167.0
+
+[node name="Label" type="Label" parent="UI/WinDialog/MarginContainer/Control"]
+anchor_right = 1.0
+margin_bottom = 81.0
+custom_fonts/font = SubResource( 1 )
+text = "Game aborted. Tie between green, yellow and red"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/WinDialog/MarginContainer/Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -50.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayAgain" type="Button" parent="UI/WinDialog/MarginContainer/Control/HBoxContainer"]
+margin_left = 24.0
+margin_right = 174.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 150, 50 )
+size_flags_horizontal = 6
 text = "Play again"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackToMenu" type="Button" parent="UI/WinDialog"]
-margin_left = 168.0
-margin_top = 88.0
-margin_right = 256.0
-margin_bottom = 128.0
+[node name="BackToMenu" type="Button" parent="UI/WinDialog/MarginContainer/Control/HBoxContainer"]
+margin_left = 223.0
+margin_right = 373.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 150, 50 )
+size_flags_horizontal = 6
 text = "Back to menu"
 __meta__ = {
 "_edit_use_anchors_": false

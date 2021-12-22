@@ -117,7 +117,7 @@ func win_game(winning_players : Array, reason = ""):
 	# Win message says who wins, e.g. "Green wins" or "Tie between Green and Red"
 	var win_message = ""
 	
-	win_popup.popup()
+	win_popup.show()
 	#get_tree().paused = true
 	Engine.time_scale = 0.1
 	is_game_finished = true
@@ -136,7 +136,7 @@ func win_game(winning_players : Array, reason = ""):
 			else:
 				win_message += ", %s" % winning_players[p].player_name
 		
-	win_popup.window_title = reason + " " + win_message
+	win_popup.label_title.text = reason + " " + win_message
 
 
 func abort_game():

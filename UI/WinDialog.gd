@@ -1,12 +1,14 @@
-extends WindowDialog
+extends Control
 
 
-onready var play_again_btn = $PlayAgain
-onready var menu_btn = $BackToMenu
+onready var play_again_btn = $MarginContainer/Control/HBoxContainer/PlayAgain
+onready var menu_btn = $MarginContainer/Control/HBoxContainer/BackToMenu
 onready var game = get_node("/root/Main/Game")
 onready var main = get_node("/root/Main")
+onready var label_title = $MarginContainer/Control/Label
 
 func _ready():
+	hide()
 	play_again_btn.connect("pressed", self, "_on_play_again_pressed")
 	menu_btn.connect("pressed", self, "_on_menu_pressed")
 
