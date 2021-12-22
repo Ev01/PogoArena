@@ -70,10 +70,8 @@ __meta__ = {
 }
 
 [node name="PlayerJoin" parent="RightSide/VBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 544.0
-margin_bottom = 152.0
+margin_bottom = 175.0
 size_flags_vertical = 2
 
 [node name="Buttons" type="HBoxContainer" parent="RightSide/VBoxContainer"]

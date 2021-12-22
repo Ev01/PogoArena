@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 signal active_panel_changed
 
@@ -17,10 +17,13 @@ var player_nums = [3, 1, 2]
 # Player name corresponding to each control scheme
 var player_names = ["Yellow", "Green", "Red"]
 onready var control_schemes = [control_scheme1,  control_scheme2, control_scheme3]
+
+onready var hbox = $HBoxContainer
+onready var press_to_join_lbl = $PressToJoin
 # This list will rearange as the join panels rearrange themselves when unjoining
-onready var join_panels = get_children()
+onready var join_panels = hbox.get_children()
 # This list stays the same
-onready var join_panels_org = get_children()
+onready var join_panels_org = hbox.get_children()
 onready var main = get_node("/root/Main")
 onready var audio_manager = get_node("/root/Main/AudioManager")
 
@@ -32,6 +35,7 @@ func _ready():
 	if main.player_data:
 		set_player_data(main.player_data)
 	
+	connect("active_panel_changed", self, "_on_active_panel_changed")
 	emit_signal("active_panel_changed")
 
 
@@ -90,7 +94,35 @@ func _on_panel_remove_pressed(panel_num):
 	to_remove.unjoin()
 	active_panel_num -= 1
 	emit_signal("active_panel_changed")
-	move_child(to_remove, len(join_panels)-1)
-	join_panels = get_children()
+	hbox.move_child(to_remove, len(join_panels)-1)
+	join_panels = hbox.get_children()
 	#join_panels.remove(panel_num)
 	#join_panels.append(to_remove)
+
+
+func _on_active_panel_changed():
+	var press_to_join_txt = ""
+	var non_taken_controls = []
+	for control in control_schemes:
+		if not control in taken_controls:
+			non_taken_controls.append(control)
+	# Loop through all non_taken controls and put them in a string
+	for i in range(len(non_taken_controls)):
+		for c in non_taken_controls[i]:
+			
+			press_to_join_txt += " "
+			# Get the first key in an action
+			press_to_join_txt += InputMap.get_action_list(c)[0].as_text()
+		if i == len(non_taken_controls) - 2:
+			# Put an or instead of a comma if this is the last item in the list
+			# "Press A D, Left Right or J L to join"
+			press_to_join_txt += " or "
+		elif i != len(non_taken_controls) - 1:
+			# put a comma at the end if this isnt the last or second last item
+			press_to_join_txt += ", "
+	
+	# If all controls are taken, dont show anything
+	if press_to_join_txt:
+		press_to_join_lbl.text = "Press %s to join." % press_to_join_txt
+	else:
+		press_to_join_lbl.text = ""
