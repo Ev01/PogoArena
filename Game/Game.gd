@@ -22,6 +22,9 @@ onready var score_container = $UI/Scores
 onready var win_popup = $UI/WinDialog
 onready var game_timer = $TimeLeft
 onready var objective_anim = $UI/Objective/AnimationPlayer
+onready var start_count_down = $UI/StartCountdown
+onready var countdown_anim = start_count_down.count_down_anim_player
+onready var pause_menu = $UI/PauseMenu
 
 
 # Called when the node enters the scene tree for the first time.
@@ -44,7 +47,12 @@ func _ready():
 	spawn_players()
 	update_match_settings()
 	
+	game_timer.connect("timeout", self, "_on_game_timer_timeout")
+	game_timer.start(main.match_settings.settings.time)
+	time_label.text = str(int(game_timer.time_left))
+	
 	# Show the objective (e.g. "Hit the enemy head to score")
+	pause_menu.can_pause = false
 	get_tree().paused = true
 	yield(main, "transition_finished")
 	objective_anim.play("show")
@@ -52,11 +60,13 @@ func _ready():
 	yield(get_tree().create_timer(1.5), "timeout")
 	objective_anim.play_backwards("show")
 	yield(objective_anim, "animation_finished")
-	get_tree().paused = false
 	
-	#_set_time_left(match_settings.time)
-	game_timer.connect("timeout", self, "_on_game_timer_timeout")
-	game_timer.start(main.match_settings.settings.time)
+	# Show 3 2 1 countdown
+	start_count_down.start_countdown()
+	yield(start_count_down, "countdown_ended")
+	get_tree().paused = false
+	pause_menu.can_pause = true
+
 
 
 func _process(delta):

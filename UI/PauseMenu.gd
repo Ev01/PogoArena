@@ -1,5 +1,9 @@
 extends PanelContainer
 
+
+var is_showing = false
+var can_pause = true
+
 onready var match_settings_scr = $MarginContainer/Control/MatchSettingsScreen
 onready var match_settings_node = match_settings_scr.get_node("MatchSettings")
 onready var main_scr = $MarginContainer/Control/MainScreen
@@ -7,8 +11,6 @@ onready var current_screen = main_scr
 onready var win_dialog = get_node("../WinDialog")
 onready var game = get_node("/root/Main/Game")
 onready var main = get_node("/root/Main")
-
-var is_showing = false
 
 func _ready():
 	hide()
@@ -23,10 +25,11 @@ func _input(event):
 
 
 func pause():
-	change_screen(main_scr)
-	is_showing = true
-	show()
-	get_tree().paused = true
+	if can_pause:
+		change_screen(main_scr)
+		is_showing = true
+		show()
+		get_tree().paused = true
 
 
 func unpause():
