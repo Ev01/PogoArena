@@ -53,7 +53,6 @@ onready var jump_particle_timer = $JumpParticleTimer
 # The foot_kinematic only detects collisions on layer 2, which has all the walls on it.
 onready var foot_kinematic = $FootKinematic
 
-onready var bounce_audio = $BounceSound
 onready var slide_audio = $SlidingSound
 
 onready var cam = get_node("/root/Main/MainCamera")

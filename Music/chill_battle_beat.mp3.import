@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/chill_battle_beat.mp3-daf639f1e7858a89eccc5a2a867114e4.mp3str"
+
+[deps]
+
+source_file="res://Music/chill_battle_beat.mp3"
+dest_files=[ "res://.import/chill_battle_beat.mp3-daf639f1e7858a89eccc5a2a867114e4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

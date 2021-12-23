@@ -7,11 +7,11 @@ export (PackedScene) var game_scn
 export (NodePath) var transition_path
 
 var current_scene
-
 var player_data
 
 onready var match_settings = MatchSettingsData.new()
 onready var transition = get_node(transition_path)
+onready var audio_manager = $AudioManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
