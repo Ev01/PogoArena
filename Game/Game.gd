@@ -57,7 +57,7 @@ func _ready():
 	yield(main, "transition_finished")
 	objective_anim.play("show")
 	yield(objective_anim, "animation_finished")
-	yield(get_tree().create_timer(1.5), "timeout")
+	yield(get_tree().create_timer(1), "timeout")
 	objective_anim.play_backwards("show")
 	yield(objective_anim, "animation_finished")
 	
