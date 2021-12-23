@@ -1,5 +1,7 @@
 extends Node2D
 
+signal transition_finished()
+
 export (PackedScene) var menu_scn
 export (PackedScene) var game_scn
 export (NodePath) var transition_path
@@ -30,6 +32,8 @@ func change_scene_to(scene, do_transition = true):
 	
 	if do_transition:
 		transition.fade_out()
+		yield(transition, "fade_out_finished")
+	emit_signal("transition_finished")
 
 
 func load_new_game(p_player_data):
@@ -51,4 +55,6 @@ func load_new_game(p_player_data):
 	call_deferred("add_child", current_scene)
 	
 	transition.fade_out()
+	yield(transition, "fade_out_finished")
+	emit_signal("transition_finished")
 	

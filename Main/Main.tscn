@@ -28,6 +28,7 @@ __meta__ = {
 }
 
 [node name="Transition" parent="CanvasLayer/AspectRatioContainer" instance=ExtResource( 5 )]
+pause_mode = 2
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = -212.0

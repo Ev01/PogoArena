@@ -21,6 +21,7 @@ onready var world = $World
 onready var score_container = $UI/Scores
 onready var win_popup = $UI/WinDialog
 onready var game_timer = $TimeLeft
+onready var objective_anim = $UI/Objective/AnimationPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -42,6 +43,17 @@ func _ready():
 	
 	spawn_players()
 	update_match_settings()
+	
+	# Show the objective (e.g. "Hit the enemy head to score")
+	get_tree().paused = true
+	yield(main, "transition_finished")
+	objective_anim.play("show")
+	yield(objective_anim, "animation_finished")
+	yield(get_tree().create_timer(1.5), "timeout")
+	objective_anim.play_backwards("show")
+	yield(objective_anim, "animation_finished")
+	get_tree().paused = false
+	
 	#_set_time_left(match_settings.time)
 	game_timer.connect("timeout", self, "_on_game_timer_timeout")
 	game_timer.start(main.match_settings.settings.time)
