@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "MatchSettingsData",
 "language": "GDScript",
-"path": "res://MatchSettingsData.gd"
+"path": "res://Main/MatchSettingsData.gd"
 }, {
 "base": "Area2D",
 "class": "RespawnPoint",
@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="PogoArena"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://Main/Main.tscn"
 config/icon="res://icon.png"
 
 [debug]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/softcircle.png-c31115fd15728aa837999f0badaf32ac.stex"
+path="res://.import/softcircle.png-cf67ca4639d3738a317fac1b9cebd8e7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://softcircle.png"
-dest_files=[ "res://.import/softcircle.png-c31115fd15728aa837999f0badaf32ac.stex" ]
+source_file="res://ParticleSprites/softcircle.png"
+dest_files=[ "res://.import/softcircle.png-cf67ca4639d3738a317fac1b9cebd8e7.stex" ]
 
 [params]
 

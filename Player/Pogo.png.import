@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/birdjump.png-938ddbccdc6fa0988d8c38cf81a8633b.stex"
+path="res://.import/Pogo.png-a59d7830351effce262d69af6d114c37.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://birdjump.png"
-dest_files=[ "res://.import/birdjump.png-938ddbccdc6fa0988d8c38cf81a8633b.stex" ]
+source_file="res://Player/Pogo.png"
+dest_files=[ "res://.import/Pogo.png-a59d7830351effce262d69af6d114c37.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

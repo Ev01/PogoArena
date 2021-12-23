@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Main/Main.gd" type="Script" id=1]
 [ext_resource path="res://Game/Game.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Menu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://MainCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera/MainCamera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Transition/Transition.tscn" type="PackedScene" id=5]
-[ext_resource path="res://AudioManager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://AudioManager/AudioManager.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
