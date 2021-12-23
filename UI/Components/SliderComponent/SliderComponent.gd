@@ -16,7 +16,6 @@ func _ready():
 	slider.max_value = max_value
 	slider.min_value = min_value
 	
-	print("value ", value)
 	if not Engine.is_editor_hint():
 		line_edit.connect("focus_exited", self, "_on_line_edit_focus_exited")
 		line_edit.connect("text_entered", self, "_on_line_edit_text_entered")
@@ -36,7 +35,6 @@ func _set_value(val):
 		line_edit.caret_position = caret_position
 		
 		emit_signal("value_changed", value)
-		print("yay ", value)
 
 
 func _set_default_value(val):
@@ -47,7 +45,6 @@ func _set_default_value(val):
 
 func _on_line_edit_focus_exited():
 	self.value = float(line_edit.text)
-	print("exit")
 
 
 func _on_line_edit_text_entered(new_text):
