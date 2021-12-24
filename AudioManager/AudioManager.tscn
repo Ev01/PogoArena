@@ -12,7 +12,7 @@ script = ExtResource( 1 )
 [node name="BattleMusic" type="AudioStreamPlayer" parent="." groups=["Music"]]
 pause_mode = 2
 stream = ExtResource( 4 )
-volume_db = -12.0
+volume_db = -10.0
 script = ExtResource( 2 )
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="." groups=["Music"]]
@@ -23,5 +23,5 @@ script = ExtResource( 2 )
 [node name="WinMusic" type="AudioStreamPlayer" parent="." groups=["Music"]]
 pause_mode = 2
 stream = ExtResource( 5 )
-volume_db = -12.0
+volume_db = -10.0
 script = ExtResource( 2 )
