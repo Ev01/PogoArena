@@ -1,11 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Maps/DefaultMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MiscScripts/PolyOutline.gd" type="Script" id=2]
 [ext_resource path="res://Textures/Concrete.png" type="Texture" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
 [ext_resource path="res://RespawnPoint/RespawnPoint.tscn" type="PackedScene" id=5]
-
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 512, 24 )
@@ -25,7 +23,7 @@ gradient = SubResource( 4 )
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 68, 46 )
 
-[node name="Map01" instance=ExtResource( 1 )]
+[node name="Map02" instance=ExtResource( 1 )]
 
 [node name="TimeLbl" parent="." index="0"]
 margin_top = 124.0
@@ -61,42 +59,12 @@ shape = SubResource( 6 )
 position = Vector2( 1000, 296 )
 shape = SubResource( 6 )
 
-[node name="Sprite" type="Sprite" parent="Walls" index="4"]
-visible = false
-position = Vector2( 24, 296 )
-scale = Vector2( 0.75, 9.5 )
-texture = ExtResource( 4 )
-
-[node name="Sprite2" type="Sprite" parent="Walls" index="5"]
-visible = false
-position = Vector2( 1000, 296 )
-scale = Vector2( 0.75, 9.5 )
-texture = ExtResource( 4 )
-
-[node name="Sprite3" type="Sprite" parent="Walls" index="6"]
-visible = false
-position = Vector2( 512, 576 )
-scale = Vector2( 14.5, 0.75 )
-texture = ExtResource( 4 )
-
-[node name="Sprite4" type="Sprite" parent="Walls" index="7"]
-visible = false
-position = Vector2( 512, 16.0001 )
-scale = Vector2( 14.5, 0.75 )
-texture = ExtResource( 4 )
-
 [node name="CornerBL" type="StaticBody2D" parent="." index="8"]
 position = Vector2( 48, 552 )
 collision_layer = 3
 collision_mask = 3
 
-[node name="Sprite" type="Sprite" parent="CornerBL" index="0"]
-visible = false
-rotation = 0.785397
-scale = Vector2( 1.75, 1.875 )
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerBL" index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerBL" index="0"]
 position = Vector2( -9.53674e-07, 0 )
 rotation = 0.785397
 shape = SubResource( 7 )
@@ -107,13 +75,7 @@ rotation = -1.57079
 collision_layer = 3
 collision_mask = 3
 
-[node name="Sprite" type="Sprite" parent="CornerBR" index="0"]
-visible = false
-rotation = 0.785397
-scale = Vector2( 1.75, 1.875 )
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerBR" index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerBR" index="0"]
 position = Vector2( -9.53674e-07, 0 )
 rotation = 0.785397
 shape = SubResource( 7 )
@@ -124,13 +86,7 @@ rotation = -3.14159
 collision_layer = 3
 collision_mask = 3
 
-[node name="Sprite" type="Sprite" parent="CornerTR" index="0"]
-visible = false
-rotation = 0.785397
-scale = Vector2( 1.75, 1.875 )
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerTR" index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerTR" index="0"]
 position = Vector2( -9.53674e-07, 0 )
 rotation = 0.785397
 shape = SubResource( 7 )
@@ -141,13 +97,7 @@ rotation = -4.71239
 collision_layer = 3
 collision_mask = 3
 
-[node name="Sprite" type="Sprite" parent="CornerTL" index="0"]
-visible = false
-rotation = 0.785397
-scale = Vector2( 1.75, 1.875 )
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerTL" index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerTL" index="0"]
 position = Vector2( -9.53674e-07, 0 )
 rotation = 0.785397
 shape = SubResource( 7 )

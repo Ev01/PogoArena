@@ -397,7 +397,6 @@ __meta__ = {
 
 [node name="PauseMenu" type="PanelContainer" parent="UI"]
 pause_mode = 2
-visible = false
 margin_left = 320.0
 margin_top = 68.0
 margin_right = 688.0
@@ -431,36 +430,10 @@ anchor_bottom = 1.0
 
 [node name="MatchSettings" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen" instance=ExtResource( 4 )]
 margin_right = 342.0
-margin_bottom = 179.0
-
-[node name="VBoxContainer" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings" index="0"]
-margin_right = 332.0
-margin_bottom = 234.0
-
-[node name="Title" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="0"]
-margin_right = 322.0
-
-[node name="MaxScore" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="1"]
-margin_right = 322.0
-
-[node name="GravityMultiplier" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="2"]
-margin_right = 322.0
-
-[node name="BouncePower" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="3"]
-margin_right = 322.0
-
-[node name="RespawnTime" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="4"]
-margin_right = 322.0
-
-[node name="Time" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer" index="5"]
-visible = false
-margin_right = 314.0
-
-[node name="OptionButton" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings/VBoxContainer/Map" index="1"]
-items = [ "Map01", null, false, 0, null, "Map02", null, false, 1, null ]
+margin_bottom = 279.0
 
 [node name="Control" type="Control" parent="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen"]
-margin_top = 183.0
+margin_top = 283.0
 margin_right = 342.0
 margin_bottom = 394.0
 size_flags_vertical = 3
@@ -558,5 +531,3 @@ anims/show = SubResource( 4 )
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MainScreen/ResumeBtn" to="UI/PauseMenu" method="_on_ResumeBtn_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MainScreen/MatchSettingsBtn" to="UI/PauseMenu" method="_on_MatchSettingsBtn_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MainScreen/EndGameBtn" to="UI/PauseMenu" method="_on_EndGameBtn_pressed"]
-
-[editable path="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/MatchSettings"]

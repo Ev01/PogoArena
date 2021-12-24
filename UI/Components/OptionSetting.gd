@@ -13,6 +13,8 @@ func _ready():
 	
 	for item_id in range(get_item_count()):
 		value_names[get_item_text(item_id)] = item_id
+	
+	print(value_names)
 
 
 func _on_item_selected(item_id):
