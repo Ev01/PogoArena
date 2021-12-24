@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/beachfight.mp3-f255f1493129168751c1de1d84cfbfcb.mp3str"
+
+[deps]
+
+source_file="res://Music/beachfight.mp3"
+dest_files=[ "res://.import/beachfight.mp3-f255f1493129168751c1de1d84cfbfcb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

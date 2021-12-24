@@ -15,9 +15,11 @@ func _ready():
 
 func _on_play_again_pressed():
 	Engine.time_scale = 1
+	main.audio_manager.stop_music(0.8)
 	main.load_new_game(main.player_data)
 
 
 func _on_menu_pressed():
 	Engine.time_scale = 1
+	main.audio_manager.stop_music(0.8)
 	main.change_scene_to(main.menu_scn)

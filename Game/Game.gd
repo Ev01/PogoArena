@@ -61,6 +61,7 @@ func _ready():
 	objective_anim.play_backwards("show")
 	yield(objective_anim, "animation_finished")
 	
+	main.audio_manager.stop_music(1)
 	main.audio_manager.play_existing("BattleMusic", 1)
 	
 	# Show 3 2 1 countdown
@@ -164,6 +165,7 @@ func win_game(winning_players : Array, reason = ""):
 		
 	win_popup.label_title.text = reason + " " + win_message
 	main.audio_manager.stop_existing("BattleMusic", 1)
+	main.audio_manager.play_existing("WinMusic", 2)
 
 
 func abort_game():
