@@ -173,11 +173,6 @@ func abort_game():
 	win_game(get_highest_scoring(), "Match Aborted.")
 
 
-func _input(event):
-	if Input.is_action_just_pressed("Reset"):
-		main.load_new_game()
-
-
 func _on_player_score_changed(current_score, player):
 	if current_score >= main.match_settings.settings.max_score:
 		# Wait a very small amount of time before winning the game in case two players died 
