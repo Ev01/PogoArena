@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Maps/DefaultMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MiscScripts/PolyOutline.gd" type="Script" id=2]
 [ext_resource path="res://Textures/Concrete.png" type="Texture" id=3]
+[ext_resource path="res://Camera/CameraLimiter.tscn" type="PackedScene" id=4]
 [ext_resource path="res://RespawnPoint/RespawnPoint.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -120,3 +121,13 @@ position = Vector2( 524, 296 )
 scale = Vector2( 1.82813, 1 )
 z_index = -10
 texture = ExtResource( 3 )
+
+[node name="CameraLimiter" parent="." index="14" instance=ExtResource( 4 )]
+position = Vector2( -192, -208 )
+limit_left = true
+limit_up = true
+
+[node name="CameraLimiter2" parent="." index="15" instance=ExtResource( 4 )]
+position = Vector2( 1216, 768 )
+limit_right = true
+limit_down = true

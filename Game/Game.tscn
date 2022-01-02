@@ -270,8 +270,10 @@ score_label_scn = ExtResource( 7 )
 [node name="Camera" parent="." instance=ExtResource( 13 )]
 position = Vector2( 512, 296 )
 smoothing_enabled = true
+smoothing_speed = 2.0
+zoom_speed = 5
 zoom_margin = 0.8
-look_ahead_mult = 0.6
+look_ahead_mult = 0.4
 
 [node name="TimeLeft" type="Timer" parent="."]
 one_shot = true
@@ -519,6 +521,9 @@ margin_right = 1024.0
 margin_bottom = -256.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 0.278431 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="UI/Objective/ColorRect"]
 anchor_right = 1.0

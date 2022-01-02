@@ -13,8 +13,13 @@ var target_zoom = 1
 var shake
 var fade_out
 onready var shake_timer = $ShakeTimer
+var camera_limits: Array
 onready var game = get_parent()
-onready var resolution = OS.get_window_size()
+onready var resolution = OS.get_screen_size()
+
+func _ready():
+	yield(game, "game_ready")
+	camera_limits = get_tree().get_nodes_in_group("CameraLimiter")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -75,13 +80,31 @@ func fit_to_players():
 		# Stretch rect upwards
 		if point.y < new_rect_top_left.y:
 			new_rect_top_left.y = point.y
-		
+	
+	# Apply margin around players
+	new_rect_top_left -= Vector2.ONE * zoom_margin * resolution / 2
+	new_rect_bottom_right += Vector2.ONE * zoom_margin * resolution / 2
+	
+	for point_limit_node in camera_limits:
+		var point_limit = point_limit_node.position
+		if point_limit_node.limit_left:
+			new_rect_top_left.x = max(new_rect_top_left.x, point_limit.x)
+		if point_limit_node.limit_up:
+			new_rect_top_left.y = max(new_rect_top_left.y, point_limit.y)
+		if point_limit_node.limit_right:
+			new_rect_bottom_right.x = min(new_rect_bottom_right.x, point_limit.x)
+		if point_limit_node.limit_down:
+			new_rect_bottom_right.y = min(new_rect_bottom_right.y, point_limit.y)
+	
+	
+	
 	var new_rect_size = new_rect_bottom_right - new_rect_top_left
+	
 	
 	position = new_rect_top_left + new_rect_size/2
 	# Convert size in pixels to a zoom multiplier
-	var new_zoom_x = max(new_rect_size.x / resolution.x, min_zoom) + zoom_margin
-	var new_zoom_y = max(new_rect_size.y / resolution.y, min_zoom) + zoom_margin
+	var new_zoom_x = max(new_rect_size.x / resolution.x, min_zoom)# + zoom_margin
+	var new_zoom_y = max(new_rect_size.y / resolution.y, min_zoom)# + zoom_margin
 	# Need to maintain aspect ratio, pick the biggest axis for both.
 	target_zoom = Vector2.ONE * max(new_zoom_x, new_zoom_y)
 		

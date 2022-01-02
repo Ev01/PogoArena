@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Camera/CameraLimiter.gd" type="Script" id=1]
+
+[node name="CameraLimiter" type="Position2D" groups=["CameraLimiter"]]
+script = ExtResource( 1 )
