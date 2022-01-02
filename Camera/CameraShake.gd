@@ -1,6 +1,7 @@
 extends Camera2D
 
 
+export var zoom_smoothing_enabled = true
 export var zoom_speed = 10
 export var min_zoom: float = 0.1
 export var zoom_margin: float = 1
@@ -15,7 +16,9 @@ var fade_out
 onready var shake_timer = $ShakeTimer
 var camera_limits: Array
 onready var game = get_parent()
-onready var resolution = OS.get_screen_size()
+onready var resolution = Vector2(
+	ProjectSettings.get_setting("display/window/size/width"), 
+	ProjectSettings.get_setting("display/window/size/height"))
 
 func _ready():
 	yield(game, "game_ready")
@@ -27,7 +30,10 @@ func _process(delta):
 	fit_to_players()
 	
 	# Zoom smoothing
-	zoom = Vector2.ONE * lerp(zoom, target_zoom, zoom_speed * delta)
+	if zoom_smoothing_enabled:
+		zoom = Vector2.ONE * lerp(zoom, target_zoom, zoom_speed * delta)
+	else:
+		zoom = target_zoom
 	
 	if is_shaking:
 		shake = max(shake-(delta*fade_out)/shake_timer.wait_time,0)
@@ -85,6 +91,7 @@ func fit_to_players():
 	new_rect_top_left -= Vector2.ONE * zoom_margin * resolution / 2
 	new_rect_bottom_right += Vector2.ONE * zoom_margin * resolution / 2
 	
+	# Limit camera so it stays within a certain bounds
 	for point_limit_node in camera_limits:
 		var point_limit = point_limit_node.position
 		if point_limit_node.limit_left:
@@ -96,17 +103,32 @@ func fit_to_players():
 		if point_limit_node.limit_down:
 			new_rect_bottom_right.y = min(new_rect_bottom_right.y, point_limit.y)
 	
-	
-	
 	var new_rect_size = new_rect_bottom_right - new_rect_top_left
 	
+	#print(new_rect_top_left)
 	
 	position = new_rect_top_left + new_rect_size/2
 	# Convert size in pixels to a zoom multiplier
-	var new_zoom_x = max(new_rect_size.x / resolution.x, min_zoom)# + zoom_margin
-	var new_zoom_y = max(new_rect_size.y / resolution.y, min_zoom)# + zoom_margin
+	var new_zoom_x = new_rect_size.x / resolution.x
+	var new_zoom_y = new_rect_size.y / resolution.y
 	# Need to maintain aspect ratio, pick the biggest axis for both.
 	target_zoom = Vector2.ONE * max(new_zoom_x, new_zoom_y)
+	#target_zoom = Vector2.ONE * new_zoom_y
+	# Sometimes zooming out to fit the aspect ratio will zoom past the boundary nodes,
+	# in this case reposition the camera without zooming
+	#for boundary_node in camera_limits:
+	#	var boundary_pos = boundary_node.position
+		# Position of top left of camera
+		#var position_tl = position - new_rect_size/2
+		#if boundary_node.limit_left and position.x - new_rect_size.x/2 < boundary_pos.x:
+		#	position.x = boundary_pos.x + new_rect_size.x/2
+		#elif boundary_node.limit_right and boundary_pos.x < position.x + new_rect_size.x/2:
+		#	position.x = boundary_pos.x - new_rect_size.x/2
 		
+		#if boundary_node.limit_up and position.y < boundary_pos.y:
+		#	position.y = boundary_pos.y
+		#elif boundary_node.limit_down and boundary_pos.y < position.y + new_rect_size.y:
+		#	position.y = boundary_pos.y - new_rect_size.y
+	#target_zoom = Vector2(new_zoom_x, new_zoom_y)
 		
 		

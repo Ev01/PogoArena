@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Maps/DefaultMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MiscScripts/PolyOutline.gd" type="Script" id=2]
 [ext_resource path="res://Textures/Concrete.png" type="Texture" id=3]
+[ext_resource path="res://Camera/CameraLimiter.tscn" type="PackedScene" id=4]
 [ext_resource path="res://RespawnPoint/RespawnPoint.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -106,6 +107,7 @@ shape = SubResource( 7 )
 color = Color( 0.827451, 0.768627, 0.768627, 1 )
 texture = ExtResource( 3 )
 invert_enable = true
+invert_border = 400.0
 polygon = PoolVector2Array( 976, 472, 896, 552, 128, 552, 48, 472, 48, 120, 128, 40, 896, 40, 976, 120 )
 script = ExtResource( 2 )
 OutLine = Color( 0.866667, 0.866667, 0.866667, 1 )
@@ -144,3 +146,13 @@ Width = 5.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleBlock" index="1"]
 position = Vector2( 0, -6 )
 shape = SubResource( 9 )
+
+[node name="CameraLimiter" parent="." index="15" instance=ExtResource( 4 )]
+position = Vector2( -88, -104 )
+limit_left = true
+limit_up = true
+
+[node name="CameraLimiter2" parent="." index="16" instance=ExtResource( 4 )]
+position = Vector2( 1112, 688 )
+limit_right = true
+limit_down = true

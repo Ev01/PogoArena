@@ -250,8 +250,8 @@ score_label_scn = ExtResource( 7 )
 [node name="Camera" parent="." instance=ExtResource( 13 )]
 position = Vector2( 512, 296 )
 smoothing_enabled = true
-smoothing_speed = 2.0
-zoom_speed = 5
+smoothing_speed = 1.0
+zoom_speed = 1
 zoom_margin = 0.8
 look_ahead_mult = 0.4
 
@@ -512,8 +512,11 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Objective"]
+reset_on_save = false
 anims/RESET = SubResource( 3 )
 anims/show = SubResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MatchSettingsScreen/Control/BackButton" to="UI/PauseMenu" method="_on_BackButton_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/Control/MainScreen/ResumeBtn" to="UI/PauseMenu" method="_on_ResumeBtn_pressed"]

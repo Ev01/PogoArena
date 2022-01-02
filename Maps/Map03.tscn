@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Maps/DefaultMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MiscScripts/PolyOutline.gd" type="Script" id=2]
 [ext_resource path="res://RespawnPoint/RespawnPoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Textures/Concrete.png" type="Texture" id=4]
+[ext_resource path="res://Camera/CameraLimiter.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0.282297, 0.473684, 0.502392, 0.770335 )
@@ -130,6 +131,7 @@ z_index = 1
 color = Color( 0.235294, 0.164706, 0.25098, 1 )
 texture = ExtResource( 4 )
 invert_enable = true
+invert_border = 400.0
 polygon = PoolVector2Array( 976, 472, 896, 552, 128, 552, 48, 472, 48, 120, 128, 40, 896, 40, 976, 120 )
 script = ExtResource( 2 )
 OutLine = Color( 1, 1, 1, 1 )
@@ -150,3 +152,13 @@ polygon = PoolVector2Array( 192, 552, 464, 288, 464, 416, 544, 416, 544, 280, 83
 script = ExtResource( 2 )
 OutLine = Color( 0.427451, 0.352941, 0.294118, 1 )
 Width = 3.0
+
+[node name="CameraLimiter" parent="." index="17" instance=ExtResource( 5 )]
+position = Vector2( -88, -104 )
+limit_left = true
+limit_up = true
+
+[node name="CameraLimiter2" parent="." index="18" instance=ExtResource( 5 )]
+position = Vector2( 1112, 688 )
+limit_right = true
+limit_down = true
