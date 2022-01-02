@@ -1,5 +1,6 @@
 extends Node2D
 
+signal game_ready()
 
 export (PackedScene) var player_scn
 export (PackedScene) var score_label_scn
@@ -50,6 +51,8 @@ func _ready():
 	game_timer.connect("timeout", self, "_on_game_timer_timeout")
 	game_timer.start(main.match_settings.settings.time)
 	time_label.text = str(int(game_timer.time_left))
+	
+	emit_signal("game_ready")
 	
 	# Show the objective (e.g. "Hit the enemy head to score")
 	pause_menu.can_pause = false

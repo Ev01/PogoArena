@@ -1,14 +1,29 @@
 extends Camera2D
 
 
+export var zoom_speed = 10
+export var min_zoom: float = 0.1
+export var zoom_margin: float = 1
+export var look_ahead_mult: float = 0.5
+
 # Declare member variables here. Examples:
 var is_shaking = false
+var target_zoom = 1
+
 var shake
 var fade_out
 onready var shake_timer = $ShakeTimer
+onready var game = get_parent()
+onready var resolution = OS.get_window_size()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	fit_to_players()
+	
+	# Zoom smoothing
+	zoom = Vector2.ONE * lerp(zoom, target_zoom, zoom_speed * delta)
+	
 	if is_shaking:
 		shake = max(shake-(delta*fade_out)/shake_timer.wait_time,0)
 		set_offset(Vector2(rand_range(-shake, shake), rand_range(-shake, shake)))
@@ -18,9 +33,57 @@ func _process(delta):
 	if shake_timer.is_stopped():
 		is_shaking = false
 
-func camera_shake(shake_amount,duration):
+func camera_shake(shake_amount, duration):
 	is_shaking = true
 	shake = shake_amount
 	fade_out = shake_amount
 	shake_timer.wait_time = duration
 	shake_timer.start()
+
+
+func fit_to_players():
+	# The camera will stretch to fit around these points
+	var points_to_fit = []
+	
+	for player in game.players:
+		points_to_fit.append(player.position)
+		points_to_fit.append(player.position + player.linear_velocity * look_ahead_mult)
+	
+	var new_rect_top_left : Vector2
+	var new_rect_bottom_right : Vector2
+	var initial_value_set = false
+	
+	for point in points_to_fit:
+		if not initial_value_set:
+			new_rect_top_left = point
+			new_rect_bottom_right = point
+			initial_value_set = true
+			continue
+		
+		# Stretch rect to the right
+		if point.x > new_rect_bottom_right.x:
+			new_rect_bottom_right.x = point.x
+		
+		# Stretch rect to the left
+		if point.x < new_rect_top_left.x:
+			new_rect_top_left.x = point.x
+		
+		# Stretch rect to the bottom
+		if point.y > new_rect_bottom_right.y:
+			new_rect_bottom_right.y = point.y
+		
+		# Stretch rect upwards
+		if point.y < new_rect_top_left.y:
+			new_rect_top_left.y = point.y
+		
+	var new_rect_size = new_rect_bottom_right - new_rect_top_left
+	
+	position = new_rect_top_left + new_rect_size/2
+	# Convert size in pixels to a zoom multiplier
+	var new_zoom_x = max(new_rect_size.x / resolution.x, min_zoom) + zoom_margin
+	var new_zoom_y = max(new_rect_size.y / resolution.y, min_zoom) + zoom_margin
+	# Need to maintain aspect ratio, pick the biggest axis for both.
+	target_zoom = Vector2.ONE * max(new_zoom_x, new_zoom_y)
+		
+		
+		

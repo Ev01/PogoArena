@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Game/Game.gd" type="Script" id=1]
 [ext_resource path="res://World/World.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://UI/Fonts/Stacked pixel.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://UI/Fonts/BRLNSR.TTF" type="DynamicFontData" id=11]
 [ext_resource path="res://Game/StartCountdown.gd" type="Script" id=12]
+[ext_resource path="res://Camera/MainCamera.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Animation" id=5]
 resource_name = "FadeOut"
@@ -266,6 +267,12 @@ script = ExtResource( 1 )
 player_scn = ExtResource( 6 )
 score_label_scn = ExtResource( 7 )
 
+[node name="Camera" parent="." instance=ExtResource( 13 )]
+position = Vector2( 512, 296 )
+smoothing_enabled = true
+zoom_margin = 0.8
+look_ahead_mult = 0.6
+
 [node name="TimeLeft" type="Timer" parent="."]
 one_shot = true
 
@@ -397,6 +404,7 @@ __meta__ = {
 
 [node name="PauseMenu" type="PanelContainer" parent="UI"]
 pause_mode = 2
+visible = false
 margin_left = 320.0
 margin_top = 68.0
 margin_right = 688.0

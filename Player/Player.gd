@@ -55,8 +55,9 @@ onready var foot_kinematic = $FootKinematic
 
 onready var slide_audio = $SlidingSound
 
-onready var cam = get_node("/root/Main/MainCamera")
+
 onready var game = get_node("/root/Main/Game")
+onready var cam = game.get_node("Camera")
 onready var audio_manager = get_node("/root/Main/AudioManager")
 onready var world = get_parent()
 

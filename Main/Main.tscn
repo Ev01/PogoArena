@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main/Main.gd" type="Script" id=1]
 [ext_resource path="res://Game/Game.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Menu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Camera/MainCamera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Transition/Transition.tscn" type="PackedScene" id=5]
 [ext_resource path="res://AudioManager/AudioManager.tscn" type="PackedScene" id=6]
 
@@ -12,9 +11,6 @@ script = ExtResource( 1 )
 menu_scn = ExtResource( 3 )
 game_scn = ExtResource( 2 )
 transition_path = NodePath("CanvasLayer/AspectRatioContainer/Transition")
-
-[node name="MainCamera" parent="." instance=ExtResource( 4 )]
-position = Vector2( 512, 296 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
