@@ -100,6 +100,7 @@ shape = SubResource( 7 )
 color = Color( 0.827451, 0.768627, 0.768627, 1 )
 texture = ExtResource( 3 )
 invert_enable = true
+invert_border = 300.0
 polygon = PoolVector2Array( 976, 472, 896, 552, 128, 552, 48, 472, 48, 120, 128, 40, 896, 40, 976, 120 )
 script = ExtResource( 2 )
 OutLine = Color( 0.866667, 0.866667, 0.866667, 1 )
@@ -123,11 +124,11 @@ z_index = -10
 texture = ExtResource( 3 )
 
 [node name="CameraLimiter" parent="." index="14" instance=ExtResource( 4 )]
-position = Vector2( -192, -208 )
+position = Vector2( -120, -136 )
 limit_left = true
 limit_up = true
 
 [node name="CameraLimiter2" parent="." index="15" instance=ExtResource( 4 )]
-position = Vector2( 1216, 768 )
+position = Vector2( 1160, 712 )
 limit_right = true
 limit_down = true

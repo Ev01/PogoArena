@@ -13,6 +13,7 @@ game_scn = ExtResource( 2 )
 transition_path = NodePath("CanvasLayer/AspectRatioContainer/Transition")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer"]
 anchor_right = 1.0

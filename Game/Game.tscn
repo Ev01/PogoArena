@@ -227,16 +227,6 @@ tracks/0/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
-tracks/1/type = "bezier"
-tracks/1/path = NodePath(".:rect_size:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 600, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
 
 [sub_resource type="Animation" id=4]
 resource_name = "show"
@@ -250,16 +240,6 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1024, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath(".:rect_size:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/keys = {
-"points": PoolRealArray( 600, -0.25, 0, 0.25, 0, 600, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
 }
 
 [node name="Game" type="Node2D"]
@@ -280,13 +260,7 @@ one_shot = true
 
 [node name="World" parent="." instance=ExtResource( 2 )]
 
-[node name="UI" type="Control" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
-theme = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StartCountdown" type="Label" parent="UI"]
 pause_mode = 2
@@ -339,6 +313,7 @@ margin_left = -224.0
 margin_top = -108.0
 margin_right = 224.0
 margin_bottom = 84.0
+theme = ExtResource( 9 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
