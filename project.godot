@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "GameOptionsData",
+"language": "GDScript",
+"path": "res://OptionScripts/GameOptionsData.gd"
+}, {
 "base": "Control",
 "class": "MatchSetting",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://AudioManager/Sound.gd"
 } ]
 _global_script_class_icons={
+"GameOptionsData": "",
 "MatchSetting": "",
 "MatchSettingsData": "",
 "RespawnPoint": "",
