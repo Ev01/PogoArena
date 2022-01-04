@@ -6,15 +6,8 @@
 [ext_resource path="res://UI/Theme/ui_theme.tres" type="Theme" id=4]
 [ext_resource path="res://UI/Fonts/big_font.tres" type="DynamicFont" id=5]
 
-[node name="Menu" type="Control"]
-margin_right = 1024.0
-margin_bottom = 600.0
-focus_mode = 2
-theme = ExtResource( 4 )
+[node name="Menu" type="CanvasLayer"]
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 player_join_path = NodePath("RightSide/VBoxContainer/PlayerJoin")
 match_settings_path = NodePath("PanelContainer/ScrollContainer/MatchSettings")
 
@@ -45,6 +38,7 @@ margin_top = 16.2
 margin_right = -32.0
 margin_bottom = -40.0
 size_flags_horizontal = 3
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -71,7 +65,7 @@ __meta__ = {
 
 [node name="PlayerJoin" parent="RightSide/VBoxContainer" instance=ExtResource( 1 )]
 margin_right = 544.0
-margin_bottom = 175.0
+margin_bottom = 186.0
 size_flags_vertical = 2
 
 [node name="Buttons" type="HBoxContainer" parent="RightSide/VBoxContainer"]
@@ -122,6 +116,7 @@ margin_top = 64.0
 margin_right = 392.0
 margin_bottom = 512.0
 size_flags_horizontal = 3
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
