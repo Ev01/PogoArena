@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://UI/PlayerJoin/PlayerJoin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/Menu.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://OptionScripts/FullScreenOption.gd" type="Script" id=7]
 [ext_resource path="res://UI/Components/CheckComponent.gd" type="Script" id=8]
 [ext_resource path="res://UI/GameOptions.gd" type="Script" id=9]
+[ext_resource path="res://OptionScripts/VsyncOption.gd" type="Script" id=10]
 
 [node name="Menu" type="Control"]
 margin_right = 1024.0
@@ -209,8 +210,9 @@ size_flags_vertical = 3
 
 [node name="OptionsVbox" type="VBoxContainer" parent="OptionsScreen/MarginContainer/OptionsScreen/MarginContainer/VBoxContainer/ScrollContainer"]
 margin_right = 778.0
-margin_bottom = 33.0
+margin_bottom = 86.0
 size_flags_horizontal = 3
+custom_constants/separation = 20
 script = ExtResource( 9 )
 
 [node name="SettingFullscreen" type="HBoxContainer" parent="OptionsScreen/MarginContainer/OptionsScreen/MarginContainer/VBoxContainer/ScrollContainer/OptionsVbox"]
@@ -226,6 +228,25 @@ custom_fonts/font = ExtResource( 6 )
 text = "FullScreen"
 
 [node name="CheckButton" type="CheckButton" parent="OptionsScreen/MarginContainer/OptionsScreen/MarginContainer/VBoxContainer/ScrollContainer/OptionsVbox/SettingFullscreen"]
+margin_left = 714.0
+margin_right = 778.0
+margin_bottom = 33.0
+script = ExtResource( 8 )
+
+[node name="SettingVsync" type="HBoxContainer" parent="OptionsScreen/MarginContainer/OptionsScreen/MarginContainer/VBoxContainer/ScrollContainer/OptionsVbox"]
+margin_top = 53.0
+margin_right = 778.0
+margin_bottom = 86.0
+script = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="OptionsScreen/MarginContainer/OptionsScreen/MarginContainer/VBoxContainer/ScrollContainer/OptionsVbox/SettingVsync"]
+margin_right = 710.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 6 )
+text = "Vsync"
+
+[node name="CheckButton" type="CheckButton" parent="OptionsScreen/MarginContainer/OptionsScreen/MarginContainer/VBoxContainer/ScrollContainer/OptionsVbox/SettingVsync"]
 margin_left = 714.0
 margin_right = 778.0
 margin_bottom = 33.0

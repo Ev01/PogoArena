@@ -10,6 +10,7 @@ onready var options_screen = $OptionsScreen
 onready var play_button = get_node("RightSide/VBoxContainer/Buttons/PlayButton")
 
 func _ready():
+	options_screen.hide()
 	main.audio_manager.play_existing("MenuMusic", 1)
 	player_join.connect("active_panel_changed", self, "_on_active_panel_changed")
 	_on_active_panel_changed()

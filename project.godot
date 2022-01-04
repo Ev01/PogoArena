@@ -48,10 +48,6 @@ config/name="PogoArena"
 run/main_scene="res://Main/Main.tscn"
 config/icon="res://icon.png"
 
-[debug]
-
-settings/fps/force_fps=120
-
 [display]
 
 window/size/always_on_top=true
