@@ -9,6 +9,7 @@ export (NodePath) var transition_path
 var current_scene
 var player_data
 
+onready var game_options = GameOptionsData.new()
 onready var match_settings = MatchSettingsData.new()
 onready var transition = get_node(transition_path)
 onready var audio_manager = $AudioManager

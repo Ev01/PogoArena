@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "GameOptionsData",
+"language": "GDScript",
+"path": "res://OptionScripts/GameOptionsData.gd"
+}, {
 "base": "Control",
 "class": "MatchSetting",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://AudioManager/Sound.gd"
 } ]
 _global_script_class_icons={
+"GameOptionsData": "",
 "MatchSetting": "",
 "MatchSettingsData": "",
 "RespawnPoint": "",
@@ -41,10 +47,6 @@ _global_script_class_icons={
 config/name="PogoArena"
 run/main_scene="res://Main/Main.tscn"
 config/icon="res://icon.png"
-
-[debug]
-
-settings/fps/force_fps=120
 
 [display]
 
