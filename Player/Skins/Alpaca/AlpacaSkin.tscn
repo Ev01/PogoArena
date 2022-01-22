@@ -6,5 +6,5 @@
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -5.82801e-07, 1.90735e-06 )
-scale = Vector2( 0.444444, 0.45977 )
+scale = Vector2( 0.222, 0.23 )
 texture = ExtResource( 1 )
