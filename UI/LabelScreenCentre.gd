@@ -5,7 +5,10 @@ var screen_size: Vector2
 
 func _ready():
 	get_tree().connect("screen_resized", self, "_on_screen_resized")
+	# Make sure rect is at its minimum size
+	rect_size.x = 0
 	update_size()
+
 
 
 func update_size():
