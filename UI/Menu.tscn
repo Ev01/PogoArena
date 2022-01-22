@@ -11,15 +11,8 @@
 [ext_resource path="res://UI/GameOptions.gd" type="Script" id=9]
 [ext_resource path="res://OptionScripts/VsyncOption.gd" type="Script" id=10]
 
-[node name="Menu" type="Control"]
-margin_right = 1024.0
-margin_bottom = 600.0
-focus_mode = 2
-theme = ExtResource( 4 )
+[node name="Menu" type="CanvasLayer"]
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 player_join_path = NodePath("RightSide/VBoxContainer/PlayerJoin")
 match_settings_path = NodePath("PanelContainer/ScrollContainer/MatchSettings")
 
@@ -50,6 +43,7 @@ margin_top = 16.2
 margin_right = -32.0
 margin_bottom = -40.0
 size_flags_horizontal = 3
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -127,6 +121,7 @@ margin_top = 64.0
 margin_right = 392.0
 margin_bottom = 512.0
 size_flags_horizontal = 3
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
