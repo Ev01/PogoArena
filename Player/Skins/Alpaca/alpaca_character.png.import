@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fish_character.png-17a2ba6699168eb03fba4ac2d4235e02.stex"
+path="res://.import/alpaca_character.png-7c930cda0e6ccb31a8a50c1d008c3b9f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Fish/fish_character.png"
-dest_files=[ "res://.import/fish_character.png-17a2ba6699168eb03fba4ac2d4235e02.stex" ]
+source_file="res://Player/Skins/Alpaca/alpaca_character.png"
+dest_files=[ "res://.import/alpaca_character.png-7c930cda0e6ccb31a8a50c1d008c3b9f.stex" ]
 
 [params]
 

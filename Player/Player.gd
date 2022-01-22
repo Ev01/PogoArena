@@ -38,6 +38,7 @@ var is_invincible = false
 var current_score = 0 setget _set_current_score
 var last_touched_by
 var gravity_multiplier = 1 setget _set_gravity_multiplier
+var skin_data setget _set_skin_data
 
 
 onready var org_gravity_scale = gravity_scale
@@ -280,3 +281,12 @@ func _set_gravity_multiplier(value):
 func _set_respawn_time(value):
 	respawn_time = value
 	respawn_timer.wait_time = value
+
+
+func _set_skin_data(value):
+	skin_data = value
+	# Remove the old skin and add the new one
+	if sprite:
+		sprite.queue_free()
+	sprite = skin_data.skin_scene.instance()
+	add_child(sprite)

@@ -32,7 +32,7 @@ func _ready():
 		join_panels[p].remove_btn.connect("pressed", self, "_on_panel_remove_pressed", [p])
 	
 	# If Main's player data isnt empty, use it. This is what remembers what players were joined.
-	if main.player_data:
+	if main and main.player_data:
 		set_player_data(main.player_data)
 	
 	connect("active_panel_changed", self, "_on_active_panel_changed")
@@ -40,6 +40,8 @@ func _ready():
 
 
 func get_player_data():
+	# Returns a dictionary of each player and its data (colour, skin, etc)
+	
 	var player_count = 0
 	var players = []
 	for panel in join_panels:
@@ -50,6 +52,7 @@ func get_player_data():
 				controls = panel.control,
 				player_num = panel.player_num,
 				player_name = panel.player_name,
+				skin_data = panel.skin_data,
 			}
 			players.append(panel_data)
 		
@@ -66,7 +69,7 @@ func set_player_data(data : Dictionary):
 			_on_panel_remove_pressed(panel_num)
 	# Then join the panels back with our new player_data
 	for player in data.players:
-		join_panels[active_panel_num].join(player.controls, player.colour, player.player_num, player.player_name)
+		join_panels[active_panel_num].join(player.controls, player.colour, player.player_num, player.player_name, player.skin_data)
 		taken_controls.append(player.controls)
 		active_panel_num += 1
 	emit_signal("active_panel_changed")
@@ -85,7 +88,8 @@ func _input(event):
 					taken_controls.append(control_schemes[s])
 					active_panel_num += 1
 					emit_signal("active_panel_changed")
-					audio_manager.play_sound("res://Player/pogoready.wav", 1+(float(active_panel_num-1)/2), -5)
+					if audio_manager:
+						audio_manager.play_sound("res://Player/pogoready.wav", 1+(float(active_panel_num-1)/2), -5)
 
 
 func _on_panel_remove_pressed(panel_num):

@@ -67,23 +67,23 @@ align = 1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -304.0
+margin_top = -368.0
 margin_bottom = -56.0
-custom_constants/separation = 0
+custom_constants/separation = 50
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlayerJoin" parent="RightSide/VBoxContainer" instance=ExtResource( 1 )]
 margin_right = 544.0
-margin_bottom = 186.0
-size_flags_vertical = 2
+margin_bottom = 212.0
+size_flags_vertical = 3
 
 [node name="Buttons" type="HBoxContainer" parent="RightSide/VBoxContainer"]
-margin_top = 198.0
+margin_top = 262.0
 margin_right = 544.0
-margin_bottom = 248.0
-size_flags_vertical = 10
+margin_bottom = 312.0
+size_flags_vertical = 8
 custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false

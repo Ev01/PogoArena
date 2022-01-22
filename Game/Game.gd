@@ -83,6 +83,7 @@ func _process(delta):
 
 
 func add_player(data, player_num):
+	# Data created by PlayerJoin.get_player_data()
 	
 	var new_player = player_scn.instance()
 	players.append(new_player)
@@ -94,6 +95,7 @@ func add_player(data, player_num):
 	new_player.modulate = data.colour
 	new_player.player_num = data.player_num
 	new_player.player_name = data.player_name
+	new_player.skin_data = data.skin_data
 	new_player.action_rotate_left = data.controls[0]
 	new_player.action_rotate_right = data.controls[1]
 	
