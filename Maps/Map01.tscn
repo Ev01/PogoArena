@@ -95,13 +95,13 @@ rotation = 0.785397
 shape = SubResource( 7 )
 
 [node name="Polygon2D" type="Polygon2D" parent="." index="12"]
-color = Color( 0.827451, 0.768627, 0.768627, 1 )
+color = Color( 0.247059, 0.137255, 0.101961, 1 )
 texture = ExtResource( 3 )
 invert_enable = true
 invert_border = 400.0
 polygon = PoolVector2Array( 976, 472, 896, 552, 128, 552, 48, 472, 48, 120, 128, 40, 896, 40, 976, 120 )
 script = ExtResource( 2 )
-OutLine = Color( 0.866667, 0.866667, 0.866667, 1 )
+OutLine = Color( 0.0627451, 0.0470588, 0, 1 )
 Width = 5.0
 
 [node name="CameraLimiter" parent="." index="13" instance=ExtResource( 4 )]
