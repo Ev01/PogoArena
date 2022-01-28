@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/citybuildinglayer.png-69d07436d54b4ba6246305994717e9d8.stex"
+path="res://.import/paint_bg.png-d47a0cc0e2a3f9a340fda60fb53c5e61.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/citybuildinglayer.png"
-dest_files=[ "res://.import/citybuildinglayer.png-69d07436d54b4ba6246305994717e9d8.stex" ]
+source_file="res://Backgrounds/BG1/paint_bg.png"
+dest_files=[ "res://.import/paint_bg.png-d47a0cc0e2a3f9a340fda60fb53c5e61.stex" ]
 
 [params]
 
@@ -19,8 +19,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
-flags/filter=false
+flags/repeat=0
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -21,6 +21,12 @@ onready var resolution = Vector2(
 	ProjectSettings.get_setting("display/window/size/height"))
 
 func _ready():
+	# Needed to fix wierd offset bug with parallax background
+	pause_mode = PAUSE_MODE_PROCESS
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	pause_mode = PAUSE_MODE_INHERIT
+	
 	yield(game, "game_ready")
 	camera_limits = get_tree().get_nodes_in_group("CameraLimiter")
 

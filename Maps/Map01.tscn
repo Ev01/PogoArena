@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Maps/DefaultMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MiscScripts/PolyOutline.gd" type="Script" id=2]
 [ext_resource path="res://Textures/Concrete.png" type="Texture" id=3]
 [ext_resource path="res://Camera/CameraLimiter.tscn" type="PackedScene" id=4]
 [ext_resource path="res://RespawnPoint/RespawnPoint.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Textures/citybuildinglayer.png" type="Texture" id=6]
+[ext_resource path="res://Backgrounds/BG1/buldings.png" type="Texture" id=6]
+[ext_resource path="res://Backgrounds/BG1/hills.png" type="Texture" id=7]
+[ext_resource path="res://Backgrounds/BG1/paint_bg.png" type="Texture" id=8]
+[ext_resource path="res://MiscScripts/ParallaxOffsetFix.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 512, 24 )
@@ -112,15 +115,44 @@ limit_right = true
 limit_down = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="15"]
+pause_mode = 2
 layer = -1
+scroll_ignore_camera_zoom = true
 
-[node name="Buildings" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
-modulate = Color( 0.0352941, 0.0352941, 0.12549, 1 )
-position = Vector2( 515, 312 )
-z_index = -5
-motion_scale = Vector2( 0.5, 0.5 )
-motion_offset = Vector2( 0, -128 )
-motion_mirroring = Vector2( 1022, 0 )
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground" index="0"]
+margin_left = -488.0
+margin_top = -488.0
+margin_right = 1528.0
+margin_bottom = 1032.0
+color = Color( 0.133333, 0.0117647, 0.262745, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PaintBG" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
+motion_scale = Vector2( 0.05, 0.05 )
+motion_mirroring = Vector2( 2048, 0 )
+script = ExtResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/PaintBG" index="0"]
+z_index = -10
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Hills" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
+motion_scale = Vector2( 0.2, 0.2 )
+motion_mirroring = Vector2( 2048, 0 )
+script = ExtResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Hills" index="0"]
+texture = ExtResource( 7 )
+centered = false
+
+[node name="Buildings" type="ParallaxLayer" parent="ParallaxBackground" index="3"]
+motion_scale = Vector2( 0.3, 0.3 )
+motion_mirroring = Vector2( 2048, 0 )
+script = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/Buildings" index="0"]
 texture = ExtResource( 6 )
+centered = false

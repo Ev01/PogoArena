@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cloudslayer.png-acf3111ed076e1b903cd1abb8d1eff95.stex"
+path="res://.import/cloudslayer.png-e596165fbe92f84874ef8a82c83c6464.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/cloudslayer.png"
-dest_files=[ "res://.import/cloudslayer.png-acf3111ed076e1b903cd1abb8d1eff95.stex" ]
+source_file="res://Backgrounds/cloudslayer.png"
+dest_files=[ "res://.import/cloudslayer.png-e596165fbe92f84874ef8a82c83c6464.stex" ]
 
 [params]
 

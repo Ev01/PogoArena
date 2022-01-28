@@ -261,6 +261,7 @@ player_scn = ExtResource( 6 )
 score_label_scn = ExtResource( 7 )
 
 [node name="Camera" parent="." instance=ExtResource( 13 )]
+pause_mode = 2
 position = Vector2( 512, 296 )
 smoothing_enabled = true
 smoothing_speed = 1.0
