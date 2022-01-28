@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Maps/DefaultMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MiscScripts/PolyOutline.gd" type="Script" id=2]
 [ext_resource path="res://Textures/Concrete.png" type="Texture" id=3]
 [ext_resource path="res://Camera/CameraLimiter.tscn" type="PackedScene" id=4]
 [ext_resource path="res://RespawnPoint/RespawnPoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Textures/citybuildinglayer.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 512, 24 )
@@ -14,12 +15,6 @@ extents = Vector2( 24, 256 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 56.5685, 56.5686 )
-
-[sub_resource type="Gradient" id=9]
-colors = PoolColorArray( 0.0196078, 0.0196078, 0.196078, 0.278431, 0.617188, 0.800369, 1, 0.329412 )
-
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 9 )
 
 [node name="Map01" instance=ExtResource( 1 )]
 
@@ -106,29 +101,26 @@ script = ExtResource( 2 )
 OutLine = Color( 0.866667, 0.866667, 0.866667, 1 )
 Width = 5.0
 
-[node name="BG" type="Node2D" parent="." index="13"]
-z_index = -5
-
-[node name="BGGradient" type="Sprite" parent="BG" index="0"]
-position = Vector2( 515, 312.613 )
-rotation = -1.57079
-scale = Vector2( 0.36393, 931.25 )
-z_index = -5
-texture = SubResource( 8 )
-
-[node name="BGTexture" type="Sprite" parent="BG" index="1"]
-modulate = Color( 0.168627, 0.180392, 0.270588, 1 )
-position = Vector2( 524, 296 )
-scale = Vector2( 1.82813, 1 )
-z_index = -10
-texture = ExtResource( 3 )
-
-[node name="CameraLimiter" parent="." index="14" instance=ExtResource( 4 )]
+[node name="CameraLimiter" parent="." index="13" instance=ExtResource( 4 )]
 position = Vector2( -88, -104 )
 limit_left = true
 limit_up = true
 
-[node name="CameraLimiter2" parent="." index="15" instance=ExtResource( 4 )]
+[node name="CameraLimiter2" parent="." index="14" instance=ExtResource( 4 )]
 position = Vector2( 1112, 688 )
 limit_right = true
 limit_down = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="15"]
+layer = -1
+
+[node name="Buildings" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+modulate = Color( 0.0352941, 0.0352941, 0.12549, 1 )
+position = Vector2( 515, 312 )
+z_index = -5
+motion_scale = Vector2( 0.5, 0.5 )
+motion_offset = Vector2( 0, -128 )
+motion_mirroring = Vector2( 1022, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Buildings" index="0"]
+texture = ExtResource( 6 )
