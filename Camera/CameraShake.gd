@@ -4,16 +4,20 @@ extends Camera2D
 export var zoom_smoothing_enabled = true
 export var zoom_speed = 10
 export var min_zoom: float = 0.1
+# Zoom out this much after fitting around players
 export var zoom_margin: float = 1
+# Also fit in the screen where the players will be this many seconds into the future
 export var look_ahead_mult: float = 0.5
 
-# Declare member variables here. Examples:
 var is_shaking = false
+# Without zoom smoothing the zoom would always be equal to this
 var target_zoom = 1
 
+# The current shake amplitude.
 var shake
 var fade_out
 onready var shake_timer = $ShakeTimer
+# Array of CameraLimiters. Prevent the camera from moving past certain areas
 var camera_limits: Array
 onready var game = get_parent()
 onready var resolution = Vector2(
@@ -30,7 +34,7 @@ func _ready():
 	yield(game, "game_ready")
 	camera_limits = get_tree().get_nodes_in_group("CameraLimiter")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
 	
 	fit_to_players()
@@ -42,7 +46,7 @@ func _process(delta):
 		zoom = target_zoom
 	
 	if is_shaking:
-		shake = max(shake-(delta*fade_out)/shake_timer.wait_time,0)
+		shake = max(shake - (delta * fade_out) / shake_timer.wait_time, 0)
 		set_offset(Vector2(rand_range(-shake, shake), rand_range(-shake, shake)))
 	else:
 		set_offset(Vector2(0, 0))
@@ -59,6 +63,7 @@ func camera_shake(shake_amount, duration):
 
 
 func fit_to_players():
+	""" Move and stretch the camera to fit all of the players in the screen. """
 	# The camera will stretch to fit around these points
 	var points_to_fit = []
 	
@@ -71,6 +76,7 @@ func fit_to_players():
 	var initial_value_set = false
 	
 	for point in points_to_fit:
+		# TODO: this can be done without initial_value_set variable
 		if not initial_value_set:
 			new_rect_top_left = point
 			new_rect_bottom_right = point
@@ -97,7 +103,7 @@ func fit_to_players():
 	new_rect_top_left -= Vector2.ONE * zoom_margin * resolution / 2
 	new_rect_bottom_right += Vector2.ONE * zoom_margin * resolution / 2
 	
-	# Limit camera so it stays within a certain bounds
+	# Limit camera so it stays within bounds
 	for point_limit_node in camera_limits:
 		var point_limit = point_limit_node.position
 		if point_limit_node.limit_left:
@@ -119,6 +125,7 @@ func fit_to_players():
 	var new_zoom_y = new_rect_size.y / resolution.y
 	# Need to maintain aspect ratio, pick the biggest axis for both.
 	target_zoom = Vector2.ONE * max(new_zoom_x, new_zoom_y)
+	
 	#target_zoom = Vector2.ONE * new_zoom_y
 	# Sometimes zooming out to fit the aspect ratio will zoom past the boundary nodes,
 	# in this case reposition the camera without zooming

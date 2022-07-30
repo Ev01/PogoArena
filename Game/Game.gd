@@ -83,7 +83,12 @@ func _process(delta):
 
 
 func add_player(data, player_num):
-	# Data created by PlayerJoin.get_player_data()
+	""" Adds a new player to the game and spawns them in. 
+	
+	Args:
+		data (Dictionary): The player's data, created by PlayerJoin.get_player_data().
+		player_num (int): The player's number (e.g. 1 for Player 1, 2 for Player 2 etc).
+	"""
 	
 	var new_player = player_scn.instance()
 	players.append(new_player)
@@ -107,6 +112,7 @@ func add_player(data, player_num):
 
 
 func spawn_players():
+	""" Adds all of the players into the game. """
 	for p in range(len(main.player_data.players)):
 		add_player(main.player_data.players[p], p + 1)
 
@@ -119,6 +125,7 @@ func update_match_settings():
 
 
 func choose_spawn(player_num):
+	# TODO: players can spawn at any spawn point (not just their spawn)
 	var final_spawn
 	for spawn in spawns[player_num - 1]:
 		final_spawn = spawn.position
@@ -129,8 +136,13 @@ func choose_spawn(player_num):
 
 
 func get_highest_scoring():
-	# Check which player finished with the highest score
-	# Returns a list with the winner, or multiple players if there is a tie.
+	""" Check which player finished with the highest score.
+	
+	Returns:
+		A list with the winner, or multiple players if there is a tie.
+		eg: ["Player 1"]
+	"""
+	
 	var highest_scoring = []
 	for p in players:
 		if not highest_scoring:
@@ -145,7 +157,14 @@ func get_highest_scoring():
 
 
 func win_game(winning_players : Array, reason = ""):
-	# Reason is something like "Match aborted." or "Time out!"
+	""" End the game and show the win dialog.
+	
+	Args:
+		winning_players (Array): List of the winning player, or multiple if there is a tie.
+		reason (str): the reason why the game was ended (e.g. "Match aborted" or "Time out!")
+	 """
+	# TODO: remove winning_players argument and get it inside the function
+	
 	# Win message says who wins, e.g. "Green wins" or "Tie between Green and Red"
 	var win_message = ""
 	
