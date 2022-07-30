@@ -40,7 +40,7 @@ func _ready():
 
 
 func get_player_data():
-	# Returns a dictionary of each player and its data (colour, skin, etc)
+	""" Returns a dictionary of each player and its data (colour, skin, etc). """
 	
 	var player_count = 0
 	var players = []
@@ -63,6 +63,14 @@ func get_player_data():
 
 
 func set_player_data(data : Dictionary):
+	""" Sets the player_data variable and updates the players panels accordinagly. 
+	
+	This is used when loading back into the menu, so the player panels don't
+	get reset.
+	
+	Args:
+		data (Dictionary): What to set player_data to
+	"""
 	# First unjoin every panel
 	for panel_num in range(len(join_panels_org)):
 		if join_panels_org[panel_num].joined:
@@ -105,6 +113,10 @@ func _on_panel_remove_pressed(panel_num):
 
 
 func _on_active_panel_changed():
+	""" Called when a player panel is added or removed. 
+	
+	This function updates the 'Press __ to join' text
+	"""
 	var press_to_join_txt = ""
 	var non_taken_controls = []
 	for control in control_schemes:

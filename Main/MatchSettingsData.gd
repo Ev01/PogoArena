@@ -2,6 +2,7 @@ extends Resource
 
 class_name MatchSettingsData
 
+# TODO: Remove dictionary and make multiple variables instead
 var settings = {}
 
 func set_setting(setting_name : String, value):

@@ -20,10 +20,13 @@ func _on_PlayButton_pressed():
 		var player_data = player_join.get_player_data()
 		main.load_new_game(player_data)
 		main.audio_manager.stop_existing("MenuMusic", 1)
+
+
 func _on_Control_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed == true:
 			$Control.grab_focus()
+
 
 func _on_active_panel_changed():
 	play_button.disabled = not player_join.active_panel_num > 0

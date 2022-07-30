@@ -24,9 +24,9 @@ var rot_flip = 0.0
 var highspeed_bounce = true
 var col_pos
 var col_normal
-#used for wall jumps
+# Used for wall jumps
 var wall_jumped = false
-#used for roof jumps
+# Used for roof jumps
 var roof_jumped = false
 # The angle in radians of the normal of the last touched wall.
 # Floor = -PI/2    Right wall = PI    Ceiling = PI/2    Left wall = 0 OR PI
@@ -47,6 +47,7 @@ onready var foot_area = $FootArea
 onready var respawn_timer = $RespawnTimer
 onready var respawn_time = respawn_timer.wait_time setget _set_respawn_time
 onready var invincibility_timer = $InvincibilityTimer
+# The player that touched us last is reset after time
 onready var last_touched_timer = $LastTouchedTimer
 onready var jump_particle_timer = $JumpParticleTimer
 # The foot_kinematic is a kinematic body with the same collision as footarea. It only detects the
@@ -55,7 +56,6 @@ onready var jump_particle_timer = $JumpParticleTimer
 onready var foot_kinematic = $FootKinematic
 
 onready var slide_audio = $SlidingSound
-
 
 onready var game = get_node("/root/Main/Game")
 onready var cam = game.get_node("Camera")
@@ -128,8 +128,13 @@ func _physics_process(delta):
 		done_trick("HIGH SPEED!")
 		highspeed_bounce = false
 
+
 func kill(body):
+	""" Kills the player, then respawns after some time 
 	
+	Args:
+	body (Node): The body that killed the player
+	"""
 	if not is_dead and not is_invincible:
 		if body.is_in_group("PlayerFoot"):
 			last_touched_by = body.get_parent()
@@ -151,17 +156,18 @@ func kill(body):
 		#Engine.time_scale = 0.2
 		sprite.modulate = Color(0.2,0.2,0.2)
 		
+		# Create explosion
 		var new_particle = explosion_particle.instance()
 		cam.camera_shake(10,0.4)
 		audio_manager.play_sound("res://Player/plosion.wav",rand_range(0.9,1.1),rand_range(-15,-5))
 		new_particle.position = position
 		world.add_child(new_particle)
 		new_particle.emitting = true
-		#new_particle.vel = linear_velocity
 		
 		respawn_timer.start()
 		yield(respawn_timer, "timeout") # Wait for the respawn timer to finish
 		respawn()
+
 
 func respawn():
 	#Engine.time_scale = 1
@@ -188,12 +194,18 @@ func respawn():
 
 
 func do_bounce(body):
+	""" Makes the player bounce
+	
+	Args:
+	body (Node): The body that the player bounced on
+	"""
 	if body != self:
 		#apply_central_impulse(Vector2(linear_velocity.length() * mass + bounce_power, 0).rotated(rotation - PI/2))
 		apply_central_impulse(Vector2(bounce_power, 0).rotated(rotation - PI/2))
-		#rot_flip = 0
+		# "HIGH SPEED!" trick can only be displayed once every bounce
 		highspeed_bounce = true
 		
+		# Create jump particle if we havent already created one recently
 		if jump_particle_timer.is_stopped():
 			var new_particle = jump_particle.instance()
 			new_particle.position = $ParticleSpawn.global_position
@@ -204,11 +216,17 @@ func do_bounce(body):
 
 
 func give_frag():
+	# This signal is picked up by Game.gd
 	emit_signal("got_kill")
 
 
 func done_trick(text):
-	# Creates the trick label
+	""" Creates the trick label
+	
+	Args:
+	text (str): The text that pops up next to the player
+	"""
+	
 	var text_inst = trick_text.instance()
 	game.add_child(text_inst)
 	text_inst.text = text
@@ -216,6 +234,7 @@ func done_trick(text):
 
 
 func detect_wall_jump():
+	""" Updates wall_jumped and roof_jumped variables based on last collision """
 	if (rad2deg(last_normal_rads) >= 165 && rad2deg(last_normal_rads) <= 195 or 
 			rad2deg(last_normal_rads) >= -15 && rad2deg(last_normal_rads) <= 15):
 		wall_jumped = true
@@ -260,8 +279,9 @@ func _on_Player_body_entered(body):
 		last_touched_timer.start()
 
 
-func _integrate_forces( state ):
-	if state.get_contact_count() >= 1 && state.get_contact_collider_object(0).is_in_group("Player") == false:
+func _integrate_forces(state):
+	# If we collided with a wall
+	if state.get_contact_count() >= 1 and state.get_contact_collider_object(0).is_in_group("Player") == false:
 		#print(wall_jumped, " ", roof_jumped)
 		col_pos = state.get_contact_local_position(0)
 		last_normal_rads = state.get_contact_local_normal(0).angle()

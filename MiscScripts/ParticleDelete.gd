@@ -8,7 +8,7 @@ func _ready():
 	children = get_children()
 
 
-func _pocess(delta):
+func _process(delta):
 	var should_kill = true
 	for child in children:
 		if child.get_class() == "CPUParticles2D":
@@ -20,7 +20,7 @@ func _pocess(delta):
 		queue_free()
 	
 	vel -= (vel * 5) * delta
-	position+=vel*delta
+	position += vel*delta
 
 
 func _set_emitting(value):

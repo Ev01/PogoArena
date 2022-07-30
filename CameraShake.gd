@@ -1,6 +1,5 @@
 extends Camera2D
 
-
 # Declare member variables here. Examples:
 var is_shaking = false
 var shake
